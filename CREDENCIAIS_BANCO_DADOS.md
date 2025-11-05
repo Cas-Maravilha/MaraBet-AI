@@ -9,15 +9,15 @@ As credenciais de conexão do banco de dados PostgreSQL foram configuradas nos a
 ```
 Host: 37.27.220.67
 Port: 5432
-Database: meu_banco
-Username: meu_usuario
-Password: ctcaddTcMaRVioDY4kso
+Database: meu_Postgres
+Username: meu_marabet
+Password: 12345
 ```
 
 ### **String de Conexão (para aplicações):**
 
 ```
-postgresql://meu_usuario:ctcaddTcMaRVioDY4kso@37.27.220.67:5432/meu_banco
+postgresql://meu_marabet:1234@37.27.220.67:5432/meu_Postgres
 ```
 
 ---
@@ -27,10 +27,10 @@ postgresql://meu_usuario:ctcaddTcMaRVioDY4kso@37.27.220.67:5432/meu_banco
 As credenciais foram configuradas nos seguintes arquivos:
 
 1. **`config_production.env`** - Configuração de produção
-   - Linha 25: `DATABASE_URL=postgresql://meu_usuario:ctcaddTcMaRVioDY4kso@37.27.220.67:5432/meu_banco`
+   - Linha 25: `DATABASE_URL=postgresql://meu_marabet:1234@37.27.220.67:5432/meu_Postgres`
 
 2. **`config_personal.env`** - Configuração pessoal
-   - Linha 9-11: `DATABASE_URL=postgresql://meu_usuario:ctcaddTcMaRVioDY4kso@37.27.220.67:5432/meu_banco`
+   - Linha 9-11: `DATABASE_URL=postgresql://meu_marabet:1234@37.27.220.67:5432/meu_Postgres`
 
 ---
 
@@ -56,10 +56,10 @@ cp config_personal.env .env
 
 ```bash
 # Via Python (psycopg2)
-python -c "import psycopg2; conn = psycopg2.connect('postgresql://meu_usuario:ctcaddTcMaRVioDY4kso@37.27.220.67:5432/meu_banco'); print('✅ Conexão bem-sucedida!')"
+python -c "import psycopg2; conn = psycopg2.connect('postgresql://meu_marabet:1234@37.27.220.67:5432/meu_Postgres'); print('✅ Conexão bem-sucedida!')"
 
 # Via psql (linha de comando)
-psql -h 37.27.220.67 -p 5432 -U meu_usuario -d meu_banco
+psql -h 37.27.220.67 -p 5432 -U meu_marabet -d meu_Postgres
 ```
 
 ---
@@ -95,7 +95,7 @@ psql -h 37.27.220.67 -p 5432 -U meu_usuario -d meu_banco
 - Verifique se o usuário tem permissões para acessar o banco
 
 ### **Erro: "Database does not exist"**
-- Verifique se o nome do banco está correto: `meu_banco`
+- Verifique se o nome do banco está correto: `meu_Postgres`
 - Entre em contato com o administrador do banco de dados
 
 ---
