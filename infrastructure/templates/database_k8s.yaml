@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-master
+  namespace: marabet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-master
+  serviceName: postgres-master
+  template:
+    metadata:
+      labels:
+        app: postgres-master
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: marabet_production
+        - name: POSTGRES_USER
+          value: marabet_user
+        - name: POSTGRES_PASSWORD
+          value: secure_password_123
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        image: postgres:13
+        name: postgres
+        ports:
+        - containerPort: 5432
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-storage
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi

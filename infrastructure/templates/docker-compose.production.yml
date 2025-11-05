@@ -1,0 +1,71 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    depends_on:
+    - redis
+    - postgres
+    environment:
+    - FLASK_ENV=production
+    - DATABASE_URL=${DATABASE_URL}
+    - REDIS_URL=${REDIS_URL}
+    - API_FOOTBALL_KEY=${API_FOOTBALL_KEY}
+    healthcheck:
+      interval: 30s
+      retries: 3
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:5000/api/health
+      timeout: 10s
+    ports:
+    - 5000:5000
+    restart: unless-stopped
+  backup:
+    build:
+      context: .
+      dockerfile: Dockerfile.backup
+    depends_on:
+    - postgres
+    environment:
+    - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+    - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    - S3_BUCKET=${S3_BUCKET}
+    - DATABASE_URL=${DATABASE_URL}
+    restart: unless-stopped
+  nginx:
+    depends_on:
+    - app
+    image: nginx:alpine
+    ports:
+    - 80:80
+    - 443:443
+    restart: unless-stopped
+    volumes:
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./nginx/ssl:/etc/nginx/ssl
+  postgres:
+    environment:
+    - POSTGRES_DB=${POSTGRES_DB}
+    - POSTGRES_USER=${POSTGRES_USER}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    image: postgres:15-alpine
+    ports:
+    - 5432:5432
+    restart: unless-stopped
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+  redis:
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    image: redis:7-alpine
+    ports:
+    - 6379:6379
+    restart: unless-stopped
+    volumes:
+    - redis_data:/data
+version: '3.8'
+volumes:
+  postgres_data: {}
+  redis_data: {}

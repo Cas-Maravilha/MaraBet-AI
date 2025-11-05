@@ -1,0 +1,647 @@
+{
+  "match_data": {
+    "home_team": "Real Madrid",
+    "away_team": "Barcelona",
+    "league": "La Liga",
+    "match_date": "2024-01-20 21:00",
+    "home_strength": 0.75,
+    "away_strength": 0.72,
+    "home_advantage": 0.08,
+    "home_goals_avg": 2.3,
+    "away_goals_avg": 2.1,
+    "home_corners_avg": 7.2,
+    "away_corners_avg": 6.8,
+    "home_cards_avg": 2.5,
+    "away_cards_avg": 2.3,
+    "home_yellow_avg": 2.2,
+    "away_yellow_avg": 2.0,
+    "home_red_avg": 0.12,
+    "away_red_avg": 0.1,
+    "form_factor": 1.05,
+    "injury_factor": 0.98,
+    "weather_factor": 1.0,
+    "importance_factor": 1.4,
+    "rivalry_factor": 1.5,
+    "referee_factor": 1.1,
+    "possession_factor": 1.02,
+    "style_factor": 1.15
+  },
+  "predictions": {
+    "goals": [
+      {
+        "market_type": "exact_goals",
+        "selection": "5+",
+        "predicted_probability": 0.7357892093387748,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Distribuição de Poisson com λ=6.2"
+      },
+      {
+        "market_type": "both_teams_score",
+        "selection": "Sim",
+        "predicted_probability": 0.8043486086448672,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Probabilidade casa: 91.7%, visitante: 87.8%"
+      },
+      {
+        "market_type": "both_teams_score",
+        "selection": "Não",
+        "predicted_probability": 0.19565139135513276,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Probabilidade casa: 91.7%, visitante: 87.8%"
+      },
+      {
+        "market_type": "clean_sheet",
+        "selection": "Casa",
+        "predicted_probability": 0.1224564282529819,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Visitante marca em média 2.1 gols"
+      },
+      {
+        "market_type": "clean_sheet",
+        "selection": "Visitante",
+        "predicted_probability": 0.08340892174326338,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Casa marca em média 2.5 gols"
+      },
+      {
+        "market_type": "clean_sheet",
+        "selection": "Nenhum",
+        "predicted_probability": 0.7941346500037547,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Ambas as equipes marcam"
+      },
+      {
+        "market_type": "over_under",
+        "selection": "Over 5.5",
+        "predicted_probability": 0.5796656994696155,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Média ajustada: 6.2 gols"
+      },
+      {
+        "market_type": "over_under",
+        "selection": "Under 5.5",
+        "predicted_probability": 0.42033430053038445,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média ajustada: 6.2 gols"
+      },
+      {
+        "market_type": "over_under",
+        "selection": "Over 0.5",
+        "predicted_probability": 0.9978877467282673,
+        "confidence": 0.4,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média ajustada: 6.2 gols"
+      },
+      {
+        "market_type": "over_under",
+        "selection": "Under 0.5",
+        "predicted_probability": 0.0021122532717327003,
+        "confidence": 0.4,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média ajustada: 6.2 gols"
+      }
+    ],
+    "handicap": [
+      {
+        "market_type": "asian_handicap",
+        "selection": "Casa 0.5",
+        "predicted_probability": 0.616043,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença de força ajustada: 0.11"
+      },
+      {
+        "market_type": "asian_handicap",
+        "selection": "Visitante 0.5",
+        "predicted_probability": 0.383957,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença de força ajustada: 0.11"
+      },
+      {
+        "market_type": "european_handicap",
+        "selection": "Casa 0",
+        "predicted_probability": 0.47170249999999997,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença de força ajustada: 0.11"
+      },
+      {
+        "market_type": "european_handicap",
+        "selection": "Visitante 0",
+        "predicted_probability": 0.5282975000000001,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença de força ajustada: 0.11"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Casa 0",
+        "predicted_probability": 0.4061599999999999,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": false,
+        "reasoning": "Diferença de cantos ajustada: 0.5"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Visitante 0",
+        "predicted_probability": 0.5938400000000001,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença de cantos ajustada: 0.5"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Casa 1",
+        "predicted_probability": 0.6061599999999999,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença de cantos ajustada: 0.5"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Visitante 1",
+        "predicted_probability": 0.3938400000000001,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": false,
+        "reasoning": "Diferença de cantos ajustada: 0.5"
+      },
+      {
+        "market_type": "asian_handicap",
+        "selection": "Casa -0.5",
+        "predicted_probability": 0.31604299999999996,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": false,
+        "reasoning": "Diferença de força ajustada: 0.11"
+      },
+      {
+        "market_type": "asian_handicap",
+        "selection": "Visitante -0.5",
+        "predicted_probability": 0.683957,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença de força ajustada: 0.11"
+      }
+    ],
+    "cards": [
+      {
+        "market_type": "red_cards",
+        "selection": "0",
+        "predicted_probability": 0.6015774442409103,
+        "confidence": 0.5,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média ajustada vermelhos: 0.51"
+      },
+      {
+        "market_type": "red_cards",
+        "selection": "1+",
+        "predicted_probability": 0.3984225557590897,
+        "confidence": 0.5,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média ajustada vermelhos: 0.51"
+      },
+      {
+        "market_type": "red_cards",
+        "selection": "2+",
+        "predicted_probability": 0.09270089859585928,
+        "confidence": 0.5,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média ajustada vermelhos: 0.51"
+      },
+      {
+        "market_type": "total_cards",
+        "selection": "1º Tempo Over 1.5",
+        "predicted_probability": 0.7179157137961883,
+        "confidence": 0.4,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média 1º: 2.5 cartões"
+      },
+      {
+        "market_type": "total_cards",
+        "selection": "1º Tempo Under 1.5",
+        "predicted_probability": 0.28208428620381165,
+        "confidence": 0.4,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média 1º: 2.5 cartões"
+      },
+      {
+        "market_type": "total_cards",
+        "selection": "2º Tempo Over 2.5",
+        "predicted_probability": 0.7292245743552308,
+        "confidence": 0.4,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média 2º: 3.8 cartões"
+      },
+      {
+        "market_type": "total_cards",
+        "selection": "2º Tempo Under 2.5",
+        "predicted_probability": 0.2707754256447692,
+        "confidence": 0.4,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média 2º: 3.8 cartões"
+      }
+    ],
+    "corners": [
+      {
+        "market_type": "corner_handicap",
+        "selection": "Casa 0",
+        "predicted_probability": 0.4061599999999999,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": false,
+        "reasoning": "Diferença ajustada: 0.5 cantos"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Visitante 0",
+        "predicted_probability": 0.5938400000000001,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença ajustada: 0.5 cantos"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Casa 1",
+        "predicted_probability": 0.6061599999999999,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença ajustada: 0.5 cantos"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Visitante 1",
+        "predicted_probability": 0.3938400000000001,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": false,
+        "reasoning": "Diferença ajustada: 0.5 cantos"
+      },
+      {
+        "market_type": "total_corners",
+        "selection": "1º Tempo Over 4.5",
+        "predicted_probability": 0.6490542545468835,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Média 1º: 5.5 cantos"
+      },
+      {
+        "market_type": "total_corners",
+        "selection": "1º Tempo Under 4.5",
+        "predicted_probability": 0.3509457454531165,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média 1º: 5.5 cantos"
+      },
+      {
+        "market_type": "total_corners",
+        "selection": "2º Tempo Over 5.5",
+        "predicted_probability": 0.6695123992390299,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Média 2º: 6.8 cantos"
+      },
+      {
+        "market_type": "total_corners",
+        "selection": "2º Tempo Under 5.5",
+        "predicted_probability": 0.33048760076097006,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média 2º: 6.8 cantos"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Casa -1",
+        "predicted_probability": 0.20615999999999995,
+        "confidence": 0.5,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": false,
+        "reasoning": "Diferença ajustada: 0.5 cantos"
+      },
+      {
+        "market_type": "corner_handicap",
+        "selection": "Visitante -1",
+        "predicted_probability": 0.7938400000000001,
+        "confidence": 0.5,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Diferença ajustada: 0.5 cantos"
+      }
+    ],
+    "double_chance": [
+      {
+        "market_type": "double_chance",
+        "selection": "1X",
+        "predicted_probability": 0.8155376950065297,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Baseado em: Casa 58.6%, Empate 23.0%, Visitante 18.4%"
+      },
+      {
+        "market_type": "double_chance",
+        "selection": "X2",
+        "predicted_probability": 0.4143619806881831,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Baseado em: Casa 58.6%, Empate 23.0%, Visitante 18.4%"
+      },
+      {
+        "market_type": "double_chance",
+        "selection": "12",
+        "predicted_probability": 0.7701003243052872,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Baseado em: Casa 58.6%, Empate 23.0%, Visitante 18.4%"
+      },
+      {
+        "market_type": "double_chance",
+        "selection": "1X2",
+        "predicted_probability": 1.0,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Baseado em: Casa 58.6%, Empate 23.0%, Visitante 18.4%"
+      },
+      {
+        "market_type": "double_chance",
+        "selection": "1X",
+        "predicted_probability": 0.8155376950065297,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Baseado em: Casa 58.6%, Empate 23.0%, Visitante 18.4%"
+      },
+      {
+        "market_type": "double_chance",
+        "selection": "X2",
+        "predicted_probability": 0.4143619806881831,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Baseado em: Casa 58.6%, Empate 23.0%, Visitante 18.4%"
+      },
+      {
+        "market_type": "double_chance",
+        "selection": "12",
+        "predicted_probability": 0.7701003243052872,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Baseado em: Casa 58.6%, Empate 23.0%, Visitante 18.4%"
+      },
+      {
+        "market_type": "match_winner",
+        "selection": "1",
+        "predicted_probability": 0.5856380193118169,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Força casa: 0.75, visitante: 0.72, vantagem casa: 0.08"
+      },
+      {
+        "market_type": "match_winner",
+        "selection": "X",
+        "predicted_probability": 0.2298996756947128,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Força casa: 0.75, visitante: 0.72, vantagem casa: 0.08"
+      },
+      {
+        "market_type": "match_winner",
+        "selection": "2",
+        "predicted_probability": 0.1844623049934703,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Força casa: 0.75, visitante: 0.72, vantagem casa: 0.08"
+      }
+    ],
+    "exact_score": [
+      {
+        "market_type": "half_time_score",
+        "selection": "1-1",
+        "predicted_probability": 0.0782803030197514,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "1ª parte - Casa: 2.1 gols, Visitante: 1.8 gols"
+      },
+      {
+        "market_type": "half_time_score",
+        "selection": "2-1",
+        "predicted_probability": 0.08166827453444624,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "1ª parte - Casa: 2.1 gols, Visitante: 1.8 gols"
+      },
+      {
+        "market_type": "half_time_score",
+        "selection": "1-2",
+        "predicted_probability": 0.06904322726342074,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "1ª parte - Casa: 2.1 gols, Visitante: 1.8 gols"
+      },
+      {
+        "market_type": "exact_score",
+        "selection": "Outros",
+        "predicted_probability": 0.7514272112247954,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Casa: 3.5 gols, Visitante: 2.9 gols"
+      },
+      {
+        "market_type": "goal_interval",
+        "selection": "4-5 gols",
+        "predicted_probability": 0.2454667021898732,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Média total ajustada: 6.7 gols"
+      },
+      {
+        "market_type": "goal_interval",
+        "selection": "6+ gols",
+        "predicted_probability": 0.6527747780127542,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Média total ajustada: 6.7 gols"
+      },
+      {
+        "market_type": "win_to_nil",
+        "selection": "Casa",
+        "predicted_probability": 0.9178854033500896,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Casa marca e não sofre: 91.8%"
+      },
+      {
+        "market_type": "win_to_nil",
+        "selection": "Visitante",
+        "predicted_probability": 0.9178854033500896,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "True",
+        "reasoning": "Visitante marca e não sofre: 91.8%"
+      },
+      {
+        "market_type": "win_to_nil",
+        "selection": "Nenhum",
+        "predicted_probability": -0.8357708067001792,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "Ambas marcam ou empate"
+      },
+      {
+        "market_type": "half_time_score",
+        "selection": "2-0",
+        "predicted_probability": 0.04629720778596725,
+        "confidence": 0.6944581167895088,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": "False",
+        "reasoning": "1ª parte - Casa: 2.1 gols, Visitante: 1.8 gols"
+      }
+    ],
+    "match_winner": [
+      {
+        "market_type": "match_winner",
+        "selection": "1",
+        "predicted_probability": 0.47770700636942676,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": true,
+        "reasoning": "Baseado na força das equipes"
+      },
+      {
+        "market_type": "match_winner",
+        "selection": "2",
+        "predicted_probability": 0.27229299363057324,
+        "confidence": 0.7,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": false,
+        "reasoning": "Baseado na força das equipes"
+      },
+      {
+        "market_type": "match_winner",
+        "selection": "X",
+        "predicted_probability": 0.25,
+        "confidence": 0.6,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": false,
+        "reasoning": "Probabilidade histórica de empate"
+      }
+    ]
+  },
+  "generated_at": "2025-10-22T15:16:04.006061",
+  "total_predictions": 60
+}

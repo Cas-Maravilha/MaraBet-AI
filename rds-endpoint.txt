@@ -1,0 +1,26 @@
+﻿MaraBet AI - RDS PostgreSQL Endpoint
+=====================================
+
+RDS Instance ID:    database-1
+Status:             available
+Region:             eu-west-1
+Availability Zone:  eu-west-1c
+
+Endpoint:           database-1.c74amy6m4xhz.eu-west-1.rds.amazonaws.com
+Port:               5432
+
+Engine:             postgres 15.10
+Instance Class:     db.m7g.large
+Storage:            100 GB
+Multi-AZ:           False
+Encrypted:          True
+Backup Retention:   7 dias
+
+Database:           marabet_production
+Username:           marabet_admin
+Password:           GuF#Y(!j38Bgw|YyT<r0J5>yxD3n
+
+ARN:                arn:aws:rds:eu-west-1:206749730888:db:database-1
+Secret ARN:         arn:aws:secretsmanager:eu-west-1:206749730888:secret:rds!db-3758a324-12a2-4675-b5ff-b92acdf38483-BpTjIS
+
+Generated:          10/27/2025 12:03:18

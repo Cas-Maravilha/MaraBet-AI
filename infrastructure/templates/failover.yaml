@@ -1,0 +1,28 @@
+apiVersion: v1
+data:
+  failover.sh: "\n#!/bin/bash\n# Failover script for MaraBet AI\n\nPRIMARY_ENDPOINT=\"\
+    https://api1.marabet.com\"\nSECONDARY_ENDPOINT=\"https://api2.marabet.com\"\n\
+    HEALTH_CHECK_PATH=\"/api/health\"\nTIMEOUT=5\nMAX_RETRIES=3\n\ncheck_health()\
+    \ {\n    local endpoint=$1\n    local url=\"${endpoint}${HEALTH_CHECK_PATH}\"\n\
+    \    \n    for i in $(seq 1 $MAX_RETRIES); do\n        if curl -s --max-time $TIMEOUT\
+    \ \"$url\" | grep -q \"healthy\"; then\n            return 0\n        fi\n   \
+    \     sleep 2\n    done\n    return 1\n}\n\nfailover() {\n    echo \"$(date):\
+    \ Starting failover process\"\n    \n    # Check primary endpoint\n    if check_health\
+    \ $PRIMARY_ENDPOINT; then\n        echo \"$(date): Primary endpoint is healthy\"\
+    \n        exit 0\n    fi\n    \n    echo \"$(date): Primary endpoint is unhealthy,\
+    \ checking secondary\"\n    \n    # Check secondary endpoint\n    if check_health\
+    \ $SECONDARY_ENDPOINT; then\n        echo \"$(date): Secondary endpoint is healthy,\
+    \ updating DNS\"\n        # Update DNS to point to secondary\n        # This would\
+    \ typically use your DNS provider's API\n        update_dns_to_secondary\n   \
+    \ else\n        echo \"$(date): Both endpoints are unhealthy, alerting\"\n   \
+    \     send_alert \"Both primary and secondary endpoints are down\"\n    fi\n}\n\
+    \nupdate_dns_to_secondary() {\n    # This would be implemented based on your DNS\
+    \ provider\n    echo \"$(date): Updating DNS to secondary endpoint\"\n    # Example\
+    \ for AWS Route 53:\n    # aws route53 change-resource-record-sets --hosted-zone-id\
+    \ Z123456789 --change-batch file://failover.json\n}\n\nsend_alert() {\n    local\
+    \ message=$1\n    echo \"$(date): ALERT: $message\"\n    # Send alert via email,\
+    \ Slack, etc.\n}\n\n# Run failover check\nfailover\n"
+kind: ConfigMap
+metadata:
+  name: failover-config
+  namespace: marabet

@@ -1,0 +1,71 @@
+════════════════════════════════════════════════════════════
+🚨 PROBLEMA IDENTIFICADO - SOLUÇÃO PRONTA
+════════════════════════════════════════════════════════════
+
+📍 SEU IP: 95.216.143.185
+
+❌ PROBLEMA:
+   Este IP não está na whitelist da API-Football
+   Por isso não recebe dados de jogos, odds e previsões
+
+✅ SOLUÇÃO (5 MINUTOS):
+
+1. Acessar: https://dashboard.api-football.com/
+
+2. Login com suas credenciais
+
+3. Ir para "IP Whitelist" ou "Allowed IPs"
+
+4. Clicar em "Add IP" ou "+ New IP"
+
+5. Adicionar IP: 95.216.143.185
+   Descrição: MaraBet AI - Development
+
+6. Salvar
+
+7. Aguardar 2 minutos
+
+8. Testar no terminal:
+   python test_api_ultra_plan.py
+
+════════════════════════════════════════════════════════════
+RESULTADO APÓS ADICIONAR:
+════════════════════════════════════════════════════════════
+
+✅ API-Football funcionará 100%
+✅ Plano Ultra totalmente ativo
+✅ Odds de +200 bookmakers disponíveis
+✅ Previsões avançadas funcionando
+✅ Jogos ao vivo acessíveis
+✅ Telegram enviará automático
+✅ Sistema completo operacional
+
+════════════════════════════════════════════════════════════
+ALTERNATIVAS:
+════════════════════════════════════════════════════════════
+
+1. Desabilitar whitelist no dashboard (menos seguro)
+2. Adicionar 0.0.0.0/0 (aceita todos os IPs)
+3. Usar football-data.org temporariamente (já funcionando)
+
+════════════════════════════════════════════════════════════
+SUPORTE:
+════════════════════════════════════════════════════════════
+
+MaraBet AI:
+📧 Comercial: comercial@marabet.ao
+📧 Suporte: suporte@marabet.ao
+📞 WhatsApp: +224 932027393
+
+API-Football:
+🌐 Dashboard: https://dashboard.api-football.com/
+📧 Support: support@api-football.com
+
+════════════════════════════════════════════════════════════
+
+IP: 95.216.143.185
+DASHBOARD: https://dashboard.api-football.com/
+TEMPO: 5 minutos
+
+════════════════════════════════════════════════════════════
+

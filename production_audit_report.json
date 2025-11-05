@@ -1,0 +1,66 @@
+{
+  "timestamp": "2025-10-23T16:06:39.678127",
+  "overall_score": 81.25,
+  "categories": {
+    "essential_files": {
+      "score": 9,
+      "total": 9,
+      "percentage": 100.0,
+      "status": "PASS"
+    },
+    "docker": {
+      "score": 3,
+      "total": 5,
+      "percentage": 60.0,
+      "status": "FAIL"
+    },
+    "security": {
+      "score": 2,
+      "total": 3,
+      "percentage": 66.66666666666666,
+      "status": "FAIL"
+    },
+    "database": {
+      "score": 2,
+      "total": 3,
+      "percentage": 66.66666666666666,
+      "status": "FAIL"
+    },
+    "tests": {
+      "score": 2,
+      "total": 3,
+      "percentage": 66.66666666666666,
+      "status": "FAIL"
+    },
+    "monitoring": {
+      "score": 2,
+      "total": 3,
+      "percentage": 66.66666666666666,
+      "status": "FAIL"
+    },
+    "deployment": {
+      "score": 3,
+      "total": 3,
+      "percentage": 100.0,
+      "status": "PASS"
+    },
+    "documentation": {
+      "score": 3,
+      "total": 3,
+      "percentage": 100.0,
+      "status": "PASS"
+    }
+  },
+  "critical_issues": [
+    "Docker não instalado",
+    "Docker Compose não instalado"
+  ],
+  "warnings": [
+    "Configuração SSL/HTTPS não encontrada",
+    "Sistema de migrações não encontrado",
+    "Testes de carga não encontrados",
+    "Grafana não configurado"
+  ],
+  "recommendations": [],
+  "production_ready": false
+}

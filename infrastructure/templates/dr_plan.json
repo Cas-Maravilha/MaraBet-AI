@@ -1,0 +1,80 @@
+{
+  "disaster_recovery_plan": {
+    "version": "1.0",
+    "last_updated": "2025-10-21T13:35:08.641666",
+    "rto_rpo": {
+      "critical": {
+        "rto_minutes": 15,
+        "rpo_minutes": 5
+      },
+      "high": {
+        "rto_minutes": 60,
+        "rpo_minutes": 15
+      },
+      "medium": {
+        "rto_minutes": 240,
+        "rpo_minutes": 60
+      },
+      "low": {
+        "rto_minutes": 1440,
+        "rpo_minutes": 360
+      }
+    },
+    "backup_strategy": {
+      "frequency": "hourly",
+      "retention_days": 30,
+      "encryption": true,
+      "compression": true,
+      "providers": [
+        "aws_s3",
+        "google_cloud",
+        "azure_blob"
+      ]
+    },
+    "recovery_procedures": {
+      "database": {
+        "rto_minutes": 15,
+        "rpo_minutes": 5,
+        "steps": [
+          "1. Identificar backup mais recente",
+          "2. Restaurar banco de dados",
+          "3. Validar integridade dos dados",
+          "4. Atualizar DNS/load balancer",
+          "5. Verificar conectividade da aplica\u00e7\u00e3o"
+        ]
+      },
+      "application": {
+        "rto_minutes": 30,
+        "rpo_minutes": 15,
+        "steps": [
+          "1. Provisionar inst\u00e2ncias de aplica\u00e7\u00e3o",
+          "2. Deploy do c\u00f3digo da aplica\u00e7\u00e3o",
+          "3. Configurar vari\u00e1veis de ambiente",
+          "4. Iniciar servi\u00e7os da aplica\u00e7\u00e3o",
+          "5. Verificar health checks"
+        ]
+      },
+      "infrastructure": {
+        "rto_minutes": 60,
+        "rpo_minutes": 30,
+        "steps": [
+          "1. Provisionar infraestrutura base",
+          "2. Configurar rede e seguran\u00e7a",
+          "3. Deploy de servi\u00e7os de apoio",
+          "4. Restaurar dados e configura\u00e7\u00f5es",
+          "5. Validar funcionamento completo"
+        ]
+      }
+    },
+    "testing_schedule": {
+      "backup_validation": "daily",
+      "restore_testing": "weekly",
+      "full_dr_test": "monthly"
+    },
+    "contact_information": {
+      "primary": "admin@marabet.com",
+      "secondary": "ops@marabet.com",
+      "emergency": "+1-555-0123"
+    }
+  }
+}

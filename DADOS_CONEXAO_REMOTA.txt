@@ -1,0 +1,35 @@
+========================================
+DADOS PARA CONEXÃO REMOTA - PostgreSQL
+========================================
+
+Host: 37.27.220.67
+Porta: 5432
+Usuário: meu_root$marabet
+Senha: dudbeeGdNBSxjpEWlop
+Database: marabet
+
+========================================
+COMANDOS DE CONEXÃO:
+========================================
+
+# Via psql:
+psql -h 37.27.220.67 -p 5432 -U "meu_root\$marabet" -d marabet
+
+# Via string de conexão (connection string):
+postgresql://meu_root%24marabet:dudbeeGdNBSxjpEWlop@37.27.220.67:5432/marabet
+
+# Nota: %24 é o código URL para o caractere $ no usuário
+
+========================================
+VERIFICAÇÃO:
+========================================
+
+✅ PostgreSQL escutando em: 0.0.0.0:5432
+✅ Acesso remoto configurado no pg_hba.conf
+✅ Porta 5432 ativa em todas as interfaces
+
+⚠️  IMPORTANTE:
+   - Certifique-se de que o firewall permite conexões na porta 5432
+   - Use SSL/TLS para conexões seguras quando possível
+   - Considere restringir acesso por IP específico no pg_hba.conf para maior segurança
+

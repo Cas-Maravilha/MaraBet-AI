@@ -1,0 +1,35 @@
+﻿{
+    "rds":  {
+                "engine":  "postgres",
+                "instance_class":  "db.m7g.large",
+                "engine_version":  "15.10",
+                "backup_retention_days":  7,
+                "instance_id":  "database-1",
+                "status":  "available",
+                "multi_az":  false,
+                "region":  "eu-west-1",
+                "port":  5432,
+                "availability_zone":  "eu-west-1c",
+                "arn":  "arn:aws:rds:eu-west-1:206749730888:db:database-1",
+                "allocated_storage_gb":  100,
+                "endpoint":  "database-1.c74amy6m4xhz.eu-west-1.rds.amazonaws.com",
+                "storage_encrypted":  true
+            },
+    "generated_at":  "2025-10-27T11:03:18Z",
+    "database":  {
+                     "username":  "marabet_admin",
+                     "name":  "marabet_production",
+                     "password":  "GuF#Y(!j38Bgw|YyT\u003cr0J5\u003eyxD3n"
+                 },
+    "connection_strings":  {
+                               "postgresql":  "postgresql://marabet_admin:GuF#Y(!j38Bgw|YyT\u003cr0J5\u003eyxD3n@database-1.c74amy6m4xhz.eu-west-1.rds.amazonaws.com:5432/marabet_production?sslmode=require",
+                               "rails":  "postgresql://marabet_admin:GuF#Y(!j38Bgw|YyT\u003cr0J5\u003eyxD3n@database-1.c74amy6m4xhz.eu-west-1.rds.amazonaws.com:5432/marabet_production",
+                               "jdbc":  "jdbc:postgresql://database-1.c74amy6m4xhz.eu-west-1.rds.amazonaws.com:5432/marabet_production?sslmode=require",
+                               "django":  "postgres://marabet_admin:GuF#Y(!j38Bgw|YyT\u003cr0J5\u003eyxD3n@database-1.c74amy6m4xhz.eu-west-1.rds.amazonaws.com:5432/marabet_production"
+                           },
+    "secrets_manager":  {
+                            "version_id":  "c55b9938-e4de-439a-9ccd-59c7a57ed978",
+                            "secret_id":  "rds!db-3758a324-12a2-4675-b5ff-b92acdf38483",
+                            "secret_arn":  "arn:aws:secretsmanager:eu-west-1:206749730888:secret:rds!db-3758a324-12a2-4675-b5ff-b92acdf38483-BpTjIS"
+                        }
+}

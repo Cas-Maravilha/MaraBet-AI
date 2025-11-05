@@ -1,0 +1,222 @@
+🎯 *ANÁLISE DETALHADA MARABET AI*
+
+🏆 *Petro de Luanda vs 1º de Agosto*
+🏟️ Girabola
+📅 22/10/2025 16:40
+
+🏆 *TOP 15 RECOMENDAÇÕES:*
+
+1. ⭐ *5+* (exact_goals)
+   📊 Probabilidade: 45.3%
+   💰 Odds: 15.00
+   📈 Valor Esperado: +579.0%
+   🎯 ROI Potencial: +579.0%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 30.3% - 55.3%
+   📋 Confiança: BAIXA
+   ⭐ Nível: EXCELENTE
+   💡 Distribuição de Poisson com λ=4.4
+
+2. ⭐ *1X2* (double_chance)
+   📊 Probabilidade: 100.0%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +100.0%
+   🎯 ROI Potencial: +100.0%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 85.0% - 100.0%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Baseado em: Casa 57.0%, Empate 23.0%, Visitante 19.9%
+
+3. ⭐ *1X +1* (double_chance)
+   📊 Probabilidade: 87.0%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +73.9%
+   🎯 ROI Potencial: +73.9%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 72.0% - 97.0%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Handicap +1: Casa 70.5%, Empate 16.5%, Visitante 13.0%
+
+4. ⭐ *12 +1* (double_chance)
+   📊 Probabilidade: 83.5%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +67.0%
+   🎯 ROI Potencial: +67.0%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 68.5% - 93.5%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Handicap +1: Casa 70.5%, Empate 16.5%, Visitante 13.0%
+
+5. ⭐ *Visitante -1* (corner_handicap)
+   📊 Probabilidade: 80.5%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +61.0%
+   🎯 ROI Potencial: +61.0%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 65.5% - 90.5%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença ajustada: 0.5 cantos
+
+6. ⭐ *Over 4.5* (over_under)
+   📊 Probabilidade: 45.3%
+   💰 Odds: 3.50
+   📈 Valor Esperado: +58.4%
+   🎯 ROI Potencial: +58.4%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 30.3% - 55.3%
+   📋 Confiança: BAIXA
+   ⭐ Nível: EXCELENTE
+   💡 Média ajustada: 4.4 gols
+
+7. ⭐ *2º Tempo Over 2.5* (total_cards)
+   📊 Probabilidade: 73.7%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +47.4%
+   🎯 ROI Potencial: +47.4%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 58.7% - 83.7%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Média 2º: 3.8 cartões
+
+8. ⭐ *Over 3.5* (over_under)
+   📊 Probabilidade: 64.4%
+   💰 Odds: 2.25
+   📈 Valor Esperado: +44.9%
+   🎯 ROI Potencial: +44.9%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 49.4% - 74.4%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Média ajustada: 4.4 gols
+
+9. ⭐ *1º Tempo Over 1.5* (total_cards)
+   📊 Probabilidade: 72.4%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +44.9%
+   🎯 ROI Potencial: +44.9%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 57.4% - 82.4%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Média 1º: 2.6 cartões
+
+10. ⭐ *Visitante -0.5* (asian_handicap)
+   📊 Probabilidade: 67.8%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +35.5%
+   🎯 ROI Potencial: +35.5%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 52.8% - 77.8%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença de força ajustada: 0.09
+
+11. ⭐ *Sim* (both_teams_score)
+   📊 Probabilidade: 69.2%
+   💰 Odds: 1.80
+   📈 Valor Esperado: +24.5%
+   🎯 ROI Potencial: +24.5%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 54.2% - 79.2%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Probabilidade casa: 86.7%, visitante: 79.8%
+
+12. ⭐ *Casa 0.5* (asian_handicap)
+   📊 Probabilidade: 62.2%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +24.5%
+   🎯 ROI Potencial: +24.5%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 47.2% - 72.2%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença de força ajustada: 0.09
+
+13. ⭐ *Visitante 0* (corner_handicap)
+   📊 Probabilidade: 60.5%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +21.0%
+   🎯 ROI Potencial: +21.0%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 45.5% - 70.5%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença de cantos ajustada: 0.5
+
+14. ⭐ *Visitante 0* (corner_handicap)
+   📊 Probabilidade: 60.5%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +21.0%
+   🎯 ROI Potencial: +21.0%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 45.5% - 70.5%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença ajustada: 0.5 cantos
+
+15. ⭐ *Casa 1* (corner_handicap)
+   📊 Probabilidade: 59.5%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +19.0%
+   🎯 ROI Potencial: +19.0%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 44.5% - 69.5%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença de cantos ajustada: 0.5
+
+📊 *ANÁLISE POR CATEGORIA:*
+
+*GOALS:*
+✅ 4/10 apostas favoráveis
+   ⭐ 5+: +579.0% EV
+   ⭐ Over 4.5: +58.4% EV
+   ⭐ Over 3.5: +44.9% EV
+
+*HANDICAP:*
+✅ 5/10 apostas favoráveis
+   ⭐ Visitante -0.5: +35.5% EV
+   ⭐ Casa 0.5: +24.5% EV
+   ⭐ Visitante 0: +21.0% EV
+
+*CARDS:*
+✅ 3/7 apostas favoráveis
+   ⭐ 2º Tempo Over 2.5: +47.4% EV
+   ⭐ 1º Tempo Over 1.5: +44.9% EV
+   ⭐ 0: +10.9% EV
+
+*CORNERS:*
+✅ 5/10 apostas favoráveis
+   ⭐ Visitante -1: +61.0% EV
+   ⭐ Visitante 0: +21.0% EV
+   ⭐ Casa 1: +19.0% EV
+
+*DOUBLE_CHANCE:*
+✅ 5/10 apostas favoráveis
+   ⭐ 1X2: +100.0% EV
+   ⭐ 1X +1: +73.9% EV
+   ⭐ 12 +1: +67.0% EV
+
+*EXACT_SCORE:*
+✅ 1/10 apostas favoráveis
+   ⭐ Outros: +14.0% EV
+
+📈 *RESUMO ESTATÍSTICO:*
+• Valor Esperado Médio: -2.9%
+• Melhor Valor Esperado: +579.0%
+• Apostas Favoráveis: 23/60
+• Taxa de Sucesso: 38.3%
+
+⚠️ *AVISOS IMPORTANTES:*
+• Stake máximo recomendado: 5% do bankroll
+• Valor mínimo esperado: 2.0%
+• Gestão de risco é fundamental
+• Nunca aposte mais do que pode perder
+
+🤖 *Sistema MaraBet AI - Análise Profissional*

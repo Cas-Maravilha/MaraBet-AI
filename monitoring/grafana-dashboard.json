@@ -1,0 +1,16 @@
+{
+  "dashboard": {
+    "title": "MaraBet AI Production Dashboard",
+    "panels": [
+      {
+        "title": "System Health",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "up{job=\"marabet-ai\"}"
+          }
+        ]
+      }
+    ]
+  }
+}

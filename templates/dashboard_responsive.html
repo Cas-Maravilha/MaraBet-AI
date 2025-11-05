@@ -1,0 +1,537 @@
+{% extends "base_responsive.html" %}
+
+{% block title %}Dashboard - MaraBet AI{% endblock %}
+
+{% block content %}
+<div class="container dashboard">
+    
+    <!-- Header com saudação -->
+    <div class="dashboard-widget-full">
+        <div class="card fade-in">
+            <div class="card-header">
+                <div>
+                    <h1 class="card-title">Olá, {{ user.name|default('Utilizador') }}! 👋</h1>
+                    <p class="text-secondary">
+                        <span class="hide-mobile">Bem-vindo ao seu dashboard de apostas inteligentes.</span>
+                        <span class="show-mobile">Dashboard</span>
+                        <br>
+                        <small>{{ current_date|default('25 de Outubro de 2025') }}</small>
+                    </p>
+                </div>
+                <div class="hide-mobile">
+                    <button class="btn btn-primary" onclick="refreshDashboard()">
+                        🔄 Atualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="stat-card fade-in">
+        <div class="stat-card-icon" style="background: rgba(26, 115, 232, 0.1); color: var(--primary-color);">
+            ⚽
+        </div>
+        <div class="stat-card-value">{{ total_predictions|default(127) }}</div>
+        <div class="stat-card-label">Previsões Hoje</div>
+        <div class="stat-card-change positive">+15% vs ontem</div>
+    </div>
+    
+    <div class="stat-card fade-in">
+        <div class="stat-card-icon" style="background: rgba(52, 168, 83, 0.1); color: var(--success-color);">
+            ✅
+        </div>
+        <div class="stat-card-value">{{ win_rate|default(73.5) }}%</div>
+        <div class="stat-card-label">Taxa de Acerto</div>
+        <div class="stat-card-change positive">+2.3% esta semana</div>
+    </div>
+    
+    <div class="stat-card fade-in">
+        <div class="stat-card-icon" style="background: rgba(234, 67, 53, 0.1); color: var(--danger-color);">
+            🔴
+        </div>
+        <div class="stat-card-value">{{ live_matches|default(23) }}</div>
+        <div class="stat-card-label">Jogos Ao Vivo</div>
+        <div class="stat-card-change">Agora mesmo</div>
+    </div>
+    
+    <div class="stat-card fade-in">
+        <div class="stat-card-icon" style="background: rgba(251, 188, 4, 0.1); color: var(--warning-color);">
+            💰
+        </div>
+        <div class="stat-card-value">{{ bankroll|default('250.00') }} €</div>
+        <div class="stat-card-label">Bankroll Atual</div>
+        <div class="stat-card-change positive">+12.5% este mês</div>
+    </div>
+    
+    <!-- Previsões em Destaque -->
+    <div class="dashboard-widget-full">
+        <div class="card fade-in">
+            <div class="card-header">
+                <h2 class="card-title">⭐ Previsões em Destaque</h2>
+                <a href="/predictions" class="btn btn-outline btn-mobile-full">Ver Todas</a>
+            </div>
+            <div class="card-body">
+                
+                <!-- Previsão 1 -->
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <span class="badge badge-success">Alta Confiança</span>
+                        <span class="text-secondary">15:00</span>
+                    </div>
+                    
+                    <div class="prediction-teams">
+                        <div class="prediction-team">
+                            <img src="/static/images/teams/benfica.png" 
+                                 alt="Benfica" 
+                                 class="prediction-team-logo"
+                                 loading="lazy">
+                            <div class="prediction-team-name">Benfica</div>
+                        </div>
+                        
+                        <div class="prediction-vs">vs</div>
+                        
+                        <div class="prediction-team">
+                            <img src="/static/images/teams/porto.png" 
+                                 alt="Porto" 
+                                 class="prediction-team-logo"
+                                 loading="lazy">
+                            <div class="prediction-team-name">Porto</div>
+                        </div>
+                    </div>
+                    
+                    <div class="prediction-odds">
+                        <div class="prediction-odd">
+                            <div class="prediction-odd-label">Casa</div>
+                            <div class="prediction-odd-value">2.10</div>
+                        </div>
+                        <div class="prediction-odd" style="background: var(--success-color); color: white;">
+                            <div class="prediction-odd-label">Empate</div>
+                            <div class="prediction-odd-value">3.40</div>
+                        </div>
+                        <div class="prediction-odd">
+                            <div class="prediction-odd-label">Fora</div>
+                            <div class="prediction-odd-value">3.20</div>
+                        </div>
+                    </div>
+                    
+                    <div class="prediction-confidence">
+                        <span class="text-secondary">Confiança:</span>
+                        <div class="prediction-confidence-bar">
+                            <div class="prediction-confidence-fill" style="width: 87%;"></div>
+                        </div>
+                        <span class="font-weight-bold">87%</span>
+                    </div>
+                    
+                    <div style="margin-top: var(--spacing-md);">
+                        <button class="btn btn-primary btn-mobile-full">Ver Análise Completa</button>
+                    </div>
+                </div>
+                
+                <!-- Previsão 2 -->
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <span class="badge badge-warning">Média Confiança</span>
+                        <span class="text-secondary">18:30</span>
+                    </div>
+                    
+                    <div class="prediction-teams">
+                        <div class="prediction-team">
+                            <img src="/static/images/teams/sporting.png" 
+                                 alt="Sporting" 
+                                 class="prediction-team-logo"
+                                 loading="lazy">
+                            <div class="prediction-team-name">Sporting</div>
+                        </div>
+                        
+                        <div class="prediction-vs">vs</div>
+                        
+                        <div class="prediction-team">
+                            <img src="/static/images/teams/braga.png" 
+                                 alt="Braga" 
+                                 class="prediction-team-logo"
+                                 loading="lazy">
+                            <div class="prediction-team-name">Braga</div>
+                        </div>
+                    </div>
+                    
+                    <div class="prediction-odds">
+                        <div class="prediction-odd" style="background: var(--success-color); color: white;">
+                            <div class="prediction-odd-label">Casa</div>
+                            <div class="prediction-odd-value">1.75</div>
+                        </div>
+                        <div class="prediction-odd">
+                            <div class="prediction-odd-label">Empate</div>
+                            <div class="prediction-odd-value">3.60</div>
+                        </div>
+                        <div class="prediction-odd">
+                            <div class="prediction-odd-label">Fora</div>
+                            <div class="prediction-odd-value">4.50</div>
+                        </div>
+                    </div>
+                    
+                    <div class="prediction-confidence">
+                        <span class="text-secondary">Confiança:</span>
+                        <div class="prediction-confidence-bar">
+                            <div class="prediction-confidence-fill" style="width: 65%;"></div>
+                        </div>
+                        <span class="font-weight-bold">65%</span>
+                    </div>
+                    
+                    <div style="margin-top: var(--spacing-md);">
+                        <button class="btn btn-primary btn-mobile-full">Ver Análise Completa</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gráfico de Performance -->
+    <div class="col-lg-8 col-md-6">
+        <div class="card fade-in">
+            <div class="card-header">
+                <h2 class="card-title">📈 Performance Semanal</h2>
+                <select class="form-control" style="width: auto;">
+                    <option>Últimos 7 dias</option>
+                    <option>Últimos 30 dias</option>
+                    <option>Este mês</option>
+                </select>
+            </div>
+            <div class="card-body">
+                <canvas id="performanceChart" style="max-height: 300px;"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Estatísticas Rápidas -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card fade-in">
+            <div class="card-header">
+                <h2 class="card-title">📊 Resumo</h2>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Total de Apostas</span>
+                    <span class="stat-value">1,247</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Apostas Ganhas</span>
+                    <span class="stat-value text-success">917</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Apostas Perdidas</span>
+                    <span class="stat-value text-danger">330</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">ROI Médio</span>
+                    <span class="stat-value text-success">+15.7%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Maior Ganho</span>
+                    <span class="stat-value">€ 450.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Sequência Atual</span>
+                    <span class="stat-value text-success">7 vitórias</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Melhores Ligas -->
+    <div class="col-lg-6 col-md-6">
+        <div class="card fade-in">
+            <div class="card-header">
+                <h2 class="card-title">🏆 Melhores Ligas</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Liga</th>
+                                <th class="hide-mobile">Jogos</th>
+                                <th>Taxa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Liga">
+                                    <span class="hide-mobile">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> Premier League
+                                </td>
+                                <td data-label="Jogos" class="hide-mobile">87</td>
+                                <td data-label="Taxa">
+                                    <span class="badge badge-success">78%</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Liga">
+                                    <span class="hide-mobile">🇪🇸</span> La Liga
+                                </td>
+                                <td data-label="Jogos" class="hide-mobile">92</td>
+                                <td data-label="Taxa">
+                                    <span class="badge badge-success">75%</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Liga">
+                                    <span class="hide-mobile">🇩🇪</span> Bundesliga
+                                </td>
+                                <td data-label="Jogos" class="hide-mobile">65</td>
+                                <td data-label="Taxa">
+                                    <span class="badge badge-success">72%</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Liga">
+                                    <span class="hide-mobile">🇮🇹</span> Serie A
+                                </td>
+                                <td data-label="Jogos" class="hide-mobile">71</td>
+                                <td data-label="Taxa">
+                                    <span class="badge badge-warning">68%</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ações Rápidas -->
+    <div class="col-lg-6 col-md-6">
+        <div class="card fade-in">
+            <div class="card-header">
+                <h2 class="card-title">⚡ Ações Rápidas</h2>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-primary btn-mobile-full" style="margin-bottom: var(--spacing-sm);">
+                    ⚽ Ver Previsões de Hoje
+                </button>
+                <button class="btn btn-secondary btn-mobile-full" style="margin-bottom: var(--spacing-sm);">
+                    🔴 Jogos Ao Vivo
+                </button>
+                <button class="btn btn-outline btn-mobile-full" style="margin-bottom: var(--spacing-sm);">
+                    💰 Gerenciar Bankroll
+                </button>
+                <button class="btn btn-outline btn-mobile-full" style="margin-bottom: var(--spacing-sm);">
+                    📊 Relatórios Detalhados
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notificações Recentes -->
+    <div class="dashboard-widget-full">
+        <div class="card fade-in">
+            <div class="card-header">
+                <h2 class="card-title">🔔 Notificações Recentes</h2>
+                <button class="btn btn-outline">Marcar todas como lidas</button>
+            </div>
+            <div class="card-body">
+                <div class="notification-item">
+                    <div class="notification-icon" style="background: var(--success-color);">✅</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Previsão Acertada!</div>
+                        <div class="notification-text">Benfica vs Porto - Resultado correto</div>
+                        <div class="notification-time">Há 15 minutos</div>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-icon" style="background: var(--primary-color);">📊</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Novas Estatísticas</div>
+                        <div class="notification-text">Relatório semanal disponível</div>
+                        <div class="notification-time">Há 1 hora</div>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-icon" style="background: var(--warning-color);">⚠️</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Alerta de Bankroll</div>
+                        <div class="notification-text">Considere ajustar tamanho das apostas</div>
+                        <div class="notification-time">Há 3 horas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-success {
+    background: rgba(52, 168, 83, 0.1);
+    color: var(--success-color);
+}
+
+.badge-warning {
+    background: rgba(251, 188, 4, 0.1);
+    color: var(--warning-color);
+}
+
+.badge-danger {
+    background: rgba(234, 67, 53, 0.1);
+    color: var(--danger-color);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.text-success {
+    color: var(--success-color);
+}
+
+.text-danger {
+    color: var(--danger-color);
+}
+
+.notification-item {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+    transition: var(--transition-fast);
+}
+
+.notification-item:hover {
+    background: var(--surface);
+}
+
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white;
+    font-size: 20px;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.notification-text {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.notification-time {
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+@media (max-width: 767px) {
+    .notification-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script>
+// Performance Chart
+const ctx = document.getElementById('performanceChart');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [{
+                label: 'Taxa de Acerto (%)',
+                data: [68, 72, 75, 71, 76, 78, 73],
+                borderColor: '#1a73e8',
+                backgroundColor: 'rgba(26, 115, 232, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+}
+
+// Refresh Dashboard
+function refreshDashboard() {
+    const overlay = document.getElementById('loading-overlay');
+    overlay.style.display = 'flex';
+    
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        showToast('✅ Dashboard atualizado', 'success');
+    }, 1500);
+}
+
+// Toast notification function
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+</script>
+{% endblock %}
+

@@ -1,0 +1,21 @@
+{
+  "system_ip": "102.206.57.108",
+  "configured_at": "2025-10-25T11:05:09.384807",
+  "api_whitelist": {
+    "api_football": {
+      "ip_required": true,
+      "current_ip": "102.206.57.108",
+      "dashboard_url": "https://dashboard.api-football.com/",
+      "instructions": "Adicionar este IP na seção 'IP Whitelist' do dashboard"
+    },
+    "football_data_org": {
+      "ip_required": false,
+      "note": "Esta API não requer whitelist de IP"
+    }
+  },
+  "server_config": {
+    "location": "Angola",
+    "provider": "Local/Angoweb",
+    "environment": "development"
+  }
+}

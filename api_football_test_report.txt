@@ -1,0 +1,68 @@
+================================================================================
+RELATÓRIO DE TESTE DA API FOOTBALL - MARABET AI
+================================================================================
+
+📊 RESUMO GERAL:
+  Data: 2025-10-21 17:39:08
+  API Key: 6da9495ae0...
+  Conexão: ❌ Falhou
+  Ligas: 0
+  Times: 0
+  Partidas: 0
+  Odds: 0
+
+🔌 RESULTADOS DE CONEXÃO:
+  API Conectada: False
+  Base URL: https://v3.football.api-sports.io
+  Headers: Configurados
+
+🏆 RESULTADOS DE ENDPOINTS:
+  Ligas:
+    Sucesso: True
+    Quantidade: 0
+    Tempo de resposta: 1.02s
+  Times:
+    Sucesso: True
+    Quantidade: 0
+    Tempo de resposta: 1.04s
+  Partidas:
+    Sucesso: True
+    Quantidade: 0
+    Tempo de resposta: 1.03s
+  Odds:
+    Sucesso: True
+    Quantidade: 0
+    Tempo de resposta: 1.08s
+
+⚡ RESULTADOS DE PERFORMANCE:
+  Total de requests: 10
+  Requests bem-sucedidas: 10
+  Requests falharam: 0
+  Taxa de sucesso: 100.00%
+  Response time médio: 1.44s
+  Response time máximo: 2.88s
+  Response time mínimo: 1.02s
+  Throughput: 0.52 RPS
+
+📊 RESULTADOS DE COLETA DE DADOS:
+  Ligas coletadas: 0
+  Times coletados: 0
+  Partidas coletadas: 0
+  Odds coletadas: 0
+  Dados salvos: ✅
+
+🎯 VALIDAÇÃO DE OBJETIVOS:
+  ❌ API não conectada
+  ❌ Ligas não disponíveis
+  ❌ Times não disponíveis
+  ❌ Partidas não disponíveis
+  ❌ Performance inadequada
+  ✅ Dados coletados e salvos
+
+💡 RECOMENDAÇÕES:
+  ⚠️ Verificar chave da API
+  ⚠️ Otimizar performance da API
+  🔄 Executar coleta de dados regularmente
+  📊 Monitorar limites da API
+  🔐 Manter chave da API segura
+================================================================================

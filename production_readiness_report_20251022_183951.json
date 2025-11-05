@@ -1,0 +1,216 @@
+{
+  "timestamp": "2025-10-22T18:39:47.073240",
+  "overall_status": "Ready for Production",
+  "components": {
+    "enhanced_predictions_system": {
+      "status": "Ready",
+      "file_exists": true,
+      "imports_ok": true,
+      "functions_ok": true,
+      "issues": [],
+      "score": 100
+    },
+    "interactive_dashboard": {
+      "status": "Ready",
+      "file_exists": true,
+      "imports_ok": true,
+      "functions_ok": true,
+      "issues": [],
+      "score": 100
+    },
+    "concise_alerts": {
+      "status": "Ready",
+      "file_exists": true,
+      "imports_ok": true,
+      "functions_ok": true,
+      "issues": [],
+      "score": 100
+    },
+    "data_collection_system": {
+      "status": "Ready",
+      "file_exists": true,
+      "imports_ok": true,
+      "functions_ok": true,
+      "issues": [],
+      "score": 100
+    },
+    "realtime_monitor": {
+      "status": "Ready",
+      "file_exists": true,
+      "imports_ok": true,
+      "functions_ok": true,
+      "issues": [],
+      "score": 100
+    },
+    "integrated_system": {
+      "status": "Ready",
+      "file_exists": true,
+      "imports_ok": true,
+      "functions_ok": true,
+      "issues": [],
+      "score": 100
+    },
+    "complete_marabetsystem": {
+      "status": "Ready",
+      "file_exists": true,
+      "imports_ok": true,
+      "functions_ok": true,
+      "issues": [],
+      "score": 100
+    },
+    "simple_future_predictions": {
+      "status": "Ready",
+      "file_exists": true,
+      "imports_ok": true,
+      "functions_ok": true,
+      "issues": [],
+      "score": 100
+    }
+  },
+  "issues": [],
+  "recommendations": [
+    "Mover chaves de API para variáveis de ambiente"
+  ],
+  "production_score": 98.95,
+  "dependencies": {
+    "status": "Ready",
+    "packages": {
+      "requests": {
+        "status": "Available",
+        "version": "2.31.0",
+        "installed": true
+      },
+      "flask": {
+        "status": "Available",
+        "version": "3.1.0",
+        "installed": true
+      },
+      "sqlite3": {
+        "status": "Available",
+        "version": "Unknown",
+        "installed": true
+      },
+      "json": {
+        "status": "Available",
+        "version": "Built-in",
+        "installed": true
+      },
+      "datetime": {
+        "status": "Available",
+        "version": "Built-in",
+        "installed": true
+      },
+      "random": {
+        "status": "Available",
+        "version": "Built-in",
+        "installed": true
+      },
+      "logging": {
+        "status": "Available",
+        "version": "Built-in",
+        "installed": true
+      },
+      "time": {
+        "status": "Available",
+        "version": "Built-in",
+        "installed": true
+      },
+      "os": {
+        "status": "Available",
+        "version": "Built-in",
+        "installed": true
+      },
+      "sys": {
+        "status": "Available",
+        "version": "Built-in",
+        "installed": true
+      }
+    },
+    "issues": [],
+    "score": 100
+  },
+  "configuration": {
+    "status": "Ready",
+    "files": {
+      "telegram_config.json": {
+        "exists": true,
+        "size": 189,
+        "readable": true
+      },
+      "config_personal.env": {
+        "exists": true,
+        "size": 888,
+        "readable": true
+      },
+      "config_production.env": {
+        "exists": true,
+        "size": 2060,
+        "readable": true
+      },
+      "requirements.txt": {
+        "exists": true,
+        "size": 1203,
+        "readable": true
+      },
+      "README.md": {
+        "exists": true,
+        "size": 21334,
+        "readable": true
+      }
+    },
+    "issues": [],
+    "score": 110
+  },
+  "functionality": {
+    "status": "Ready",
+    "features": {
+      "Predições de Apostas": {
+        "score": 100,
+        "status": "Ready"
+      },
+      "Dashboard Interativo": {
+        "score": 100,
+        "status": "Ready"
+      },
+      "Notificações Telegram": {
+        "score": 100,
+        "status": "Ready"
+      },
+      "Coleta de Dados": {
+        "score": 100,
+        "status": "Ready"
+      },
+      "Monitoramento em Tempo Real": {
+        "score": 100,
+        "status": "Ready"
+      },
+      "Sistema de Alertas": {
+        "score": 100,
+        "status": "Ready"
+      },
+      "Integração com APIs": {
+        "score": 100,
+        "status": "Ready"
+      },
+      "Análise de Dados Históricos": {
+        "score": 100,
+        "status": "Ready"
+      }
+    },
+    "issues": [],
+    "score": 800
+  },
+  "security": {
+    "status": "Needs Work",
+    "checks": {
+      "api_keys_secure": false,
+      "config_files": true,
+      "error_handling": true,
+      "logging": true
+    },
+    "issues": [
+      "Chaves de API expostas no código"
+    ],
+    "score": 70
+  }
+}

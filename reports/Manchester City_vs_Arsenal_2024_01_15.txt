@@ -1,0 +1,330 @@
+
+🎯 RELATÓRIO DE ANÁLISE PREDITIVA
+============================================================
+
+EVENTO ANALISADO
+🏟️ Manchester City vs Arsenal
+📅 Premier League - 2024/25
+🕐 2024-01-15 - 15:00h GMT
+🌦️ Condições: Parcialmente nublado, 19°C
+🏟️ Local: Estádio Manchester City
+👨‍⚖️ Árbitro: Craig Pawson
+👥 Público: 79,790
+⭐ Importância: High
+
+ANÁLISE DE VALOR
+------------------------------
+📊 Odds de Mercado:
+   • Vitória Manchester City: 1.75
+   • Empate: 2.90
+   • Vitória Arsenal: 4.28
+
+🎯 Probabilidades Calculadas:
+   • Vitória Manchester City: 32.1%
+   • Empate: 25.9%
+   • Vitória Arsenal: 42.0%
+
+💰 Valores Esperados:
+   • Vitória Manchester City: -0.437
+   • Empate: -0.248
+   • Vitória Arsenal: +0.797
+
+🏆 Melhor Oportunidade:
+   • Resultado: Away Win
+   • Odds: 4.28
+   • Probabilidade: 42.0%
+   • Valor Esperado: +0.797
+   • Classificação: EXCELLENT
+
+ANÁLISE ESTATÍSTICA DETALHADA
+------------------------------
+
+ANÁLISE ESTATÍSTICA DETALHADA
+============================================================
+
+Forma Recente (Últimos 5 Jogos)
+----------------------------------------
+
+Manchester City (Casa):
+Jogo		Resultado	Gols Marcados	Gols Sofridos	xG
+----------------------------------------------------------------------
+Liv		1-1	1		1		1.9
+Bre		2-0	2		0		2.1
+Ars		3-1	3		1		2.8
+Ars		4-1	4		1		3.1
+Ars		3-0	3		0		2.9
+
+
+Média: 2.6 gols/jogo | xG: 2.56 | 80% aproveitamento
+
+Arsenal (Fora):
+Jogo		Resultado	Gols Marcados	Gols Sofridos	xG
+----------------------------------------------------------------------
+Bri		2-0	2		0		2.4
+Eve		1-0	1		0		1.6
+Man		1-3	1		3		1.2
+Man		1-4	1		4		0.9
+Man		0-3	0		3		0.8
+
+
+Média: 1.0 gols/jogo | xG: 1.38 | 100% aproveitamento
+
+Confrontos Diretos (Últimos 5)
+----------------------------------------
+Man 3-1 Ars (H) ✓
+Man 0-0 Ars (A) =
+Man 4-1 Ars (H) ✓
+Man 3-1 Ars (A) ✓
+Man 3-0 Ars (H) ✓
+
+
+Vantagem Manchester City: 80% vitórias em casa
+
+MÉTRICAS AVANÇADAS
+----------------------------------------
+• Diferença de xG: +1.18
+• Diferença de gols: +1.6
+• Eficiência ofensiva Manchester City: 1.02
+• Eficiência ofensiva Arsenal: 0.72
+• Defesa Manchester City: 0.6 gols/jogo
+• Defesa Arsenal: 2.0 gols/jogo
+
+TENDÊNCIAS RECENTES
+----------------------------------------
+• Manchester City em casa: Positiva (3V-0E-0D)
+• Arsenal fora: Positiva (3V-0E-0D)
+• Confrontos diretos: Favorável ao Manchester City
+• Média de gols nos confrontos: 2.6-0.6
+
+ANÁLISE PREDITIVA
+----------------------------------------
+• Probabilidade de vitória Manchester City: 79.0%
+• Probabilidade de empate: 20.0%
+• Probabilidade de vitória Arsenal: 53.0%
+• Total de gols esperado: 3.6
+• Mais de 2.5 gols: 80.0%
+
+
+FATORES CONTEXTUAIS
+------------------------------
+
+FATORES CONTEXTUAIS
+==================================================
+
+✅ FATORES POSITIVOS - Manchester City
+----------------------------------------
+🏠 Invicto em casa há 12 jogos
+⚽ Melhor ataque da liga (2.8 gols/jogo)
+📈 Haaland com 15 gols em 10 jogos
+💪 Elenco completo, sem lesões importantes
+🎯 Buscando liderança isolada
+
+✅ FATORES POSITIVOS - Arsenal
+----------------------------------------
+🛡️ Melhor defesa visitante (0.6 gols/jogo)
+📊 Posse de bola superior (58%)
+🔥 Saka em grande fase (4 gols em 5 jogos)
+💡 Sistema tático bem definido
+
+❌ PONTOS DE ATENÇÃO
+----------------------------------------
+Manchester City: Jogo decisivo na Champions midweek (possível cansaço)
+Arsenal: Desfalque de Saliba (defensor titular)
+
+📊 ANÁLISE GERAL
+----------------------------------------
+Manchester City tem vantagem contextual significativa
+
+🔍 INSIGHTS PRINCIPAIS
+----------------------------------------
+• Manchester City tem 4 fatores positivos importantes
+• Arsenal tem 1 fatores positivos importantes
+• Arsenal tem 1 desfalques importantes
+
+⚠️ FATORES DE RISCO
+----------------------------------------
+• Manchester City: Jogo decisivo na Champions midweek (possível cansaço)
+• Arsenal: Desfalque de Saliba (defensor titular)
+
+
+MODELAGEM PREDITIVA
+------------------------------
+
+MODELAGEM PREDITIVA
+==================================================
+
+Probabilidades Calculadas pelo Sistema
+┌─────────────────────────────────────────┐
+│  RESULTADO  │  PROB. REAL  │  ODD JUSTA │
+├─────────────────────────────────────────┤
+│ Manchester City Vitória │   49.6%    │   2.02   │
+│   Empate    │   22.3%    │   4.49   │
+│ Arsenal Vitória │   28.1%    │   3.56   │
+└─────────────────────────────────────────┘
+
+
+Odds Oferecidas pelas Casas (Média)
+Manchester City Vitória: 2.18
+Empate: 3.38
+Arsenal Vitória: 4.73
+
+
+
+ANÁLISE DE VALOR
+------------------------------
+Manchester City Vitória:
+  Valor Esperado: +0.081
+  Recomendação: BOM VALOR
+  Confiança: 59.5%
+
+Empate:
+  Valor Esperado: -0.245
+  Recomendação: SEM VALOR
+  Confiança: 26.8%
+
+Arsenal Vitória:
+  Valor Esperado: +0.329
+  Recomendação: EXCELENTE VALOR
+  Confiança: 33.7%
+
+
+
+MODELO PREDITIVO
+------------------------------
+Tipo: Ensemble (Poisson + ML + Bayesian)
+Precisão: 36.0%
+Confiança: 40.0%
+Features: recent_form, head_to_head, home_advantage, xG_difference, tactical_advantage, motivational_factors, contextual_factors
+Atualização: 14/10/2025 15:57
+
+
+
+ANÁLISE DE VALOR ESPERADO
+------------------------------
+
+ANÁLISE DE VALOR ESPERADO
+==================================================
+
+💎 APOSTA COM VALOR POSITIVO IDENTIFICADA
+🎯 MERCADO: Manchester City Vence
+───────────────────────────────────
+Probabilidade Real:     50.9%
+Odd Oferecida:         2.14
+Probabilidade Implícita: 46.7%
+
+📊 CÁLCULO DE EV:
+EV = (0.509 × 2.14) - 1
+EV = 1.091 - 1
+EV = +0.091 (+9.1%)
+
+✅ VALOR BOM: +9.1%
+
+Outras Oportunidades Analisadas:
+Ambas Marcam - SIM
+├─ Probabilidade Real: 61%
+├─ Odd: 1.72
+├─ EV: +4.5% ✓ Positivo
+└─ Confiança: 70%
+
+📈 RESUMO DA ANÁLISE
+───────────────────────────────────
+• Total de Oportunidades: 8
+• Valor Positivo: 2
+• Valor Excelente: 0
+• EV Médio: -0.039
+• Melhor EV: +9.1%
+
+
+ANÁLISE DE PROBABILIDADES
+------------------------------
+📈 Forma Recente:
+   • Manchester City: 74.4%
+   • Arsenal: 67.6%
+
+⚔️ Confrontos Diretos:
+   • Manchester City: 65.1%
+   • Arsenal: 34.9%
+
+📊 Estatísticas Avançadas:
+   • xG Manchester City: 2.11
+   • xG Arsenal: 1.23
+   • Posse Manchester City: 49.9%
+   • Posse Arsenal: 35.9%
+
+🌍 Fatores Contextuais:
+   • Vantagem de casa: +14.1%
+   • Impacto de lesões: +5.8%
+   • Impacto do clima: +3.3%
+
+GESTÃO DE UNIDADES
+------------------------------
+🎯 Recomendação de Unidades:
+   • Nível de Confiança: MEDIUM
+   • Confiança: 70.9%
+   • Unidades Recomendadas: 1.4
+   • Valor da Unidade: R$ 100.00
+   • Stake Total: R$ 143.51
+
+💡 Motivos:
+   • Confiança 70.9%
+   • Análise de valor positiva
+   • Fatores contextuais favoráveis
+
+GESTÃO DE BANCA
+------------------------------
+💰 Status da Banca:
+   • Capital Atual: R$ 959.04
+   • Capital Inicial: R$ 1000.00
+   • Lucro/Prejuízo: +6.8%
+   • Drawdown: 10.8%
+
+⚖️ Gestão de Risco:
+   • Nível de Risco: MODERATE
+   • Stake Máximo: 10.0%
+   • Stake Recomendado: 7.8%
+   • Kelly Fraction: 0.011
+
+AVALIAÇÃO DE RISCO
+------------------------------
+⚠️ Análise de Riscos:
+   • Risco Geral: LOW
+   • Score de Risco: 3/10
+   • Risco de Concentração: LOW
+   • Risco de Volatilidade: LOW
+   • Risco de Liquidez: MEDIUM
+   • Risco de Mercado: HIGH
+
+💡 Recomendações de Risco:
+   • Monitorar exposição de capital
+   • Diversificar apostas
+   • Ajustar tamanho das posições
+
+RECOMENDAÇÃO FINAL
+------------------------------
+🎯 Decisão: BET
+💭 Motivo: Boa oportunidade com risco controlado
+📊 Score de Confiança: 85.6%
+⚠️ Nível de Risco: LOW
+💰 Valor Esperado: +0.797
+🎯 Unidades: 1.4
+
+RESUMO EXECUTIVO
+------------------------------
+📈 Esta análise indica uma bet 
+   com confiança de 85.6% e valor esperado 
+   de +0.797. A recomendação é apostar 
+   1.4 unidades no resultado 
+   Away Win.
+
+📊 MÉTRICAS DE QUALIDADE
+------------------------------
+• Confiabilidade da Análise: 85.6%
+• Qualidade dos Dados: 86.7%
+• Precisão Histórica: 78.6%
+• Atualização: 14/10/2025 15:57
+
+============================================================
+🤖 Relatório gerado pelo MaraBet AI
+📧 Para mais informações: contato@marabet.ai
+🌐 Acesse: www.marabet.ai
+============================================================

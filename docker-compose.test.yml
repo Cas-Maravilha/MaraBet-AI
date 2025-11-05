@@ -1,0 +1,56 @@
+version: '3.8'
+
+# Docker Compose para Testes - MaraBet AI
+# Ambiente de desenvolvimento/testes local
+
+services:
+  # Nginx de Teste
+  test-nginx:
+    image: nginx:alpine
+    container_name: marabet-test-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./test-html:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    networks:
+      - test-network
+
+  # Redis de Teste
+  test-redis:
+    image: redis:alpine
+    container_name: marabet-test-redis
+    ports:
+      - "6380:6379"
+    restart: unless-stopped
+    networks:
+      - test-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # PostgreSQL de Teste
+  test-postgres:
+    image: postgres:15-alpine
+    container_name: marabet-test-postgres
+    environment:
+      - POSTGRES_DB=marabet_test
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+    networks:
+      - test-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+networks:
+  test-network:
+    driver: bridge
+

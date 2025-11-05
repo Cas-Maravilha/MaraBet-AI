@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- MaraBet Logo - M estilizado com gradiente azul -->
+  <defs>
+    <!-- Gradiente azul escuro para azul médio -->
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1f3c;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a3a5c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a6b8a;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para o swoosh -->
+    <linearGradient id="swooshGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b5998;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5b7db8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Letra M estilizada -->
+  <path d="M 185 135 
+           C 185 135, 190 130, 200 135
+           L 245 220
+           L 290 135
+           C 290 135, 300 125, 315 135
+           L 325 255
+           C 325 260, 320 265, 310 265
+           C 300 265, 295 260, 295 255
+           L 290 190
+           L 255 260
+           C 250 270, 240 270, 235 260
+           L 200 190
+           L 195 255
+           C 195 260, 190 265, 180 265
+           C 170 265, 165 260, 165 255
+           L 175 135
+           Z" 
+        fill="url(#logoGradient)" />
+  
+  <!-- Swoosh dinâmico embaixo -->
+  <path d="M 230 265
+           Q 280 275, 330 260
+           Q 320 270, 280 278
+           Q 240 280, 230 265
+           Z"
+        fill="url(#swooshGradient)" 
+        opacity="0.8"/>
+  
+  <!-- Texto MaraBet -->
+  <text x="80" y="350" 
+        font-family="Arial, sans-serif" 
+        font-size="80" 
+        font-weight="bold" 
+        fill="#0d1f3c">MaraBet</text>
+</svg>
+

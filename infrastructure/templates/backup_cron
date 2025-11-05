@@ -1,0 +1,15 @@
+
+# MaraBet AI Backup Schedule
+# Generated on 2025-10-21 14:04:32
+
+# Full backup - Daily at 2 AM
+0 2 * * * /usr/local/bin/marabet-backup full
+
+# Incremental backup - Every 6 hours
+0 */6 * * * /usr/local/bin/marabet-backup incremental
+
+# Cleanup old backups - Daily at 3 AM
+0 3 * * * /usr/local/bin/marabet-backup cleanup
+
+# Verify backups - Weekly on Sunday at 4 AM
+0 4 * * 0 /usr/local/bin/marabet-backup verify

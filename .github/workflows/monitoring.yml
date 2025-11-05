@@ -1,0 +1,253 @@
+name: 📊 Monitoring & Alerts
+
+on:
+  schedule:
+    # Run every 5 minutes
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to monitor'
+        required: true
+        type: choice
+        options:
+        - staging
+        - production
+        - both
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: marabet-ai
+
+jobs:
+  # Job 1: Health Check Staging
+  health-check-staging:
+    name: 🏥 Health Check Staging
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'staging' || github.event.inputs.environment == 'both' || github.event_name == 'schedule'
+    environment: staging
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🏥 Check Staging Health
+      run: |
+        # Health check endpoints
+        HEALTH_URL="http://${{ secrets.STAGING_HOST }}/health"
+        API_HEALTH_URL="http://${{ secrets.STAGING_HOST }}/api/health"
+        DASHBOARD_URL="http://${{ secrets.STAGING_HOST }}/dashboard"
+        
+        # Check main health endpoint
+        if curl -f -s "$HEALTH_URL" > /dev/null; then
+          echo "✅ Staging health check passed"
+        else
+          echo "❌ Staging health check failed"
+          exit 1
+        fi
+        
+        # Check API health endpoint
+        if curl -f -s "$API_HEALTH_URL" > /dev/null; then
+          echo "✅ Staging API health check passed"
+        else
+          echo "❌ Staging API health check failed"
+          exit 1
+        fi
+        
+        # Check dashboard
+        if curl -f -s "$DASHBOARD_URL" > /dev/null; then
+          echo "✅ Staging dashboard check passed"
+        else
+          echo "❌ Staging dashboard check failed"
+          exit 1
+        fi
+
+  # Job 2: Health Check Production
+  health-check-production:
+    name: 🏥 Health Check Production
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'production' || github.event.inputs.environment == 'both' || github.event_name == 'schedule'
+    environment: production
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🏥 Check Production Health
+      run: |
+        # Health check endpoints
+        HEALTH_URL="https://${{ secrets.PRODUCTION_HOST }}/health"
+        API_HEALTH_URL="https://${{ secrets.PRODUCTION_HOST }}/api/health"
+        DASHBOARD_URL="https://${{ secrets.PRODUCTION_HOST }}/dashboard"
+        
+        # Check main health endpoint
+        if curl -f -s "$HEALTH_URL" > /dev/null; then
+          echo "✅ Production health check passed"
+        else
+          echo "❌ Production health check failed"
+          exit 1
+        fi
+        
+        # Check API health endpoint
+        if curl -f -s "$API_HEALTH_URL" > /dev/null; then
+          echo "✅ Production API health check passed"
+        else
+          echo "❌ Production API health check failed"
+          exit 1
+        fi
+        
+        # Check dashboard
+        if curl -f -s "$DASHBOARD_URL" > /dev/null; then
+          echo "✅ Production dashboard check passed"
+        else
+          echo "❌ Production dashboard check failed"
+          exit 1
+        fi
+
+  # Job 3: Performance Monitoring
+  performance-monitoring:
+    name: 📈 Performance Monitoring
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 📈 Check Performance Metrics
+      run: |
+        # Check staging performance
+        STAGING_URL="http://${{ secrets.STAGING_HOST }}/metrics"
+        if curl -f -s "$STAGING_URL" > /dev/null; then
+          echo "✅ Staging metrics available"
+        else
+          echo "❌ Staging metrics unavailable"
+        fi
+        
+        # Check production performance
+        PRODUCTION_URL="https://${{ secrets.PRODUCTION_HOST }}/metrics"
+        if curl -f -s "$PRODUCTION_URL" > /dev/null; then
+          echo "✅ Production metrics available"
+        else
+          echo "❌ Production metrics unavailable"
+        fi
+
+  # Job 4: Database Monitoring
+  database-monitoring:
+    name: 🗄️ Database Monitoring
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    environment: production
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🗄️ Check Database Health
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.PRODUCTION_HOST }}
+        username: ${{ secrets.PRODUCTION_USERNAME }}
+        key: ${{ secrets.PRODUCTION_SSH_KEY }}
+        port: ${{ secrets.PRODUCTION_PORT }}
+        script: |
+          cd /opt/marabet-ai/production
+          
+          # Check database connection
+          docker exec marabet-ai-production python -c "
+          from armazenamento.banco_de_dados import DatabaseManager
+          
+          try:
+              db = DatabaseManager()
+              db.test_connection()
+              print('✅ Database connection successful')
+          except Exception as e:
+              print(f'❌ Database connection failed: {e}')
+              exit 1
+          "
+          
+          # Check database size
+          docker exec marabet-ai-production python -c "
+          from armazenamento.banco_de_dados import DatabaseManager
+          import os
+          
+          db = DatabaseManager()
+          db_path = db.get_database_path()
+          size_mb = os.path.getsize(db_path) / (1024 * 1024)
+          
+          print(f'📊 Database size: {size_mb:.2f} MB')
+          
+          if size_mb > 1000:  # Alert if database is larger than 1GB
+              print('⚠️ Database size warning: > 1GB')
+          else:
+              print('✅ Database size is normal')
+          "
+
+  # Job 5: Log Analysis
+  log-analysis:
+    name: 📋 Log Analysis
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 📋 Analyze Logs
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.PRODUCTION_HOST }}
+        username: ${{ secrets.PRODUCTION_USERNAME }}
+        key: ${{ secrets.PRODUCTION_SSH_KEY }}
+        port: ${{ secrets.PRODUCTION_PORT }}
+        script: |
+          cd /opt/marabet-ai/production
+          
+          # Check for errors in logs
+          ERROR_COUNT=$(docker logs marabet-ai-production 2>&1 | grep -i error | wc -l)
+          WARNING_COUNT=$(docker logs marabet-ai-production 2>&1 | grep -i warning | wc -l)
+          
+          echo "📊 Log Analysis:"
+          echo "  Errors: $ERROR_COUNT"
+          echo "  Warnings: $WARNING_COUNT"
+          
+          if [ $ERROR_COUNT -gt 10 ]; then
+              echo "⚠️ High error count detected: $ERROR_COUNT"
+          else
+              echo "✅ Error count is normal"
+          fi
+          
+          if [ $WARNING_COUNT -gt 50 ]; then
+              echo "⚠️ High warning count detected: $WARNING_COUNT"
+          else
+              echo "✅ Warning count is normal"
+          fi
+
+  # Job 6: Alert Notifications
+  alert-notifications:
+    name: 🚨 Alert Notifications
+    runs-on: ubuntu-latest
+    needs: [health-check-staging, health-check-production, performance-monitoring, database-monitoring, log-analysis]
+    if: always()
+    
+    steps:
+    - name: 🚨 Send Alerts
+      run: |
+        # Check if any job failed
+        if [ "${{ needs.health-check-staging.result }}" == "failure" ] || 
+           [ "${{ needs.health-check-production.result }}" == "failure" ] || 
+           [ "${{ needs.performance-monitoring.result }}" == "failure" ] || 
+           [ "${{ needs.database-monitoring.result }}" == "failure" ] || 
+           [ "${{ needs.log-analysis.result }}" == "failure" ]; then
+          
+          echo "🚨 ALERT: One or more monitoring checks failed!"
+          echo "🔍 Please check the logs for details"
+          
+          # Here you could add webhook notifications, Slack alerts, etc.
+          # curl -X POST -H 'Content-type: application/json' \
+          #   --data '{"text":"🚨 MaraBet AI Alert: Monitoring check failed"}' \
+          #   ${{ secrets.SLACK_WEBHOOK_URL }}
+          
+        else
+          echo "✅ All monitoring checks passed successfully!"
+        fi

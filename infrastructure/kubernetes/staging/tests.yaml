@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: marabet-staging-tests
+  namespace: marabet-staging
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+      - args:
+        - -c
+        - pytest tests/e2e/ -v --env=staging
+        command:
+        - /bin/bash
+        env:
+        - name: ENVIRONMENT
+          value: staging
+        - name: DATABASE_URL
+          value: postgresql://marabet_user:staging_password_123@marabet-staging.cluster-xyz.us-east-1.rds.amazonaws.com:5432/marabet_staging
+        - name: REDIS_URL
+          value: redis://marabet-staging-redis.cache.amazonaws.com:6379/0
+        image: your-registry.com/marabet-ai:staging
+        name: staging-tests
+        resources:
+          limits:
+            cpu: 250m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+      restartPolicy: Never

@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  database.yml: "\nproduction:\n  adapter: postgresql\n  host: marabet-master.cluster-xyz.us-east-1.rds.amazonaws.com\n\
+    \  port: 5432\n  database: marabet_production\n  username: marabet_user\n  password:\
+    \ secure_password_123\n  pool: 20\n  timeout: 5000\n  ssl: true\n  \n  # Read\
+    \ replicas\n  read_replicas:\n    - host: marabet-slave-1.cluster-xyz.us-east-1.rds.amazonaws.com\n\
+    \      port: 5432\n      database: marabet_production\n      username: marabet_user\n\
+    \      password: secure_password_123\n      pool: 15\n      timeout: 5000\n  \
+    \    ssl: true\n"
+kind: ConfigMap
+metadata:
+  name: database-pool-config
+  namespace: marabet

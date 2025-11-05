@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Ambientes virtuais
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Dados sensíveis - CRÍTICO: NUNCA commite credenciais!
+.env
+.env.local
+.env.production
+.env.staging
+*.db
+*.sqlite
+*.sqlite3
+config_personal.env
+config_production.env
+*_personal.env
+*_keys.py
+*_secrets.py
+# AWS Credentials
+*aws*.pem
+*aws*.key
+aws-credentials
+.aws/
+# Chaves e certificados
+*.pem
+*.key
+*.crt
+*.p12
+
+# Dados e logs
+data/
+logs/*.log
+backups/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Docker
+docker-compose.override.yml
+marabet-key.pem

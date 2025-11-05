@@ -1,0 +1,465 @@
+{% extends "base_responsive.html" %}
+
+{% block title %}Termos e Condições - MaraBet AI{% endblock %}
+
+{% block content %}
+<div class="container legal-page">
+    <div class="legal-header">
+        <h1>📜 Termos e Condições de Uso</h1>
+        <p class="legal-meta">
+            <strong>Última Atualização:</strong> 25 de Outubro de 2025 | 
+            <strong>Versão:</strong> 1.0.0
+        </p>
+        <div class="legal-actions">
+            <button class="btn btn-outline" onclick="window.print()">🖨️ Imprimir</button>
+            <a href="/legal/termos.pdf" class="btn btn-outline" download>📥 Baixar PDF</a>
+        </div>
+    </div>
+
+    <nav class="legal-toc">
+        <h3>Índice</h3>
+        <ul>
+            <li><a href="#aceitacao">1. Aceitação dos Termos</a></li>
+            <li><a href="#definicoes">2. Definições</a></li>
+            <li><a href="#natureza">3. Natureza do Serviço</a></li>
+            <li><a href="#elegibilidade">4. Elegibilidade</a></li>
+            <li><a href="#registo">5. Registo e Conta</a></li>
+            <li><a href="#planos">6. Planos e Subscrição</a></li>
+            <li><a href="#uso">7. Uso Permitido</a></li>
+            <li><a href="#propriedade">8. Propriedade Intelectual</a></li>
+            <li><a href="#privacidade">9. Proteção de Dados</a></li>
+            <li><a href="#garantias">10. Garantias e Limitações</a></li>
+            <li><a href="#disponibilidade">11. Disponibilidade</a></li>
+            <li><a href="#terminacao">12. Suspensão e Terminação</a></li>
+            <li><a href="#jogo-responsavel">13. Jogo Responsável</a></li>
+            <li><a href="#litigios">14. Resolução de Litígios</a></li>
+            <li><a href="#contactos">15. Contactos</a></li>
+        </ul>
+    </nav>
+
+    <div class="legal-content">
+        
+        <!-- Aviso Importante -->
+        <div class="alert alert-warning">
+            <h4>⚠️ AVISO LEGAL IMPORTANTE</h4>
+            <p>
+                O MaraBet AI fornece análises estatísticas com base em inteligência artificial. 
+                As previsões <strong>NÃO garantem resultados</strong> e são meramente indicativas.
+            </p>
+            <p>
+                <strong>Você é o único responsável</strong> pelas suas decisões de apostas. 
+                O MaraBet AI não se responsabiliza por perdas financeiras.
+            </p>
+            <p>
+                <strong>Aposte com responsabilidade.</strong> Jogos de azar podem causar dependência.
+            </p>
+        </div>
+
+        <section id="aceitacao">
+            <h2>1. ACEITAÇÃO DOS TERMOS</h2>
+            <p>
+                Ao aceder e utilizar a plataforma <strong>MaraBet AI</strong>, você aceita e concorda 
+                em ficar vinculado a estes Termos e Condições de Uso, bem como à nossa Política de Privacidade.
+            </p>
+            <p><strong>Se não concordar com estes termos, não utilize o Serviço.</strong></p>
+        </section>
+
+        <section id="definicoes">
+            <h2>2. DEFINIÇÕES</h2>
+            <ul>
+                <li><strong>MaraBet AI:</strong> Sistema de análise e previsões desportivas com IA</li>
+                <li><strong>Utilizador:</strong> Pessoa que acede e utiliza a Plataforma</li>
+                <li><strong>Subscrição:</strong> Plano contratado (Gratuito, Premium, Pro, Enterprise)</li>
+                <li><strong>Previsões:</strong> Análises estatísticas geradas por algoritmos de IA</li>
+            </ul>
+        </section>
+
+        <section id="natureza">
+            <h2>3. NATUREZA DO SERVIÇO</h2>
+            
+            <h3>O Que É o MaraBet AI</h3>
+            <div class="feature-list">
+                <div class="feature-item">✅ Previsões desportivas baseadas em IA</div>
+                <div class="feature-item">✅ Análise de dados públicos</div>
+                <div class="feature-item">✅ Estatísticas e probabilidades</div>
+                <div class="feature-item">✅ Ferramenta de apoio à decisão</div>
+            </div>
+
+            <h3>O Que NÃO É o MaraBet AI</h3>
+            <div class="feature-list">
+                <div class="feature-item">❌ NÃO é casa de apostas</div>
+                <div class="feature-item">❌ NÃO garante ganhos</div>
+                <div class="feature-item">❌ NÃO opera jogos de azar</div>
+                <div class="feature-item">❌ NÃO gere fundos de apostas</div>
+            </div>
+        </section>
+
+        <section id="elegibilidade">
+            <h2>4. ELEGIBILIDADE</h2>
+            <div class="requirement-box">
+                <h3>Requisitos para Utilização:</h3>
+                <ul>
+                    <li>✅ Ter <strong>18 anos ou mais</strong> de idade</li>
+                    <li>✅ Possuir capacidade jurídica plena</li>
+                    <li>✅ Residir em jurisdição onde o serviço é permitido</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="planos">
+            <h2>6. PLANOS E SUBSCRIÇÃO</h2>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Gratuito</h3>
+                    <p class="price">€0/mês</p>
+                    <ul>
+                        <li>5 previsões por dia</li>
+                        <li>Estatísticas básicas</li>
+                        <li>Com anúncios</li>
+                    </ul>
+                    <a href="/registo" class="btn btn-outline">Começar Grátis</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Premium</h3>
+                    <p class="price">€9.99/mês</p>
+                    <ul>
+                        <li>Previsões ilimitadas</li>
+                        <li>Estatísticas avançadas</li>
+                        <li>Sem anúncios</li>
+                        <li>Notificações em tempo real</li>
+                    </ul>
+                    <a href="/subscrever/premium" class="btn btn-primary">Subscrever</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Pro</h3>
+                    <p class="price">€29.99/mês</p>
+                    <ul>
+                        <li>Tudo do Premium</li>
+                        <li>API de acesso</li>
+                        <li>Relatórios personalizados</li>
+                        <li>Suporte prioritário</li>
+                    </ul>
+                    <a href="/subscrever/pro" class="btn btn-outline">Subscrever</a>
+                </div>
+            </div>
+
+            <h3>Política de Reembolso</h3>
+            <p>
+                Primeiros <strong>7 dias</strong>: Reembolso total (sem uso significativo)<br>
+                Após 7 dias: Sem reembolso (serviço digital consumido)
+            </p>
+        </section>
+
+        <section id="garantias">
+            <h2>10. GARANTIAS E LIMITAÇÕES DE RESPONSABILIDADE</h2>
+            
+            <div class="alert alert-danger">
+                <h3>Limitação de Responsabilidade</h3>
+                <p><strong>O MaraBet AI NÃO é responsável por:</strong></p>
+                <ul>
+                    <li>❌ Perdas financeiras em apostas</li>
+                    <li>❌ Decisões tomadas com base nas previsões</li>
+                    <li>❌ Erros de terceiros (casas de apostas, APIs)</li>
+                    <li>❌ Interrupções por força maior</li>
+                    <li>❌ Uso indevido da Plataforma</li>
+                </ul>
+                <p>
+                    <strong>Limite Máximo:</strong> Valor pago nos últimos 3 meses
+                </p>
+            </div>
+        </section>
+
+        <section id="jogo-responsavel">
+            <h2>13. JOGO RESPONSÁVEL</h2>
+            
+            <div class="alert alert-info">
+                <h3>🆘 Sinais de Alerta</h3>
+                <p><strong>Procure ajuda se:</strong></p>
+                <ul>
+                    <li>Aposta mais do que pode perder</li>
+                    <li>Persegue perdas</li>
+                    <li>Negligencia responsabilidades</li>
+                    <li>Sente-se ansioso ou deprimido por causa de apostas</li>
+                </ul>
+                
+                <h4>Recursos de Ajuda:</h4>
+                <ul>
+                    <li>Gamblers Anonymous: <a href="https://www.gamblersanonymous.org" target="_blank">www.gamblersanonymous.org</a></li>
+                    <li>GamCare: <a href="https://www.gamcare.org.uk" target="_blank">www.gamcare.org.uk</a></li>
+                    <li>MaraBet AI: <a href="mailto:jogo.responsavel@marabet.ao">jogo.responsavel@marabet.ao</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="litigios">
+            <h2>14. RESOLUÇÃO DE LITÍGIOS</h2>
+            <p>
+                <strong>Lei Aplicável:</strong> República de Angola<br>
+                <strong>Foro Competente:</strong> Tribunais de Luanda, Angola<br>
+                <strong>Mediação:</strong> Disponível antes de ação judicial
+            </p>
+        </section>
+
+        <section id="contactos">
+            <h2>15. CONTACTOS</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h4>📧 Geral</h4>
+                    <p>comercial@marabet.ao</p>
+                </div>
+                <div class="contact-card">
+                    <h4>🛠️ Suporte</h4>
+                    <p>suporte@marabet.ao</p>
+                </div>
+                <div class="contact-card">
+                    <h4>⚖️ Jurídico</h4>
+                    <p>legal@marabet.ao</p>
+                </div>
+                <div class="contact-card">
+                    <h4>🔒 Privacidade</h4>
+                    <p>privacidade@marabet.ao</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Confirmação de Leitura -->
+    <div class="legal-acceptance">
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="acceptTerms">
+                Li e compreendi os Termos e Condições
+            </label>
+        </div>
+        <button class="btn btn-primary" onclick="acceptTerms()" disabled id="acceptBtn">
+            Aceito os Termos e Condições
+        </button>
+    </div>
+
+</div>
+
+<style>
+.legal-page {
+    max-width: 900px;
+    margin: 80px auto 40px;
+    padding: 0 20px;
+}
+
+.legal-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+}
+
+.legal-header h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.legal-meta {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.legal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.legal-toc {
+    background: var(--surface);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 40px;
+}
+
+.legal-toc h3 {
+    margin-bottom: 16px;
+}
+
+.legal-toc ul {
+    list-style: none;
+    padding: 0;
+}
+
+.legal-toc li {
+    margin-bottom: 8px;
+}
+
+.legal-toc a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.legal-toc a:hover {
+    text-decoration: underline;
+}
+
+.legal-content section {
+    margin-bottom: 48px;
+}
+
+.legal-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.legal-content h3 {
+    font-size: 20px;
+    margin: 24px 0 16px;
+}
+
+.alert {
+    padding: 20px;
+    border-radius: var(--radius-md);
+    margin: 24px 0;
+}
+
+.alert-warning {
+    background: rgba(251, 188, 4, 0.1);
+    border-left: 4px solid var(--warning-color);
+}
+
+.alert-danger {
+    background: rgba(234, 67, 53, 0.1);
+    border-left: 4px solid var(--danger-color);
+}
+
+.alert-info {
+    background: rgba(26, 115, 232, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+.feature-list, .requirement-box ul {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.feature-item {
+    padding: 12px;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+}
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin: 32px 0;
+}
+
+.pricing-card {
+    background: var(--surface);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 2px solid var(--border);
+}
+
+.pricing-card.featured {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.pricing-card .price {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 16px 0;
+    color: var(--primary-color);
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+}
+
+.pricing-card li {
+    padding: 8px 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.contact-card {
+    background: var(--surface);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.legal-acceptance {
+    background: var(--surface);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin-top: 48px;
+}
+
+.legal-acceptance .form-group {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+    .legal-page {
+        margin-top: 60px;
+    }
+    
+    .legal-header h1 {
+        font-size: 24px;
+    }
+    
+    .pricing-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+}
+</style>
+
+<script>
+document.getElementById('acceptTerms').addEventListener('change', function() {
+    document.getElementById('acceptBtn').disabled = !this.checked;
+});
+
+function acceptTerms() {
+    // Registrar aceitação
+    const acceptance = {
+        timestamp: new Date().toISOString(),
+        ip: '{{ user_ip }}',
+        version: '1.0.0'
+    };
+    
+    // Enviar para servidor
+    fetch('/api/legal/accept-terms', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(acceptance)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('✅ Termos aceites com sucesso!');
+        window.location.href = '/dashboard';
+    })
+    .catch(error => {
+        alert('Erro ao registar aceitação. Tente novamente.');
+    });
+}
+</script>
+{% endblock %}
+

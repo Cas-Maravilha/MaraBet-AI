@@ -1,0 +1,1 @@
+{"timestamp": "2025-10-21T10:12:10.309722Z", "level": "ERROR", "logger": "marabet", "message": "Teste de erro", "module": "structured_logging", "function": "_log_with_context", "line": 118, "thread": 1284, "process": 16876}

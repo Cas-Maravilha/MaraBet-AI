@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  vault.hcl: "\n# Vault configuration for MaraBet AI\nui = true\ndisable_mlock = true\n\
+    \nstorage \"file\" {\n    path = \"/vault/data\"\n}\n\nlistener \"tcp\" {\n  \
+    \  address = \"0.0.0.0:8200\"\n    tls_disable = true\n}\n\napi_addr = \"http://0.0.0.0:8200\"\
+    \ncluster_addr = \"http://0.0.0.0:8201\"\n\n# Enable audit logging\naudit {\n\
+    \    file {\n        path = \"/vault/logs/audit.log\"\n    }\n}\n\n# Enable metrics\n\
+    telemetry {\n    prometheus_retention_time = \"30s\"\n    disable_hostname = true\n\
+    }\n"
+kind: ConfigMap
+metadata:
+  name: vault-config
+  namespace: marabet

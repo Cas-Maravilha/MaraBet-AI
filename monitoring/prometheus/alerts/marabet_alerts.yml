@@ -1,0 +1,115 @@
+# Regras de Alerta - MaraBet AI
+
+groups:
+  - name: marabet_alerts
+    interval: 30s
+    rules:
+      # Alta taxa de erro
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          service: web
+        annotations:
+          summary: "Alta taxa de erro em {{ $labels.instance }}"
+          description: "Taxa de erro HTTP 5xx acima de 5% ({{ $value }}%)"
+      
+      # Tempo de resposta alto
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
+        for: 5m
+        labels:
+          severity: warning
+          service: web
+        annotations:
+          summary: "Tempo de resposta alto em {{ $labels.instance }}"
+          description: "P95 acima de 1s ({{ $value }}s)"
+      
+      # Serviço down
+      - alert: ServiceDown
+        expr: up{job="marabet-web"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: web
+        annotations:
+          summary: "Serviço MaraBet AI está down"
+          description: "{{ $labels.instance }} não está respondendo"
+      
+      # Banco de dados down
+      - alert: DatabaseDown
+        expr: up{job="postgresql"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "Banco de dados está down"
+          description: "PostgreSQL não está respondendo"
+      
+      # Redis down
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "Redis está down"
+          description: "Cache Redis não está respondendo"
+      
+      # Alto uso de CPU
+      - alert: HighCPUUsage
+        expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "Alto uso de CPU em {{ $labels.instance }}"
+          description: "CPU acima de 80% ({{ $value }}%)"
+      
+      # Alto uso de memória
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "Alto uso de memória em {{ $labels.instance }}"
+          description: "Memória acima de 85% ({{ $value }}%)"
+      
+      # Disco cheio
+      - alert: DiskSpaceWarning
+        expr: (1 - (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"})) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "Espaço em disco baixo em {{ $labels.instance }}"
+          description: "Disco acima de 80% ({{ $value }}%)"
+      
+      # Muitas conexões no banco
+      - alert: HighDatabaseConnections
+        expr: pg_stat_database_numbackends > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Muitas conexões no banco de dados"
+          description: "{{ $value }} conexões ativas"
+      
+      # Alto uso de Redis
+      - alert: HighRedisMemoryUsage
+        expr: (redis_memory_used_bytes / redis_memory_max_bytes) * 100 > 90
+        for: 5m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "Alto uso de memória no Redis"
+          description: "Redis usando {{ $value }}% da memória"

@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-10-24T15:27:13.116590",
+  "results": {
+    "api_football": {
+      "status": "PARTIAL",
+      "tests": {
+        "status": "FAIL",
+        "fixtures": "PASS",
+        "leagues": "PASS"
+      },
+      "matches_count": 0,
+      "leagues_count": 0
+    },
+    "football_data": {
+      "status": "PASS",
+      "tests": {
+        "competitions": "PASS",
+        "matches": "PASS",
+        "standings": "PASS"
+      },
+      "competitions_count": 13,
+      "matches_count": 380
+    }
+  }
+}

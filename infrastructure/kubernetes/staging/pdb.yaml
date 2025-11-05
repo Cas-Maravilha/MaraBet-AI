@@ -1,0 +1,11 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: marabet-ai-staging-pdb
+  namespace: marabet-staging
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: marabet-ai
+      environment: staging

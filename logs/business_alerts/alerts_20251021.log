@@ -1,0 +1,41 @@
+2025-10-21 13:45:40,562 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,563 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,563 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,563 - __main__ - INFO - ✅ Alerta enviado via telegram
+2025-10-21 13:45:40,563 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,563 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,563 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,564 - __main__ - INFO - ✅ Alerta enviado via telegram
+2025-10-21 13:45:40,564 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,565 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,565 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,566 - __main__ - INFO - ✅ Alerta enviado via telegram
+2025-10-21 13:45:40,566 - __main__ - WARNING - ⚠️ Configuração do Slack não encontrada
+2025-10-21 13:45:40,566 - __main__ - INFO - ✅ Alerta enviado via slack
+2025-10-21 13:45:40,566 - __main__ - ERROR - Erro ao avaliar condição weekly_pnl < -5000: name 'weekly_pnl' is not defined
+2025-10-21 13:45:40,566 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,566 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,566 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,567 - __main__ - INFO - ✅ Alerta enviado via telegram
+2025-10-21 13:45:40,567 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,567 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,567 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,567 - __main__ - INFO - ✅ Alerta enviado via telegram
+2025-10-21 13:45:40,567 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,567 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,567 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,568 - __main__ - INFO - ✅ Alerta enviado via telegram
+2025-10-21 13:45:40,568 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,568 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,568 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,568 - __main__ - INFO - ✅ Alerta enviado via telegram
+2025-10-21 13:45:40,568 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,568 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,568 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,569 - __main__ - INFO - ✅ Alerta enviado via telegram
+2025-10-21 13:45:40,569 - __main__ - WARNING - ⚠️ Configuração do Slack não encontrada
+2025-10-21 13:45:40,569 - __main__ - INFO - ✅ Alerta enviado via slack
+2025-10-21 13:45:40,569 - __main__ - WARNING - ⚠️ Configuração de email não encontrada
+2025-10-21 13:45:40,569 - __main__ - INFO - ✅ Alerta enviado via email
+2025-10-21 13:45:40,569 - __main__ - WARNING - ⚠️ Configuração do Telegram não encontrada
+2025-10-21 13:45:40,569 - __main__ - INFO - ✅ Alerta enviado via telegram

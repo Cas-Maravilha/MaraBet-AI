@@ -1,0 +1,178 @@
+2025-10-21 13:20:56,102 - risk_management.minimum_risk_management - WARNING - Edge -20.00% abaixo do mínimo 5.00%
+2025-10-21 13:20:56,102 - risk_management.minimum_risk_management - WARNING - Edge -20.00% abaixo do mínimo 5.00%
+2025-10-21 13:20:56,102 - risk_management.minimum_risk_management - WARNING - Edge -20.00% abaixo do mínimo 5.00%
+2025-10-21 13:20:56,102 - risk_management.minimum_risk_management - WARNING - Edge -40.00% abaixo do mínimo 5.00%
+2025-10-21 13:20:56,102 - risk_management.minimum_risk_management - WARNING - Edge -40.00% abaixo do mínimo 5.00%
+2025-10-21 13:20:56,102 - risk_management.minimum_risk_management - WARNING - Edge -40.00% abaixo do mínimo 5.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - ERROR - Aposta bet_2 não encontrada
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - ERROR - Aposta bet_2 não encontrada
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - ERROR - Aposta bet_2 não encontrada
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - ERROR - Aposta bet_2 não encontrada
+2025-10-21 13:20:56,104 - risk_management.minimum_risk_management - ERROR - Aposta bet_2 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_3 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_3 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_3 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_3 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_3 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_4 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_4 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_4 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_4 não encontrada
+2025-10-21 13:20:56,105 - risk_management.minimum_risk_management - ERROR - Aposta bet_4 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_5 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_5 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_5 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_5 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_5 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_6 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_6 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_6 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_6 não encontrada
+2025-10-21 13:20:56,106 - risk_management.minimum_risk_management - ERROR - Aposta bet_6 não encontrada
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Aposta registrada: daily_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Aposta registrada: daily_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Aposta registrada: daily_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Aposta registrada: daily_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Aposta registrada: daily_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Aposta registrada: daily_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Resultado registrado: daily_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Resultado registrado: daily_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Resultado registrado: daily_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Resultado registrado: daily_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Resultado registrado: daily_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,107 - risk_management.minimum_risk_management - INFO - Resultado registrado: daily_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_2 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_2 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_2 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_2 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_2 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_2 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_3 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_3 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_3 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_3 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_3 não encontrada
+2025-10-21 13:20:56,108 - risk_management.minimum_risk_management - ERROR - Aposta daily_bet_3 não encontrada
+2025-10-21 13:20:56,109 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,109 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,109 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,109 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,109 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,109 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,109 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: 200.00 - Bankroll: 10200.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: 200.00 - Bankroll: 10200.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: 200.00 - Bankroll: 10200.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: 200.00 - Bankroll: 10200.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: 200.00 - Bankroll: 10200.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: 200.00 - Bankroll: 10200.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_1 - PnL: 200.00 - Bankroll: 10200.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_2 - Stake: 150.00 - Edge: 21.00%
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_2 - Stake: 150.00 - Edge: 21.00%
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_2 - Stake: 150.00 - Edge: 21.00%
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_2 - Stake: 150.00 - Edge: 21.00%
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_2 - Stake: 150.00 - Edge: 21.00%
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_2 - Stake: 150.00 - Edge: 21.00%
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Aposta registrada: bet_2 - Stake: 150.00 - Edge: 21.00%
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_2 - PnL: -150.00 - Bankroll: 10050.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_2 - PnL: -150.00 - Bankroll: 10050.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_2 - PnL: -150.00 - Bankroll: 10050.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_2 - PnL: -150.00 - Bankroll: 10050.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_2 - PnL: -150.00 - Bankroll: 10050.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_2 - PnL: -150.00 - Bankroll: 10050.00
+2025-10-21 13:20:56,110 - risk_management.minimum_risk_management - INFO - Resultado registrado: bet_2 - PnL: -150.00 - Bankroll: 10050.00
+2025-10-21 13:20:56,112 - risk_management.minimum_risk_management - INFO - Aposta registrada: risk_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,112 - risk_management.minimum_risk_management - INFO - Aposta registrada: risk_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,112 - risk_management.minimum_risk_management - INFO - Aposta registrada: risk_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,112 - risk_management.minimum_risk_management - INFO - Aposta registrada: risk_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,112 - risk_management.minimum_risk_management - INFO - Aposta registrada: risk_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,112 - risk_management.minimum_risk_management - INFO - Aposta registrada: risk_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,112 - risk_management.minimum_risk_management - INFO - Aposta registrada: risk_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,112 - risk_management.minimum_risk_management - INFO - Aposta registrada: risk_bet_1 - Stake: 200.00 - Edge: 20.00%
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - INFO - Resultado registrado: risk_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - INFO - Resultado registrado: risk_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - INFO - Resultado registrado: risk_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - INFO - Resultado registrado: risk_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - INFO - Resultado registrado: risk_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - INFO - Resultado registrado: risk_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - INFO - Resultado registrado: risk_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - INFO - Resultado registrado: risk_bet_1 - PnL: -200.00 - Bankroll: 9800.00
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,113 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_2 não encontrada
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_2 não encontrada
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_2 não encontrada
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_2 não encontrada
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_2 não encontrada
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_2 não encontrada
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_2 não encontrada
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_2 não encontrada
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,114 - risk_management.minimum_risk_management - WARNING - Aposta rejeitada: Posição 2.04% excede limite 2.00%
+2025-10-21 13:20:56,115 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_3 não encontrada
+2025-10-21 13:20:56,115 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_3 não encontrada
+2025-10-21 13:20:56,115 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_3 não encontrada
+2025-10-21 13:20:56,115 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_3 não encontrada
+2025-10-21 13:20:56,115 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_3 não encontrada
+2025-10-21 13:20:56,115 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_3 não encontrada
+2025-10-21 13:20:56,115 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_3 não encontrada
+2025-10-21 13:20:56,115 - risk_management.minimum_risk_management - ERROR - Aposta risk_bet_3 não encontrada

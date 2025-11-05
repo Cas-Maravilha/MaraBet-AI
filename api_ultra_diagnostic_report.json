@@ -1,0 +1,15 @@
+{
+  "api_key": "71b2b62386f2d1275cd3...",
+  "plan": "Ultra",
+  "tests": {
+    "account": "PARTIAL",
+    "live_fixtures": "PASS",
+    "odds": "SKIP",
+    "predictions": "SKIP",
+    "statistics": "PARTIAL",
+    "next_fixtures": "PASS"
+  },
+  "timestamp": "2025-10-24T15:47:15.097170",
+  "live_matches_count": 0,
+  "next_fixtures_count": 0
+}

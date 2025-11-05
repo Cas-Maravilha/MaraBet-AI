@@ -1,0 +1,135 @@
+version: '3.8'
+
+# Docker Compose para Servidor Local/VPS - MaraBet AI
+# Para uso em Angoweb ou qualquer provedor VPS
+# Sem dependências de AWS
+
+services:
+  # Aplicação Web Principal
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: marabet-web
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - DEBUG=False
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - DOMAIN=${DOMAIN:-marabet.ao}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - DEFAULT_CURRENCY=AOA
+      - TZ=Africa/Luanda
+    volumes:
+      - ./app:/app
+      - ./static:/app/static
+      - ./media:/app/media
+      - ./logs:/app/logs
+    depends_on:
+      - db
+      - redis
+    networks:
+      - marabet-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: marabet-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${DB_NAME:-marabet}
+      - POSTGRES_USER=${DB_USER:-marabetuser}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=pt_PT.UTF-8 --lc-ctype=pt_PT.UTF-8
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backups/database:/backups
+      - ./migrations:/migrations
+    ports:
+      - "5432:5432"
+    networks:
+      - marabet-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-marabetuser}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: marabet-redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - marabet-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: marabet-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx-angoweb.conf:/etc/nginx/nginx.conf:ro
+      - ./static:/app/static:ro
+      - ./media:/app/media:ro
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - web
+    networks:
+      - marabet-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Certbot para SSL (Renovação automática)
+  certbot:
+    image: certbot/certbot
+    container_name: marabet-certbot
+    restart: unless-stopped
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - marabet-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  marabet-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+

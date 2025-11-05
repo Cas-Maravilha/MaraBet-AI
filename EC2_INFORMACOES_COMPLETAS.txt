@@ -1,0 +1,111 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║         ✅ EC2 MARABET-PRODUCTION CRIADA E RODANDO ✅            ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+INSTANCE DETAILS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Instance ID:          i-0458fc5e3b1715084
+Instance Name:        marabet-production
+Instance Type:        t3.micro (2 vCPUs)
+State:                Running ✅
+Launch Time:          Mon Oct 27 2025 15:44:34 GMT+0100
+Region:               eu-west-1
+Account:              206749730888
+
+AMI:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AMI ID:               ami-0bc691261a82b32bc
+AMI Name:             ubuntu-noble-24.04-amd64-server-20250821
+OS:                   Ubuntu 24.04 LTS
+Platform:             Linux/UNIX
+
+NETWORKING:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Public IPv4:          34.254.241.89
+Private IPv4:         172.31.23.119
+Public DNS:           ec2-34-254-241-89.eu-west-1.compute.amazonaws.com
+Private DNS:          ip-172-31-23-119.eu-west-1.compute.internal
+
+VPC:                  vpc-081a8c63b16a94a3a
+Subnet:               subnet-0575567cf09ae0e02
+Elastic IP:           - (a alocar)
+
+SSH ACCESS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Key Pair:             marabet-key
+SSH Command:          ssh -i "marabet-key.pem" ubuntu@34.254.241.89
+                      ssh -i "marabet-key.pem" ubuntu@ec2-34-254-241-89.eu-west-1.compute.amazonaws.com
+
+User:                 ubuntu
+Protocol:             SSH (Port 22)
+
+SECURITY:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Security Groups:      marabet-ec2-sg (a verificar)
+Termination Protection: Disabled
+Stop Protection:      Disabled
+IMDSv2:               Required
+
+MONITORING:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CloudWatch:           Disabled (básico)
+Auto Recovery:        Default
+Credit Specification: unlimited
+
+URLS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+HTTP:                 http://34.254.241.89
+Health Check:         http://34.254.241.89:8000/health
+
+⚠️  IMPORTANTE - ADICIONAR À API-FOOTBALL:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IP para Whitelist:    34.254.241.89
+Dashboard:            https://dashboard.api-football.com/
+Caminho:              Soccer > Settings > IP Whitelist
+Ação:                 Add IP: 34.254.241.89
+
+PRÓXIMOS PASSOS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Alocar Elastic IP (IP fixo permanente):
+   chmod +x alocar_elastic_ip.sh
+   ./alocar_elastic_ip.sh
+
+2. Configurar DNS (marabet.com → IP):
+   chmod +x configurar_dns_completo.sh
+   ./configurar_dns_completo.sh
+
+3. SSH na EC2:
+   chmod +x ssh-connect.sh
+   ./ssh-connect.sh
+   
+   OU
+   
+   ssh -i "marabet-key.pem" ubuntu@34.254.241.89
+
+4. Verificar User Data completou:
+   cat /home/ubuntu/setup-complete.txt
+
+5. Configurar Nginx e SSL
+
+6. Deploy aplicação
+
+RECURSOS CONECTADOS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RDS PostgreSQL:       database-1.c74amy6m4xhz.eu-west-1.rds.amazonaws.com:5432
+Redis Serverless:     marabet-redis-zxaq7e.serverless.euw1.cache.amazonaws.com:6379
+
+Criado em:            Mon Oct 27 2025 15:44:34
+Informações salvas:   EC2_INFORMACOES_COMPLETAS.txt
+

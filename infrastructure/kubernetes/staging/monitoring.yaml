@@ -1,0 +1,30 @@
+apiVersion: v1
+data:
+  grafana-dashboard.json: "{\n  \"dashboard\": {\n    \"title\": \"MaraBet AI Staging\
+    \ Dashboard\",\n    \"panels\": [\n      {\n        \"title\": \"CPU Usage\",\n\
+    \        \"type\": \"graph\",\n        \"targets\": [\n          {\n         \
+    \   \"expr\": \"cpu_usage_percent\",\n            \"legendFormat\": \"CPU Usage\
+    \ %\"\n          }\n        ]\n      },\n      {\n        \"title\": \"Memory\
+    \ Usage\",\n        \"type\": \"graph\",\n        \"targets\": [\n          {\n\
+    \            \"expr\": \"memory_usage_percent\",\n            \"legendFormat\"\
+    : \"Memory Usage %\"\n          }\n        ]\n      },\n      {\n        \"title\"\
+    : \"Request Rate\",\n        \"type\": \"graph\",\n        \"targets\": [\n  \
+    \        {\n            \"expr\": \"rate(http_requests_total[5m])\",\n       \
+    \     \"legendFormat\": \"Requests/sec\"\n          }\n        ]\n      }\n  \
+    \  ]\n  }\n}"
+  prometheus-rules.yaml: "\ngroups:\n- name: marabet-staging\n  rules:\n  - alert:\
+    \ StagingHighCPUUsage\n    expr: cpu_usage_percent > 80\n    for: 5m\n    labels:\n\
+    \      severity: warning\n      environment: staging\n    annotations:\n     \
+    \ summary: \"High CPU usage in staging\"\n      description: \"CPU usage is above\
+    \ 80% for 5 minutes\"\n  \n  - alert: StagingHighMemoryUsage\n    expr: memory_usage_percent\
+    \ > 85\n    for: 5m\n    labels:\n      severity: warning\n      environment:\
+    \ staging\n    annotations:\n      summary: \"High memory usage in staging\"\n\
+    \      description: \"Memory usage is above 85% for 5 minutes\"\n  \n  - alert:\
+    \ StagingPodCrashLooping\n    expr: rate(kube_pod_container_status_restarts_total[5m])\
+    \ > 0\n    for: 2m\n    labels:\n      severity: critical\n      environment:\
+    \ staging\n    annotations:\n      summary: \"Pod crash looping in staging\"\n\
+    \      description: \"Pod {{ $labels.pod }} is crash looping\"\n"
+kind: ConfigMap
+metadata:
+  name: staging-monitoring-config
+  namespace: marabet-staging

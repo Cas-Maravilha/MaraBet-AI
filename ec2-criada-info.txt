@@ -1,0 +1,38 @@
+MaraBet AI - EC2 Instance Criada
+=================================
+
+Instance ID:          i-0458fc5e3b1715084
+Instance Name:        marabet-production
+Public IPv4:          34.254.241.89
+Connection Type:      Public IP
+
+Status:               ✅ Criada e Disponível
+
+SSH Access:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SSH Command:          ssh -i marabet-key.pem ubuntu@34.254.241.89
+
+URLs:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+HTTP:                 http://34.254.241.89
+Health Check:         http://34.254.241.89:8000/health
+
+⚠️  IMPORTANTE - Adicionar à API-Football:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IP para whitelist:    34.254.241.89
+Dashboard:            https://dashboard.api-football.com/
+Soccer > Settings > IP Whitelist > Add IP
+
+Próximos Passos:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Alocar Elastic IP (IP fixo)
+2. Configurar DNS (marabet.com → Elastic IP)
+3. SSH e configurar Nginx + SSL
+4. Deploy aplicação
+
+Criado em:            $(date)
+

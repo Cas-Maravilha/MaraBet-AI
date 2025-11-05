@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  cloudflare.toml: "\n# Cloudflare configuration for MaraBet AI\n[env.production]\n\
+    zone_id = \"marabet.com\"\naccount_id = \"your_account_id\"\n\n[[env.production.routes]]\n\
+    pattern = \"marabet.com/*\"\ncustom_domain = true\n\n[[env.production.routes]]\n\
+    pattern = \"api.marabet.com/*\"\ncustom_domain = true\n\n[env.production.routes.origin]\n\
+    url = \"https://api.marabet.com\"\n\n[env.production.routes.origin.originRequest]\n\
+    httpHostHeader = \"marabet.com\"\n\n[env.production.routes.origin.originRequest.originServerName]\n\
+    \"marabet.com\" = \"marabet.com\"\n\n[env.production.routes.origin.originRequest.originServerName]\n\
+    \"api.marabet.com\" = \"api.marabet.com\"\n\n# Cache rules\n[[env.production.routes.rules]]\n\
+    type = \"Cache\"\naction = \"Cache\"\nttl = 3600\n\n# Security headers\n[[env.production.routes.rules]]\n\
+    type = \"Rewrite\"\naction = \"Rewrite\"\nheaders = {\n    \"X-Content-Type-Options\"\
+    \ = \"nosniff\"\n    \"X-Frame-Options\" = \"DENY\"\n    \"X-XSS-Protection\"\
+    \ = \"1; mode=block\"\n    \"Strict-Transport-Security\" = \"max-age=31536000;\
+    \ includeSubDomains\"\n    \"Content-Security-Policy\" = \"default-src 'self'\"\
+    \n}\n\n# Compression\n[[env.production.routes.rules]]\ntype = \"Rewrite\"\naction\
+    \ = \"Rewrite\"\nheaders = {\n    \"Accept-Encoding\" = \"gzip, deflate, br\"\n\
+    }\n\n# SSL/TLS\n[env.production.routes.origin.tls]\nverify = true\n"
+kind: ConfigMap
+metadata:
+  name: cloudflare-config
+  namespace: marabet

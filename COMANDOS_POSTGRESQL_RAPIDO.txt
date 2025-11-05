@@ -1,0 +1,126 @@
+╔═══════════════════════════════════════════════════════════╗
+║     COMANDOS ÚTEIS POSTGRESQL - REFERÊNCIA RÁPIDA          ║
+╚═══════════════════════════════════════════════════════════╝
+
+📊 COMANDOS MAIS USADOS NO PSQL:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\l          -- Listar todos os bancos de dados
+\du         -- Listar todos os usuários
+\dt         -- Listar tabelas do schema atual
+\d tabela   -- Descrever estrutura de uma tabela
+\c banco    -- Conectar a um banco específico
+\conninfo   -- Informações da conexão atual
+\q          -- Sair do psql
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 COMANDOS DE INSPEÇÃO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\l+         -- Listar bancos com detalhes (tamanho, etc)
+\du+        -- Listar usuários com detalhes
+\dt+        -- Listar tabelas com detalhes
+\d+         -- Listar tudo com detalhes
+\dn         -- Listar schemas
+\di         -- Listar índices
+\dv         -- Listar views
+\df         -- Listar funções
+\dx         -- Listar extensões
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 COMANDOS DE FORMATAÇÃO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\x          -- Ativar/desativar modo expandido (vertical)
+\timing     -- Ativar/desativar exibição de tempo de execução
+\pset       -- Configurar formatação de saída
+\copy       -- Copiar dados de/para arquivo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❓ AJUDA:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\h          -- Ajuda geral
+\h COMANDO  -- Ajuda de um comando específico (ex: \h SELECT)
+\?          -- Lista todos os comandos do psql
+\s          -- Mostrar histórico de comandos
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 QUERIES ÚTEIS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+-- Versão do PostgreSQL
+SELECT version();
+
+-- Banco atual
+SELECT current_database();
+
+-- Usuário atual
+SELECT current_user;
+
+-- Data/hora do servidor
+SELECT now();
+
+-- Tamanho de um banco
+SELECT pg_size_pretty(pg_database_size('nome_banco'));
+
+-- Tamanho de uma tabela
+SELECT pg_size_pretty(pg_total_relation_size('tabela'));
+
+-- Listar conexões ativas
+SELECT * FROM pg_stat_activity;
+
+-- Listar tabelas e tamanhos
+SELECT tablename, pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) AS size
+FROM pg_tables WHERE schemaname = 'public';
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔐 COMANDOS DE ADMINISTRAÇÃO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+-- Criar usuário
+CREATE USER nome_usuario WITH PASSWORD 'senha';
+
+-- Alterar senha
+ALTER USER nome_usuario WITH PASSWORD 'nova_senha';
+
+-- Conceder privilégios
+GRANT ALL PRIVILEGES ON DATABASE banco TO usuario;
+GRANT ALL PRIVILEGES ON TABLE tabela TO usuario;
+
+-- Criar banco
+CREATE DATABASE nome_banco OWNER usuario;
+
+-- Ver permissões
+\dp tabela  -- Permissões de uma tabela
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 CONEXÃO REMOTA:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Conectar ao servidor remoto
+psql -h 37.27.220.67 -p 5432 -U "meu_root\$marabet" -d marabet
+
+# Com password
+export PGPASSWORD='senha'
+psql -h 37.27.220.67 -p 5432 -U "meu_root\$marabet" -d marabet
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ATALHOS DE TECLADO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Up/Down     -- Navegar pelo histórico
+Ctrl+D      -- Sair (equivalente a \q)
+Ctrl+C      -- Cancelar query em execução
+Ctrl+L      -- Limpar tela
+Ctrl+R      -- Buscar no histórico
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 Dica: Para ajuda específica dentro do psql, use:
+   \h SELECT
+   \h CREATE TABLE
+   \h CREATE USER
+
+📚 Documentação completa: COMANDOS_UTEIS_POSTGRESQL.md
+

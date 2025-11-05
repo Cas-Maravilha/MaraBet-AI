@@ -1,0 +1,11 @@
+{
+  "check_interval_hours": 6,
+  "days_ahead": 7,
+  "max_predictions": 5,
+  "max_sends_per_day": 3,
+  "enabled": true,
+  "created_at": "2025-10-21T18:10:55.548288",
+  "last_check": null,
+  "total_sends": 0,
+  "status": "demo"
+}

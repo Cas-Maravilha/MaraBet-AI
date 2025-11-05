@@ -1,0 +1,124 @@
+# 🚀 COMANDOS PARA EXECUTAR NO SERVIDOR ANGOWEB
+
+# Servidor: 95.216.143.185
+# Usuário: marabet
+
+# ==========================================
+# PASSO 1: Conectar ao Servidor
+# ==========================================
+ssh marabet@95.216.143.185
+
+# ==========================================
+# PASSO 2: Enviar Script de Instalação (do seu PC)
+# ==========================================
+# Antes de conectar, no seu computador local:
+scp install_postgresql_secure.sh marabet@95.216.143.185:/tmp/
+
+# ==========================================
+# PASSO 3: Executar Script de Instalação PostgreSQL
+# ==========================================
+# Após conectar via SSH no servidor:
+sudo /tmp/install_postgresql_secure.sh
+
+# ==========================================
+# PASSO 4: Verificar Credenciais Geradas
+# ==========================================
+cat /opt/marabet/.env.db
+
+# ==========================================
+# PASSO 5: Enviar Código da Aplicação (do seu PC)
+# ==========================================
+# Voltar ao seu PC e enviar os arquivos:
+scp -r * marabet@95.216.143.185:/opt/marabet/
+
+# OU apenas arquivos essenciais:
+scp -r app.py config_production.env docker-compose.production.yml marabet@95.216.143.185:/opt/marabet/
+scp -r api/ models/ migrations/ marabet@95.216.143.185:/opt/marabet/
+scp -r static/ templates/ marabet@95.216.143.185:/opt/marabet/
+
+# ==========================================
+# PASSO 6: No Servidor - Configurar Aplicação
+# ==========================================
+# Voltar ao servidor via SSH
+cd /opt/marabet
+
+# Copiar config
+cp config_production.env .env
+
+# Editar .env e ajustar credenciais do banco geradas
+nano .env
+
+# ==========================================
+# PASSO 7: Executar Migrações
+# ==========================================
+python migrate.py --migrate --seed
+
+# ==========================================
+# PASSO 8: Instalar Docker e Docker Compose
+# ==========================================
+# Se ainda não estiver instalado:
+sudo apt install -y docker.io docker-compose
+sudo usermod -aG docker marabet
+newgrp docker
+
+# ==========================================
+# PASSO 9: Iniciar Aplicação
+# ==========================================
+cd /opt/marabet
+docker-compose -f docker-compose.production.yml up -d --build
+
+# ==========================================
+# PASSO 10: Verificar Status
+# ==========================================
+docker-compose -f docker-compose.production.yml ps
+docker-compose -f docker-compose.production.yml logs -f
+
+# ==========================================
+# PASSO 11: Configurar Nginx (SSL/HTTPS)
+# ==========================================
+# Criar configuração Nginx
+sudo nano /etc/nginx/sites-available/marabet
+
+# Conteúdo:
+server {
+    listen 80;
+    server_name marabet.ao www.marabet.ao;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name marabet.ao www.marabet.ao;
+    
+    location / {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+
+# Habilitar site
+sudo ln -s /etc/nginx/sites-available/marabet /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+
+# ==========================================
+# PASSO 12: Obter Certificado SSL
+# ==========================================
+sudo certbot --nginx -d marabet.ao -d www.marabet.ao
+
+# ==========================================
+# VERIFICAÇÕES FINAIS
+# ==========================================
+# Ver logs
+docker-compose logs web
+
+# Ver status da aplicação
+curl http://localhost:8000/health
+
+# Ver PostgreSQL
+psql -h localhost -U marabet_user -d marabet -c "SELECT version();"
+
+# Ver Redis
+redis-cli ping
+

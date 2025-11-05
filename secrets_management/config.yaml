@@ -1,0 +1,136 @@
+# Configuração do Sistema de Secrets - MaraBet AI
+# Gerencia chaves de API e credenciais de forma segura
+
+# Configurações de Criptografia
+encryption:
+  algorithm: "AES-256-GCM"
+  key_derivation: "PBKDF2"
+  iterations: 100000
+  salt_length: 32
+
+# Configurações de Rotação
+rotation:
+  enabled: true
+  interval_days: 90
+  warning_days: 7
+  auto_rotate: true
+  notification_enabled: true
+
+# Backends de Armazenamento
+backends:
+  # Backend Local (Arquivos)
+  local:
+    enabled: true
+    path: "secrets/data"
+    permissions: 0o600
+    backup_enabled: true
+    backup_retention_days: 30
+  
+  # HashiCorp Vault
+  vault:
+    enabled: false
+    url: "http://localhost:8200"
+    token: null
+    mount_point: "marabet"
+    version: 2
+    ssl_verify: true
+    timeout: 30
+  
+  # AWS Secrets Manager
+  aws:
+    enabled: false
+    region: "us-east-1"
+    secret_name: "marabet-ai-secrets"
+    kms_key_id: null
+    description: "MaraBet AI Secrets"
+
+# Configurações de Validação
+validation:
+  enabled: true
+  interval_hours: 24
+  timeout_seconds: 30
+  retry_attempts: 3
+  notification_on_failure: true
+
+# Configurações de Notificação
+notifications:
+  enabled: true
+  channels:
+    - "email"
+    - "telegram"
+    - "slack"
+  
+  email:
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    username: null
+    password: null
+    from_email: "noreply@marabet.ai"
+    to_emails: []
+  
+  telegram:
+    bot_token: null
+    chat_id: null
+  
+  slack:
+    webhook_url: null
+    channel: "#marabet-alerts"
+
+# Configurações de Logging
+logging:
+  level: "INFO"
+  file: "logs/secrets.log"
+  max_size: "10MB"
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Configurações de Segurança
+security:
+  master_key_rotation_days: 365
+  session_timeout_minutes: 30
+  max_failed_attempts: 5
+  lockout_duration_minutes: 15
+  audit_logging: true
+  encryption_at_rest: true
+
+# Configurações de Monitoramento
+monitoring:
+  enabled: true
+  metrics_endpoint: "/metrics"
+  health_check_interval: 300
+  alert_thresholds:
+    validation_failure_rate: 0.1
+    rotation_failure_rate: 0.05
+    access_failure_rate: 0.02
+
+# Configurações de Backup
+backup:
+  enabled: true
+  schedule: "0 2 * * *"  # Diário às 2h
+  retention_days: 90
+  compression: true
+  encryption: true
+  storage:
+    local:
+      path: "backups/secrets"
+    s3:
+      bucket: null
+      prefix: "secrets/"
+    vault:
+      mount_point: "backup"
+
+# Configurações de Desenvolvimento
+development:
+  debug: false
+  mock_apis: false
+  test_mode: false
+  sample_data: false
+
+# Configurações de Produção
+production:
+  strict_validation: true
+  auto_rotation: true
+  monitoring_enabled: true
+  alerting_enabled: true
+  backup_enabled: true
+  encryption_required: true

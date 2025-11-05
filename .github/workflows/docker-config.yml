@@ -1,0 +1,243 @@
+# Configuração de Docker para GitHub Actions
+# Este arquivo define as configurações para build e deploy de imagens Docker
+
+# Configurações de registry
+registry:
+  docker_hub:
+    enabled: true
+    username: "${{ secrets.DOCKER_USERNAME }}"
+    password: "${{ secrets.DOCKER_PASSWORD }}"
+    repository: "marabet-ai"
+  
+  github_packages:
+    enabled: false
+    username: "${{ github.actor }}"
+    password: "${{ secrets.GITHUB_TOKEN }}"
+    repository: "ghcr.io/${{ github.repository }}"
+
+# Configurações de build
+build:
+  # Configurações gerais
+  context: "."
+  dockerfile: "Dockerfile"
+  platforms: ["linux/amd64", "linux/arm64"]
+  
+  # Configurações de cache
+  cache:
+    enabled: true
+    type: "gha"  # GitHub Actions cache
+    mode: "max"
+    layers: true
+  
+  # Configurações de build args
+  build_args:
+    - name: "BUILD_ENV"
+      value: "${{ github.ref_name == 'main' && 'production' || 'staging' }}"
+    - name: "VERSION"
+      value: "${{ github.sha }}"
+    - name: "BUILD_DATE"
+      value: "${{ github.event.head_commit.timestamp }}"
+    - name: "GIT_COMMIT"
+      value: "${{ github.sha }}"
+    - name: "GIT_BRANCH"
+      value: "${{ github.ref_name }}"
+  
+  # Configurações de labels
+  labels:
+    - "org.opencontainers.image.title=MaraBet AI"
+    - "org.opencontainers.image.description=Sistema Profissional de Apostas com IA"
+    - "org.opencontainers.image.vendor=MaraBet"
+    - "org.opencontainers.image.version=${{ github.ref_name }}"
+    - "org.opencontainers.image.revision=${{ github.sha }}"
+    - "org.opencontainers.image.created=${{ github.event.head_commit.timestamp }}"
+    - "org.opencontainers.image.url=https://github.com/${{ github.repository }}"
+    - "org.opencontainers.image.source=https://github.com/${{ github.repository }}"
+    - "org.opencontainers.image.licenses=MIT"
+
+# Configurações de tags
+tags:
+  # Tags para staging
+  staging:
+    - "staging"
+    - "develop"
+    - "staging-${{ github.sha }}"
+    - "latest-staging"
+  
+  # Tags para production
+  production:
+    - "latest"
+    - "production"
+    - "${{ github.ref_name }}"
+    - "v${{ github.ref_name }}"
+  
+  # Tags condicionais
+  conditional:
+    - "type=ref,event=branch"
+    - "type=ref,event=pr"
+    - "type=sha,prefix={{branch}}-"
+    - "type=raw,value=latest,enable={{is_default_branch}}"
+
+# Configurações de segurança
+security:
+  # Scan de vulnerabilidades
+  vulnerability_scan:
+    enabled: true
+    tools: ["trivy"]
+    severity: ["HIGH", "CRITICAL"]
+    fail_on_high: true
+    fail_on_medium: false
+  
+  # Assinatura de imagens
+  signing:
+    enabled: false
+    key: "${{ secrets.DOCKER_SIGNING_KEY }}"
+    passphrase: "${{ secrets.DOCKER_SIGNING_PASSPHRASE }}"
+  
+  # Verificação de assinatura
+  verification:
+    enabled: false
+    public_key: "${{ secrets.DOCKER_VERIFICATION_KEY }}"
+
+# Configurações de deploy
+deploy:
+  # Configurações de staging
+  staging:
+    environment: "staging"
+    host: "${{ secrets.STAGING_HOST }}"
+    username: "${{ secrets.STAGING_USERNAME }}"
+    ssh_key: "${{ secrets.STAGING_SSH_KEY }}"
+    port: "${{ secrets.STAGING_PORT }}"
+    compose_file: "docker-compose.staging.yml"
+    health_check:
+      url: "http://${{ secrets.STAGING_HOST }}/health"
+      timeout: 30
+      retries: 3
+  
+  # Configurações de production
+  production:
+    environment: "production"
+    host: "${{ secrets.PRODUCTION_HOST }}"
+    username: "${{ secrets.PRODUCTION_USERNAME }}"
+    ssh_key: "${{ secrets.PRODUCTION_SSH_KEY }}"
+    port: "${{ secrets.PRODUCTION_PORT }}"
+    compose_file: "docker-compose.production.yml"
+    health_check:
+      url: "https://${{ secrets.PRODUCTION_HOST }}/health"
+      timeout: 60
+      retries: 5
+
+# Configurações de monitoramento
+monitoring:
+  # Métricas de build
+  build_metrics:
+    enabled: true
+    duration: true
+    size: true
+    layers: true
+  
+  # Métricas de deploy
+  deploy_metrics:
+    enabled: true
+    duration: true
+    health_check: true
+    rollback_time: true
+  
+  # Alertas
+  alerts:
+    build_failure: true
+    deploy_failure: true
+    health_check_failure: true
+    security_scan_failure: true
+
+# Configurações de limpeza
+cleanup:
+  # Limpeza de imagens antigas
+  images:
+    enabled: true
+    schedule: "0 2 * * *"  # Diário às 2:00 AM UTC
+    retention:
+      staging: 5    # Manter 5 versões
+      production: 10 # Manter 10 versões
+  
+  # Limpeza de cache
+  cache:
+    enabled: true
+    schedule: "0 3 * * *"  # Diário às 3:00 AM UTC
+    retention_days: 7
+  
+  # Limpeza de volumes
+  volumes:
+    enabled: true
+    schedule: "0 4 * * *"  # Diário às 4:00 AM UTC
+    retention_days: 30
+
+# Configurações de rollback
+rollback:
+  # Rollback automático
+  automatic:
+    enabled: true
+    conditions:
+      - health_check_failure: 3
+      - error_rate_threshold: 0.05
+      - response_time_threshold: 5000
+  
+  # Rollback manual
+  manual:
+    enabled: true
+    max_versions: 10
+    timeout: 300  # 5 minutos
+  
+  # Configurações de backup
+  backup:
+    enabled: true
+    before_deploy: true
+    retention_days: 30
+
+# Configurações de notificações
+notifications:
+  # Slack
+  slack:
+    enabled: true
+    webhook_url: "${{ secrets.SLACK_WEBHOOK_URL }}"
+    channels:
+      staging: "#deployments-staging"
+      production: "#deployments-production"
+  
+  # Email
+  email:
+    enabled: false
+    recipients:
+      staging: ["dev-team@marabet-ai.com"]
+      production: ["dev-team@marabet-ai.com", "ops-team@marabet-ai.com"]
+  
+  # Telegram
+  telegram:
+    enabled: true
+    bot_token: "${{ secrets.TELEGRAM_BOT_TOKEN }}"
+    chat_id: "${{ secrets.TELEGRAM_CHAT_ID }}"
+
+# Configurações de ambiente
+environments:
+  # Variáveis de ambiente para staging
+  staging:
+    - name: "ENVIRONMENT"
+      value: "staging"
+    - name: "LOG_LEVEL"
+      value: "INFO"
+    - name: "DEBUG"
+      value: "true"
+    - name: "CACHE_TTL"
+      value: "300"
+  
+  # Variáveis de ambiente para production
+  production:
+    - name: "ENVIRONMENT"
+      value: "production"
+    - name: "LOG_LEVEL"
+      value: "WARNING"
+    - name: "DEBUG"
+      value: "false"
+    - name: "CACHE_TTL"
+      value: "600"
+    - name: "RATE_LIMIT_ENABLED"
+      value: "true"

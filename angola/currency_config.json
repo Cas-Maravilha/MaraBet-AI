@@ -1,0 +1,17 @@
+{
+  "base_currency": "AOA",
+  "supported_currencies": ["USD", "EUR", "GBP", "BRL", "ZAR"],
+  "exchange_rates": {
+    "USD": 830.50,
+    "EUR": 920.30,
+    "GBP": 1050.80,
+    "BRL": 165.20,
+    "ZAR": 45.60
+  },
+  "api_endpoints": {
+    "primary": "https://api.exchangerate-api.com/v4/latest/AOA",
+    "backup": "https://api.fixer.io/latest?base=AOA"
+  },
+  "update_interval": 3600,
+  "last_update": null
+}

@@ -1,0 +1,947 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MaraBet AI API",
+    "description": "API completa para análise preditiva de apostas esportivas com machine learning",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Equipe MaraBet AI",
+      "email": "suporte@marabet.ai",
+      "url": "https://marabet.ai"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Servidor de desenvolvimento"
+    },
+    {
+      "url": "https://api.marabet.ai",
+      "description": "Servidor de produção"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Predictions",
+      "description": "Endpoints para predições de partidas"
+    },
+    {
+      "name": "Odds",
+      "description": "Endpoints para consulta de odds"
+    },
+    {
+      "name": "Analysis",
+      "description": "Endpoints para análise de dados"
+    },
+    {
+      "name": "Matches",
+      "description": "Endpoints para dados de partidas"
+    },
+    {
+      "name": "Teams",
+      "description": "Endpoints para dados de times"
+    },
+    {
+      "name": "Leagues",
+      "description": "Endpoints para dados de ligas"
+    },
+    {
+      "name": "Bets",
+      "description": "Endpoints para gestão de apostas"
+    },
+    {
+      "name": "Monitoring",
+      "description": "Endpoints para monitoramento do sistema"
+    }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "summary": "Health Check",
+        "description": "Verifica se a API está funcionando",
+        "responses": {
+          "200": {
+            "description": "API funcionando",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/predictions": {
+      "get": {
+        "tags": [
+          "Predictions"
+        ],
+        "summary": "Listar Predições",
+        "description": "Lista predições de partidas com paginação",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número da página",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Itens por página",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "league_id",
+            "in": "query",
+            "description": "ID da liga para filtrar",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de predições",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionsListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Predictions"
+        ],
+        "summary": "Criar Predição",
+        "description": "Cria uma nova predição para uma partida",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredictionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Predição criada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/predictions/{match_id}": {
+      "get": {
+        "tags": [
+          "Predictions"
+        ],
+        "summary": "Obter Predição",
+        "description": "Obtém predição específica de uma partida",
+        "parameters": [
+          {
+            "name": "match_id",
+            "in": "path",
+            "required": true,
+            "description": "ID da partida",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Predição encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Predição não encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/odds": {
+      "get": {
+        "tags": [
+          "Odds"
+        ],
+        "summary": "Listar Odds",
+        "description": "Lista odds de partidas com filtros",
+        "parameters": [
+          {
+            "name": "match_id",
+            "in": "query",
+            "description": "ID da partida",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bookmaker",
+            "in": "query",
+            "description": "Nome do bookmaker",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de odds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OddsListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/analysis/roi": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "summary": "Análise de ROI",
+        "description": "Obtém análise de ROI para um período",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "description": "Número de dias para análise",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          {
+            "name": "bet_type",
+            "in": "query",
+            "description": "Tipo de aposta para filtrar",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Análise de ROI",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROIAnalysisResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/matches": {
+      "get": {
+        "tags": [
+          "Matches"
+        ],
+        "summary": "Listar Partidas",
+        "description": "Lista partidas com filtros e paginação",
+        "parameters": [
+          {
+            "name": "league_id",
+            "in": "query",
+            "description": "ID da liga",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Data das partidas (YYYY-MM-DD)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status da partida",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "scheduled",
+                "live",
+                "finished"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de partidas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchesListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/teams": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Listar Times",
+        "description": "Lista times de uma liga",
+        "parameters": [
+          {
+            "name": "league_id",
+            "in": "query",
+            "description": "ID da liga",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de times",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamsListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/leagues": {
+      "get": {
+        "tags": [
+          "Leagues"
+        ],
+        "summary": "Listar Ligas",
+        "description": "Lista ligas disponíveis",
+        "responses": {
+          "200": {
+            "description": "Lista de ligas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaguesListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bets": {
+      "get": {
+        "tags": [
+          "Bets"
+        ],
+        "summary": "Listar Apostas",
+        "description": "Lista apostas do usuário",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de apostas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BetsListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Bets"
+        ],
+        "summary": "Criar Aposta",
+        "description": "Cria uma nova aposta",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Aposta criada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HealthResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "healthy"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          },
+          "uptime": {
+            "type": "number",
+            "example": 3600
+          }
+        }
+      },
+      "PredictionRequest": {
+        "type": "object",
+        "required": [
+          "match_id",
+          "home_team",
+          "away_team",
+          "league_id"
+        ],
+        "properties": {
+          "match_id": {
+            "type": "string",
+            "example": "39_12345"
+          },
+          "home_team": {
+            "type": "string",
+            "example": "Manchester City"
+          },
+          "away_team": {
+            "type": "string",
+            "example": "Liverpool"
+          },
+          "league_id": {
+            "type": "integer",
+            "example": 39
+          },
+          "match_date": {
+            "type": "string",
+            "format": "date",
+            "example": "2024-01-15"
+          }
+        }
+      },
+      "PredictionResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "pred_123"
+          },
+          "match_id": {
+            "type": "string",
+            "example": "39_12345"
+          },
+          "home_team": {
+            "type": "string",
+            "example": "Manchester City"
+          },
+          "away_team": {
+            "type": "string",
+            "example": "Liverpool"
+          },
+          "predictions": {
+            "type": "object",
+            "properties": {
+              "home_win": {
+                "type": "number",
+                "example": 0.45
+              },
+              "draw": {
+                "type": "number",
+                "example": 0.3
+              },
+              "away_win": {
+                "type": "number",
+                "example": 0.25
+              }
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "example": 0.85
+          },
+          "expected_value": {
+            "type": "number",
+            "example": 0.12
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PredictionsListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PredictionResponse"
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "integer",
+                "example": 1
+              },
+              "per_page": {
+                "type": "integer",
+                "example": 20
+              },
+              "total": {
+                "type": "integer",
+                "example": 100
+              },
+              "pages": {
+                "type": "integer",
+                "example": 5
+              }
+            }
+          }
+        }
+      },
+      "OddsListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "match_id": {
+                  "type": "string",
+                  "example": "39_12345"
+                },
+                "bookmaker": {
+                  "type": "string",
+                  "example": "Bet365"
+                },
+                "odds": {
+                  "type": "object",
+                  "properties": {
+                    "home_win": {
+                      "type": "number",
+                      "example": 2.2
+                    },
+                    "draw": {
+                      "type": "number",
+                      "example": 3.4
+                    },
+                    "away_win": {
+                      "type": "number",
+                      "example": 3.1
+                    }
+                  }
+                },
+                "updated_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ROIAnalysisResponse": {
+        "type": "object",
+        "properties": {
+          "period_days": {
+            "type": "integer",
+            "example": 30
+          },
+          "overall": {
+            "type": "object",
+            "properties": {
+              "total_bets": {
+                "type": "integer",
+                "example": 50
+              },
+              "total_stake": {
+                "type": "number",
+                "example": 5000.0
+              },
+              "total_profit": {
+                "type": "number",
+                "example": 750.0
+              },
+              "roi": {
+                "type": "number",
+                "example": 0.15
+              }
+            }
+          },
+          "by_bet_type": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "bet_type": {
+                  "type": "string",
+                  "example": "home_win"
+                },
+                "total_bets": {
+                  "type": "integer",
+                  "example": 20
+                },
+                "roi": {
+                  "type": "number",
+                  "example": 0.18
+                },
+                "win_rate": {
+                  "type": "number",
+                  "example": 0.65
+                }
+              }
+            }
+          }
+        }
+      },
+      "MatchesListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "39_12345"
+                },
+                "home_team": {
+                  "type": "string",
+                  "example": "Manchester City"
+                },
+                "away_team": {
+                  "type": "string",
+                  "example": "Liverpool"
+                },
+                "league_id": {
+                  "type": "integer",
+                  "example": 39
+                },
+                "match_date": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "scheduled"
+                }
+              }
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "integer",
+                "example": 1
+              },
+              "per_page": {
+                "type": "integer",
+                "example": 20
+              },
+              "total": {
+                "type": "integer",
+                "example": 100
+              }
+            }
+          }
+        }
+      },
+      "TeamsListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Manchester City"
+                },
+                "league_id": {
+                  "type": "integer",
+                  "example": 39
+                },
+                "logo": {
+                  "type": "string",
+                  "example": "https://example.com/logo.png"
+                }
+              }
+            }
+          }
+        }
+      },
+      "LeaguesListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 39
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Premier League"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "England"
+                },
+                "logo": {
+                  "type": "string",
+                  "example": "https://example.com/logo.png"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BetRequest": {
+        "type": "object",
+        "required": [
+          "match_id",
+          "bet_type",
+          "stake",
+          "odds"
+        ],
+        "properties": {
+          "match_id": {
+            "type": "string",
+            "example": "39_12345"
+          },
+          "bet_type": {
+            "type": "string",
+            "example": "home_win"
+          },
+          "stake": {
+            "type": "number",
+            "example": 100.0
+          },
+          "odds": {
+            "type": "number",
+            "example": 2.2
+          }
+        }
+      },
+      "BetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "bet_123"
+          },
+          "match_id": {
+            "type": "string",
+            "example": "39_12345"
+          },
+          "bet_type": {
+            "type": "string",
+            "example": "home_win"
+          },
+          "stake": {
+            "type": "number",
+            "example": 100.0
+          },
+          "odds": {
+            "type": "number",
+            "example": 2.2
+          },
+          "potential_profit": {
+            "type": "number",
+            "example": 120.0
+          },
+          "status": {
+            "type": "string",
+            "example": "pending"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "BetsListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BetResponse"
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "integer",
+                "example": 1
+              },
+              "per_page": {
+                "type": "integer",
+                "example": 20
+              },
+              "total": {
+                "type": "integer",
+                "example": 50
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "example": "validation_error"
+              },
+              "message": {
+                "type": "string",
+                "example": "Dados inválidos"
+              },
+              "details": {
+                "type": "string",
+                "example": "Campo obrigatório não fornecido"
+              }
+            }
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "Chave de API para autenticação"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+}

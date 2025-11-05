@@ -1,0 +1,76 @@
+# Configuração Alertmanager - MaraBet AI
+# Gerencia e envia alertas
+
+global:
+  resolve_timeout: 5m
+  smtp_from: 'alertmanager@marabet.com'
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_auth_username: ''
+  smtp_auth_password: ''
+
+# Templates
+templates:
+  - '/etc/alertmanager/*.tmpl'
+
+# Rotas de alertas
+route:
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 12h
+  receiver: 'default'
+  
+  routes:
+    # Alertas críticos
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      continue: true
+    
+    # Alertas de warning
+    - match:
+        severity: warning
+      receiver: 'warning-alerts'
+      continue: true
+
+# Receivers (destinos dos alertas)
+receivers:
+  - name: 'default'
+    webhook_configs:
+      - url: 'http://marabet-web:8000/api/alerts/webhook'
+        send_resolved: true
+  
+  - name: 'critical-alerts'
+    # Telegram
+    webhook_configs:
+      - url: 'https://api.telegram.org/bot<TOKEN>/sendMessage'
+        send_resolved: true
+        http_config:
+          proxy_url: ''
+    
+    # Email
+    email_configs:
+      - to: 'comercial@marabet.ao'
+        subject: '🚨 [CRITICAL] {{ .GroupLabels.alertname }}'
+        html: |
+          <h2>Alerta Crítico - MaraBet AI</h2>
+          <p><strong>Alerta:</strong> {{ .GroupLabels.alertname }}</p>
+          <p><strong>Descrição:</strong> {{ .CommonAnnotations.description }}</p>
+          <p><strong>Severidade:</strong> {{ .CommonLabels.severity }}</p>
+          <p><strong>Serviço:</strong> {{ .CommonLabels.service }}</p>
+          <p><strong>Horário:</strong> {{ .StartsAt.Format "02/01/2006 15:04:05" }}</p>
+  
+  - name: 'warning-alerts'
+    webhook_configs:
+      - url: 'http://marabet-web:8000/api/alerts/webhook'
+        send_resolved: true
+
+# Inibição de alertas
+inhibit_rules:
+  # Não enviar alertas de serviço se servidor está down
+  - source_match:
+      severity: 'critical'
+      alertname: 'ServiceDown'
+    target_match:
+      severity: 'warning'
+    equal: ['instance']

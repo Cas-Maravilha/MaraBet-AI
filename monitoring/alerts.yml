@@ -1,0 +1,144 @@
+# Regras de alertas para MaraBet AI
+groups:
+  - name: marabet-ai-alerts
+    rules:
+      # Alertas de disponibilidade
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Serviço {{ $labels.job }} está fora do ar"
+          description: "O serviço {{ $labels.job }} está fora do ar há mais de 1 minuto"
+
+      # Alertas de CPU
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alto uso de CPU"
+          description: "CPU está acima de 80% por mais de 5 minutos"
+
+      # Alertas de memória
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alto uso de memória"
+          description: "Memória está acima de 80% por mais de 5 minutos"
+
+      # Alertas de disco
+      - alert: HighDiskUsage
+        expr: (1 - (node_filesystem_avail_bytes / node_filesystem_size_bytes)) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alto uso de disco"
+          description: "Disco está acima de 80% por mais de 5 minutos"
+
+      # Alertas de rede
+      - alert: HighNetworkErrors
+        expr: rate(node_network_receive_errs_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alto número de erros de rede"
+          description: "Taxa de erros de rede está alta"
+
+      # Alertas específicos do MaraBet AI
+      - alert: DatabaseConnectionFailed
+        expr: marabet_database_connections_failed_total > 5
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Falha na conexão com banco de dados"
+          description: "Mais de 5 falhas de conexão com banco de dados em 1 minuto"
+
+      - alert: APIRateLimitExceeded
+        expr: marabet_api_rate_limit_exceeded_total > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Limite de taxa da API excedido"
+          description: "API está atingindo limites de taxa"
+
+      - alert: PredictionAccuracyLow
+        expr: marabet_prediction_accuracy < 0.5
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Precisão das predições baixa"
+          description: "Precisão das predições está abaixo de 50%"
+
+      - alert: NoDataCollected
+        expr: increase(marabet_data_collected_total[1h]) == 0
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: "Nenhum dado coletado"
+          description: "Nenhum dado foi coletado na última hora"
+
+      - alert: HighErrorRate
+        expr: rate(marabet_errors_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Alta taxa de erros"
+          description: "Taxa de erros está acima de 10% por mais de 5 minutos"
+
+      - alert: TelegramNotificationFailed
+        expr: marabet_telegram_notifications_failed_total > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Falha nas notificações do Telegram"
+          description: "Falhas ao enviar notificações do Telegram"
+
+      - alert: EmailNotificationFailed
+        expr: marabet_email_notifications_failed_total > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Falha nas notificações por email"
+          description: "Falhas ao enviar notificações por email"
+
+      - alert: ModelTrainingFailed
+        expr: marabet_model_training_failed_total > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Falha no treinamento do modelo"
+          description: "Falha ao treinar modelos de ML"
+
+      - alert: DataProcessingSlow
+        expr: marabet_data_processing_duration_seconds > 300
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Processamento de dados lento"
+          description: "Processamento de dados está demorando mais de 5 minutos"
+
+      - alert: MemoryLeak
+        expr: increase(marabet_memory_usage_bytes[1h]) > 1000000000
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: "Possível vazamento de memória"
+          description: "Uso de memória aumentou mais de 1GB na última hora"

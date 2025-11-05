@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  marabet-admin-policy.hcl: "\n# MaraBet AI Admin Policy\npath \"secret/data/marabet/*\"\
+    \ {\n  capabilities = [\"create\", \"read\", \"update\", \"delete\", \"list\"\
+    ]\n}\n\npath \"secret/metadata/marabet/*\" {\n  capabilities = [\"create\", \"\
+    read\", \"update\", \"delete\", \"list\"]\n}\n\npath \"auth/token/create\" {\n\
+    \  capabilities = [\"create\", \"update\"]\n}\n\npath \"auth/token/revoke\" {\n\
+    \  capabilities = [\"update\"]\n}\n\npath \"sys/policies/acl/*\" {\n  capabilities\
+    \ = [\"create\", \"read\", \"update\", \"delete\", \"list\"]\n}\n"
+  marabet-policy.hcl: "\n# MaraBet AI Vault Policy\npath \"secret/data/marabet/*\"\
+    \ {\n  capabilities = [\"read\", \"list\"]\n}\n\npath \"secret/metadata/marabet/*\"\
+    \ {\n  capabilities = [\"read\", \"list\"]\n}\n\npath \"secret/data/marabet/database\"\
+    \ {\n  capabilities = [\"read\"]\n}\n\npath \"secret/data/marabet/api-keys\" {\n\
+    \  capabilities = [\"read\"]\n}\n\npath \"secret/data/marabet/ssl-certificates\"\
+    \ {\n  capabilities = [\"read\"]\n}\n\npath \"secret/data/marabet/jwt-secrets\"\
+    \ {\n  capabilities = [\"read\"]\n}\n\n# Allow renewal of tokens\npath \"auth/token/renew-self\"\
+    \ {\n  capabilities = [\"update\"]\n}\n\n# Allow looking up token info\npath \"\
+    auth/token/lookup-self\" {\n  capabilities = [\"read\"]\n}\n"
+kind: ConfigMap
+metadata:
+  name: vault-policies
+  namespace: marabet

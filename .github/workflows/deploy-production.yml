@@ -1,0 +1,396 @@
+name: 🚀 Deploy to Production
+
+on:
+  push:
+    tags: [ 'v*' ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - production-rollback
+
+env:
+  ENVIRONMENT: production
+  REGISTRY: docker.io
+  IMAGE_NAME: marabet-ai
+
+jobs:
+  # Job 1: Deploy para Produção
+  deploy-production:
+    name: 🚀 Deploy to Production
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🔐 Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: 🐳 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: 📋 Extract Metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=tag
+          type=raw,value=latest
+          type=raw,value=production
+        labels: |
+          org.opencontainers.image.title=MaraBet AI Production
+          org.opencontainers.image.description=Sistema Profissional de Apostas com IA - Production
+          org.opencontainers.image.vendor=MaraBet
+          org.opencontainers.image.version=${{ github.ref_name }}
+          org.opencontainers.image.revision=${{ github.sha }}
+          org.opencontainers.image.environment=production
+    
+    - name: 🏗️ Build Production Image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        platforms: linux/amd64
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        build-args: |
+          BUILD_ENV=production
+          VERSION=${{ github.ref_name }}
+    
+    - name: 📝 Create Docker Compose for Production
+      run: |
+        cat > docker-compose.production.yml << EOF
+        version: '3.8'
+        
+        services:
+          marabet-ai:
+            image: ${{ steps.meta.outputs.tags }}
+            container_name: marabet-ai-production
+            restart: unless-stopped
+            ports:
+              - "8000:8000"
+              - "8001:8001"
+            environment:
+              - DATABASE_URL=${{ secrets.PRODUCTION_DATABASE_URL }}
+              - API_FOOTBALL_KEY=${{ secrets.API_FOOTBALL_KEY }}
+              - THE_ODDS_API_KEY=${{ secrets.THE_ODDS_API_KEY }}
+              - TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+              - TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+              - BUILD_ENV=production
+              - LOG_LEVEL=WARNING
+            volumes:
+              - marabet-production-data:/app/data
+              - marabet-production-logs:/app/logs
+            networks:
+              - marabet-production-network
+            deploy:
+              resources:
+                limits:
+                  memory: 2G
+                  cpus: '1.0'
+                reservations:
+                  memory: 1G
+                  cpus: '0.5'
+        
+          nginx:
+            image: nginx:alpine
+            container_name: marabet-nginx-production
+            restart: unless-stopped
+            ports:
+              - "80:80"
+              - "443:443"
+            volumes:
+              - ./nginx/nginx.production.conf:/etc/nginx/nginx.conf:ro
+              - marabet-ssl-certs:/etc/nginx/ssl:ro
+            depends_on:
+              - marabet-ai
+            networks:
+              - marabet-production-network
+            deploy:
+              resources:
+                limits:
+                  memory: 512M
+                  cpus: '0.5'
+        
+          prometheus:
+            image: prom/prometheus:latest
+            container_name: marabet-prometheus-production
+            restart: unless-stopped
+            ports:
+              - "9090:9090"
+            volumes:
+              - ./monitoring/prometheus.production.yml:/etc/prometheus/prometheus.yml:ro
+              - marabet-prometheus-data:/prometheus
+            command:
+              - '--config.file=/etc/prometheus/prometheus.yml'
+              - '--storage.tsdb.path=/prometheus'
+              - '--web.console.libraries=/etc/prometheus/console_libraries'
+              - '--web.console.templates=/etc/prometheus/consoles'
+              - '--web.enable-lifecycle'
+            networks:
+              - marabet-production-network
+            deploy:
+              resources:
+                limits:
+                  memory: 1G
+                  cpus: '0.5'
+        
+          grafana:
+            image: grafana/grafana:latest
+            container_name: marabet-grafana-production
+            restart: unless-stopped
+            ports:
+              - "3000:3000"
+            environment:
+              - GF_SECURITY_ADMIN_PASSWORD=${{ secrets.GRAFANA_ADMIN_PASSWORD }}
+            volumes:
+              - marabet-grafana-data:/var/lib/grafana
+              - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+              - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+            depends_on:
+              - prometheus
+            networks:
+              - marabet-production-network
+            deploy:
+              resources:
+                limits:
+                  memory: 512M
+                  cpus: '0.5'
+        
+        volumes:
+          marabet-production-data:
+          marabet-production-logs:
+          marabet-ssl-certs:
+          marabet-prometheus-data:
+          marabet-grafana-data:
+        
+        networks:
+          marabet-production-network:
+            driver: bridge
+        EOF
+    
+    - name: 📝 Create Nginx Config for Production
+      run: |
+        mkdir -p nginx
+        cat > nginx/nginx.production.conf << EOF
+        events {
+            worker_connections 1024;
+        }
+        
+        http {
+            upstream marabet_backend {
+                server marabet-ai:8000;
+            }
+            
+            # Rate limiting
+            limit_req_zone \$binary_remote_addr zone=api:10m rate=10r/s;
+            limit_req_zone \$binary_remote_addr zone=dashboard:10m rate=5r/s;
+            
+            server {
+                listen 80;
+                server_name marabet-ai.com www.marabet-ai.com;
+                
+                # Redirect HTTP to HTTPS
+                return 301 https://\$server_name\$request_uri;
+            }
+            
+            server {
+                listen 443 ssl http2;
+                server_name marabet-ai.com www.marabet-ai.com;
+                
+                # SSL Configuration
+                ssl_certificate /etc/nginx/ssl/cert.pem;
+                ssl_certificate_key /etc/nginx/ssl/key.pem;
+                ssl_protocols TLSv1.2 TLSv1.3;
+                ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384;
+                ssl_prefer_server_ciphers off;
+                
+                # Security headers
+                add_header X-Frame-Options DENY;
+                add_header X-Content-Type-Options nosniff;
+                add_header X-XSS-Protection "1; mode=block";
+                add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+                
+                # API endpoints with rate limiting
+                location /api/ {
+                    limit_req zone=api burst=20 nodelay;
+                    proxy_pass http://marabet_backend;
+                    proxy_set_header Host \$host;
+                    proxy_set_header X-Real-IP \$remote_addr;
+                    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+                    proxy_set_header X-Forwarded-Proto \$scheme;
+                }
+                
+                # Dashboard with rate limiting
+                location /dashboard {
+                    limit_req zone=dashboard burst=10 nodelay;
+                    proxy_pass http://marabet_backend;
+                    proxy_set_header Host \$host;
+                    proxy_set_header X-Real-IP \$remote_addr;
+                    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+                    proxy_set_header X-Forwarded-Proto \$scheme;
+                }
+                
+                # Health check (no rate limiting)
+                location /health {
+                    proxy_pass http://marabet_backend/health;
+                    access_log off;
+                }
+                
+                # Root redirect to dashboard
+                location / {
+                    return 301 /dashboard;
+                }
+            }
+        }
+        EOF
+    
+    - name: 📝 Create Prometheus Config for Production
+      run: |
+        mkdir -p monitoring
+        cat > monitoring/prometheus.production.yml << EOF
+        global:
+          scrape_interval: 15s
+          evaluation_interval: 15s
+        
+        rule_files:
+          - "rules/*.yml"
+        
+        scrape_configs:
+          - job_name: 'marabet-ai'
+            static_configs:
+              - targets: ['marabet-ai:8000']
+            metrics_path: '/metrics'
+            scrape_interval: 30s
+        
+          - job_name: 'nginx'
+            static_configs:
+              - targets: ['nginx:80']
+            metrics_path: '/nginx_status'
+            scrape_interval: 30s
+        
+          - job_name: 'node-exporter'
+            static_configs:
+              - targets: ['node-exporter:9100']
+            scrape_interval: 30s
+        EOF
+    
+    - name: 📝 Create Grafana Configs
+      run: |
+        mkdir -p monitoring/grafana/dashboards
+        mkdir -p monitoring/grafana/datasources
+        
+        # Grafana datasource config
+        cat > monitoring/grafana/datasources/prometheus.yml << EOF
+        apiVersion: 1
+        
+        datasources:
+          - name: Prometheus
+            type: prometheus
+            access: proxy
+            url: http://prometheus:9090
+            isDefault: true
+        EOF
+        
+        # Grafana dashboard config
+        cat > monitoring/grafana/dashboards/dashboard.yml << EOF
+        apiVersion: 1
+        
+        providers:
+          - name: 'default'
+            orgId: 1
+            folder: ''
+            type: file
+            disableDeletion: false
+            updateIntervalSeconds: 10
+            allowUiUpdates: true
+            options:
+              path: /etc/grafana/provisioning/dashboards
+        EOF
+    
+    - name: 🚀 Deploy to Production Server
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.PRODUCTION_HOST }}
+        username: ${{ secrets.PRODUCTION_USERNAME }}
+        key: ${{ secrets.PRODUCTION_SSH_KEY }}
+        port: ${{ secrets.PRODUCTION_PORT }}
+        script: |
+          # Create production directory
+          mkdir -p /opt/marabet-ai/production
+          cd /opt/marabet-ai/production
+          
+          # Backup current deployment
+          if [ -f docker-compose.production.yml ]; then
+            cp docker-compose.production.yml docker-compose.production.yml.backup
+            docker-compose -f docker-compose.production.yml down || true
+          fi
+          
+          # Pull latest image
+          docker pull ${{ steps.meta.outputs.tags }}
+          
+          # Start new deployment
+          docker-compose -f docker-compose.production.yml up -d
+          
+          # Wait for services to be ready
+          sleep 60
+          
+          # Health check
+          curl -f http://localhost:8000/health || exit 1
+          
+          # Clean up old images
+          docker image prune -f
+    
+    - name: 🧪 Run Production Tests
+      run: |
+        # Wait for deployment to be ready
+        sleep 120
+        
+        # Test production environment
+        curl -f https://${{ secrets.PRODUCTION_HOST }}/health || exit 1
+        curl -f https://${{ secrets.PRODUCTION_HOST }}/api/health || exit 1
+        curl -f https://${{ secrets.PRODUCTION_HOST }}/dashboard || exit 1
+    
+    - name: 📊 Update Production Status
+      run: |
+        echo "✅ Production deployment completed successfully!"
+        echo "🌐 Production URL: https://${{ secrets.PRODUCTION_HOST }}"
+        echo "📊 Monitoring: https://${{ secrets.PRODUCTION_HOST }}:9090"
+        echo "📈 Grafana: https://${{ secrets.PRODUCTION_HOST }}:3000"
+        echo "🏷️ Image: ${{ steps.meta.outputs.tags }}"
+
+  # Job 2: Notificação de Deploy
+  notify-deploy:
+    name: 📢 Notify Deploy Status
+    runs-on: ubuntu-latest
+    needs: deploy-production
+    if: always()
+    
+    steps:
+    - name: 📢 Notify Success
+      if: needs.deploy-production.result == 'success'
+      run: |
+        echo "✅ Production deployment successful!"
+        echo "🌐 Production URL: https://${{ secrets.PRODUCTION_HOST }}"
+        echo "📊 Monitoring: https://${{ secrets.PRODUCTION_HOST }}:9090"
+        echo "📈 Grafana: https://${{ secrets.PRODUCTION_HOST }}:3000"
+    
+    - name: 📢 Notify Failure
+      if: needs.deploy-production.result == 'failure'
+      run: |
+        echo "❌ Production deployment failed!"
+        echo "🔍 Please check the logs for details"
+        exit 1

@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-10-24T12:45:28.348812",
+  "categories": {
+    "docker": {
+      "score": 12,
+      "total": 12,
+      "percentage": 100.0,
+      "status": "PASS"
+    },
+    "database": {
+      "score": 6,
+      "total": 10,
+      "percentage": 60.0,
+      "status": "FAIL"
+    },
+    "nginx_ssl": {
+      "score": 10,
+      "total": 10,
+      "percentage": 100.0,
+      "status": "PASS"
+    },
+    "environment": {
+      "score": 7,
+      "total": 8,
+      "percentage": 87.5,
+      "status": "PASS"
+    },
+    "backup": {
+      "score": 10,
+      "total": 10,
+      "percentage": 100.0,
+      "status": "PASS"
+    },
+    "monitoring": {
+      "score": 12,
+      "total": 12,
+      "percentage": 100.0,
+      "status": "PASS"
+    },
+    "load_testing": {
+      "score": 10,
+      "total": 10,
+      "percentage": 100.0,
+      "status": "PASS"
+    },
+    "angoweb_readiness": {
+      "score": 12,
+      "total": 12,
+      "percentage": 100.0,
+      "status": "PASS"
+    },
+    "security": {
+      "score": 8,
+      "total": 10,
+      "percentage": 80.0,
+      "status": "PASS"
+    },
+    "documentation": {
+      "score": 10,
+      "total": 10,
+      "percentage": 100.0,
+      "status": "PASS"
+    }
+  },
+  "critical_issues": [],
+  "warnings": [
+    "Tabela users - revisar migrations/001_initial_schema.sql",
+    "Tabela predictions - revisar migrations/001_initial_schema.sql",
+    "Tabela bets - revisar migrations/001_initial_schema.sql",
+    "Tabela bankroll - revisar migrations/001_initial_schema.sql",
+    "Arquivo .env encontrado - verificar .gitignore"
+  ],
+  "recommendations": [],
+  "overall_score": 95.74468085106383,
+  "ready_for_production": true
+}

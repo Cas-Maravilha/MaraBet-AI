@@ -1,0 +1,335 @@
+# Configuração de Monitoramento para GitHub Actions
+# Este arquivo define as configurações para monitoramento e alertas
+
+# Configurações de health checks
+health_checks:
+  # Endpoints de health check
+  endpoints:
+    - name: "main_health"
+      url: "/health"
+      method: "GET"
+      timeout: 30
+      retries: 3
+      expected_status: 200
+      expected_response: "OK"
+    
+    - name: "api_health"
+      url: "/api/health"
+      method: "GET"
+      timeout: 30
+      retries: 3
+      expected_status: 200
+      expected_response: "OK"
+    
+    - name: "dashboard_health"
+      url: "/dashboard"
+      method: "GET"
+      timeout: 30
+      retries: 3
+      expected_status: 200
+  
+  # Configurações de frequência
+  frequency:
+    interval: 300  # 5 minutos
+    timeout: 30
+    retries: 3
+  
+  # Configurações de alertas
+  alerts:
+    failure_threshold: 3
+    recovery_threshold: 2
+    escalation_time: 900  # 15 minutos
+
+# Configurações de métricas
+metrics:
+  # Métricas de sistema
+  system:
+    - name: "cpu_usage"
+      threshold: 80
+      unit: "percent"
+      alert: true
+    
+    - name: "memory_usage"
+      threshold: 85
+      unit: "percent"
+      alert: true
+    
+    - name: "disk_usage"
+      threshold: 90
+      unit: "percent"
+      alert: true
+    
+    - name: "load_average"
+      threshold: 2.0
+      unit: "ratio"
+      alert: true
+  
+  # Métricas de aplicação
+  application:
+    - name: "response_time"
+      threshold: 2000
+      unit: "milliseconds"
+      alert: true
+    
+    - name: "error_rate"
+      threshold: 0.01
+      unit: "ratio"
+      alert: true
+    
+    - name: "request_rate"
+      threshold: 1000
+      unit: "requests_per_minute"
+      alert: false
+    
+    - name: "active_connections"
+      threshold: 100
+      unit: "count"
+      alert: true
+  
+  # Métricas de banco de dados
+  database:
+    - name: "connection_pool"
+      threshold: 80
+      unit: "percent"
+      alert: true
+    
+    - name: "query_time"
+      threshold: 1000
+      unit: "milliseconds"
+      alert: true
+    
+    - name: "deadlocks"
+      threshold: 5
+      unit: "count_per_hour"
+      alert: true
+
+# Configurações de logs
+logs:
+  # Análise de logs
+  analysis:
+    enabled: true
+    frequency: 300  # 5 minutos
+    
+    # Padrões de erro
+    error_patterns:
+      - "ERROR"
+      - "CRITICAL"
+      - "FATAL"
+      - "Exception"
+      - "Traceback"
+    
+    # Padrões de warning
+    warning_patterns:
+      - "WARNING"
+      - "WARN"
+      - "DeprecationWarning"
+    
+    # Padrões de info
+    info_patterns:
+      - "INFO"
+      - "DEBUG"
+  
+  # Configurações de alertas
+  alerts:
+    error_threshold: 10
+    warning_threshold: 50
+    escalation_time: 1800  # 30 minutos
+  
+  # Configurações de retenção
+  retention:
+    staging: 7    # 7 dias
+    production: 30 # 30 dias
+
+# Configurações de Prometheus
+prometheus:
+  # Configurações de scraping
+  scraping:
+    interval: 15s
+    timeout: 10s
+    retries: 3
+  
+  # Configurações de targets
+  targets:
+    - name: "marabet-ai"
+      host: "marabet-ai:8000"
+      port: 8000
+      path: "/metrics"
+    
+    - name: "nginx"
+      host: "nginx:80"
+      port: 80
+      path: "/nginx_status"
+    
+    - name: "node-exporter"
+      host: "node-exporter:9100"
+      port: 9100
+      path: "/metrics"
+  
+  # Configurações de regras
+  rules:
+    - name: "marabet_alerts"
+      file: "rules/marabet_alerts.yml"
+      interval: 30s
+  
+  # Configurações de storage
+  storage:
+    retention: "30d"
+    size: "10GB"
+
+# Configurações de Grafana
+grafana:
+  # Configurações de dashboards
+  dashboards:
+    - name: "MaraBet AI Overview"
+      file: "dashboards/marabet_overview.json"
+      refresh: "30s"
+    
+    - name: "MaraBet AI Performance"
+      file: "dashboards/marabet_performance.json"
+      refresh: "1m"
+    
+    - name: "MaraBet AI Infrastructure"
+      file: "dashboards/marabet_infrastructure.json"
+      refresh: "5m"
+  
+  # Configurações de datasources
+  datasources:
+    - name: "Prometheus"
+      type: "prometheus"
+      url: "http://prometheus:9090"
+      access: "proxy"
+      isDefault: true
+  
+  # Configurações de alerting
+  alerting:
+    enabled: true
+    channels:
+      - name: "slack"
+        type: "slack"
+        webhook_url: "${{ secrets.SLACK_WEBHOOK_URL }}"
+      - name: "telegram"
+        type: "telegram"
+        bot_token: "${{ secrets.TELEGRAM_BOT_TOKEN }}"
+        chat_id: "${{ secrets.TELEGRAM_CHAT_ID }}"
+
+# Configurações de alertas
+alerts:
+  # Configurações de canais
+  channels:
+    slack:
+      enabled: true
+      webhook_url: "${{ secrets.SLACK_WEBHOOK_URL }}"
+      channels:
+        staging: "#alerts-staging"
+        production: "#alerts-production"
+    
+    telegram:
+      enabled: true
+      bot_token: "${{ secrets.TELEGRAM_BOT_TOKEN }}"
+      chat_id: "${{ secrets.TELEGRAM_CHAT_ID }}"
+    
+    email:
+      enabled: false
+      smtp_host: "smtp.gmail.com"
+      smtp_port: 587
+      username: "${{ secrets.EMAIL_USERNAME }}"
+      password: "${{ secrets.EMAIL_PASSWORD }}"
+      recipients:
+        staging: ["dev-team@marabet-ai.com"]
+        production: ["dev-team@marabet-ai.com", "ops-team@marabet-ai.com"]
+  
+  # Configurações de severidade
+  severity:
+    critical:
+      channels: ["slack", "telegram", "email"]
+      escalation_time: 300  # 5 minutos
+    
+    warning:
+      channels: ["slack", "telegram"]
+      escalation_time: 900  # 15 minutos
+    
+    info:
+      channels: ["slack"]
+      escalation_time: 1800  # 30 minutos
+  
+  # Configurações de agrupamento
+  grouping:
+    enabled: true
+    group_by: ["alertname", "instance"]
+    group_wait: 30s
+    group_interval: 5m
+    repeat_interval: 1h
+
+# Configurações de backup
+backup:
+  # Configurações de backup automático
+  automatic:
+    enabled: true
+    frequency: "0 2 * * *"  # Diário às 2:00 AM UTC
+    retention: 30  # 30 dias
+  
+  # Configurações de backup manual
+  manual:
+    enabled: true
+    max_versions: 10
+  
+  # Configurações de backup de banco de dados
+  database:
+    enabled: true
+    frequency: "0 3 * * *"  # Diário às 3:00 AM UTC
+    retention: 90  # 90 dias
+    compression: true
+    encryption: true
+  
+  # Configurações de backup de configurações
+  config:
+    enabled: true
+    frequency: "0 4 * * *"  # Diário às 4:00 AM UTC
+    retention: 365  # 1 ano
+
+# Configurações de manutenção
+maintenance:
+  # Configurações de janela de manutenção
+  window:
+    enabled: true
+    schedule: "0 2 * * 0"  # Domingos às 2:00 AM UTC
+    duration: 3600  # 1 hora
+  
+  # Configurações de limpeza
+  cleanup:
+    enabled: true
+    frequency: "0 1 * * *"  # Diário às 1:00 AM UTC
+    
+    # Limpeza de logs
+    logs:
+      staging: 7    # 7 dias
+      production: 30 # 30 dias
+    
+    # Limpeza de métricas
+    metrics:
+      staging: 7    # 7 dias
+      production: 30 # 30 dias
+    
+    # Limpeza de backups
+    backups:
+      staging: 30   # 30 dias
+      production: 90 # 90 dias
+
+# Configurações de escalabilidade
+scaling:
+  # Configurações de auto-scaling
+  auto_scaling:
+    enabled: true
+    min_instances: 1
+    max_instances: 5
+    scale_up_threshold: 80
+    scale_down_threshold: 20
+    scale_up_cooldown: 300  # 5 minutos
+    scale_down_cooldown: 600  # 10 minutos
+  
+  # Configurações de load balancing
+  load_balancing:
+    enabled: true
+    algorithm: "round_robin"
+    health_check: true
+    sticky_sessions: false

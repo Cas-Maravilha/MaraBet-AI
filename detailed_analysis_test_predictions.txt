@@ -1,0 +1,222 @@
+🎯 *ANÁLISE DETALHADA MARABET AI*
+
+🏆 *Manchester City vs Arsenal*
+🏟️ Premier League
+📅 22/10/2025 16:40
+
+🏆 *TOP 15 RECOMENDAÇÕES:*
+
+1. ⭐ *5+* (exact_goals)
+   📊 Probabilidade: 50.2%
+   💰 Odds: 15.00
+   📈 Valor Esperado: +652.5%
+   🎯 ROI Potencial: +652.5%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 35.2% - 60.2%
+   📋 Confiança: BAIXA
+   ⭐ Nível: EXCELENTE
+   💡 Distribuição de Poisson com λ=4.7
+
+2. ⭐ *1X2* (double_chance)
+   📊 Probabilidade: 100.0%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +100.0%
+   🎯 ROI Potencial: +100.0%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 85.0% - 100.0%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Baseado em: Casa 61.5%, Empate 22.0%, Visitante 16.5%
+
+3. ⭐ *Over 5.5* (over_under)
+   📊 Probabilidade: 32.8%
+   💰 Odds: 6.00
+   📈 Valor Esperado: +96.9%
+   🎯 ROI Potencial: +96.9%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 17.8% - 42.8%
+   📋 Confiança: BAIXA
+   ⭐ Nível: EXCELENTE
+   💡 Média ajustada: 4.7 gols
+
+4. ⭐ *Over 5.5* (total_cards)
+   📊 Probabilidade: 47.9%
+   💰 Odds: 3.80
+   📈 Valor Esperado: +81.9%
+   🎯 ROI Potencial: +81.9%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 32.9% - 57.9%
+   📋 Confiança: BAIXA
+   ⭐ Nível: EXCELENTE
+   💡 Média ajustada: 5.5 cartões
+
+5. ⭐ *Over 4.5* (yellow_cards)
+   📊 Probabilidade: 56.2%
+   💰 Odds: 3.20
+   📈 Valor Esperado: +79.9%
+   🎯 ROI Potencial: +79.9%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 41.2% - 66.2%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Média ajustada amarelos: 5.0
+
+6. ⭐ *Over 6.5* (total_cards)
+   📊 Probabilidade: 32.1%
+   💰 Odds: 5.50
+   📈 Valor Esperado: +76.5%
+   🎯 ROI Potencial: +76.5%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 17.1% - 42.1%
+   📋 Confiança: BAIXA
+   ⭐ Nível: EXCELENTE
+   💡 Média ajustada: 5.5 cartões
+
+7. ⭐ *Over 4.5* (over_under)
+   📊 Probabilidade: 50.2%
+   💰 Odds: 3.50
+   📈 Valor Esperado: +75.6%
+   🎯 ROI Potencial: +75.6%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 35.2% - 60.2%
+   📋 Confiança: BAIXA
+   ⭐ Nível: EXCELENTE
+   💡 Média ajustada: 4.7 gols
+
+8. ⭐ *Visitante -1* (corner_handicap)
+   📊 Probabilidade: 80.7%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +61.4%
+   🎯 ROI Potencial: +61.4%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 65.7% - 90.7%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença ajustada: 0.5 cantos
+
+9. ⭐ *Visitante -0.5* (asian_handicap)
+   📊 Probabilidade: 69.6%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +39.3%
+   🎯 ROI Potencial: +39.3%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 54.6% - 79.6%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença de força ajustada: 0.15
+
+10. ⭐ *Sim* (both_teams_score)
+   📊 Probabilidade: 75.2%
+   💰 Odds: 1.80
+   📈 Valor Esperado: +35.3%
+   🎯 ROI Potencial: +35.3%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 60.2% - 85.2%
+   📋 Confiança: ALTA
+   ⭐ Nível: EXCELENTE
+   💡 Probabilidade casa: 90.1%, visitante: 83.5%
+
+11. ⭐ *Visitante 0* (corner_handicap)
+   📊 Probabilidade: 60.7%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +21.4%
+   🎯 ROI Potencial: +21.4%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 45.7% - 70.7%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença de cantos ajustada: 0.5
+
+12. ⭐ *Visitante 0* (corner_handicap)
+   📊 Probabilidade: 60.7%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +21.4%
+   🎯 ROI Potencial: +21.4%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 45.7% - 70.7%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença ajustada: 0.5 cantos
+
+13. ⭐ *Casa 0.5* (asian_handicap)
+   📊 Probabilidade: 60.4%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +20.7%
+   🎯 ROI Potencial: +20.7%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 45.4% - 70.4%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença de força ajustada: 0.15
+
+14. ⭐ *Outros* (exact_score)
+   📊 Probabilidade: 59.4%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +18.8%
+   🎯 ROI Potencial: +18.8%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 44.4% - 69.4%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Casa: 2.8 gols, Visitante: 2.2 gols
+
+15. ⭐ *Casa 1* (corner_handicap)
+   📊 Probabilidade: 59.3%
+   💰 Odds: 2.00
+   📈 Valor Esperado: +18.6%
+   🎯 ROI Potencial: +18.6%
+   💵 Stake Recomendado: 5.0%
+   🟢 Chance Green: 44.3% - 69.3%
+   📋 Confiança: MÉDIA
+   ⭐ Nível: EXCELENTE
+   💡 Diferença de cantos ajustada: 0.5
+
+📊 *ANÁLISE POR CATEGORIA:*
+
+*GOALS:*
+✅ 4/10 apostas favoráveis
+   ⭐ 5+: +652.5% EV
+   ⭐ Over 5.5: +96.9% EV
+   ⭐ Over 4.5: +75.6% EV
+
+*HANDICAP:*
+✅ 5/10 apostas favoráveis
+   ⭐ Visitante -0.5: +39.3% EV
+   ⭐ Visitante 0: +21.4% EV
+   ⭐ Casa 0.5: +20.7% EV
+
+*CARDS:*
+✅ 5/10 apostas favoráveis
+   ⭐ Over 5.5: +81.9% EV
+   ⭐ Over 4.5: +79.9% EV
+   ⭐ Over 6.5: +76.5% EV
+
+*CORNERS:*
+✅ 5/10 apostas favoráveis
+   ⭐ Visitante -1: +61.4% EV
+   ⭐ Visitante 0: +21.4% EV
+   ⭐ Casa 1: +18.6% EV
+
+*DOUBLE_CHANCE:*
+✅ 4/10 apostas favoráveis
+   ⭐ 1X2: +100.0% EV
+   ⭐ 1: +16.8% EV
+   🔥 1X: +8.5% EV
+
+*EXACT_SCORE:*
+✅ 1/10 apostas favoráveis
+   ⭐ Outros: +18.8% EV
+
+📈 *RESUMO ESTATÍSTICO:*
+• Valor Esperado Médio: +1.1%
+• Melhor Valor Esperado: +652.5%
+• Apostas Favoráveis: 24/63
+• Taxa de Sucesso: 38.1%
+
+⚠️ *AVISOS IMPORTANTES:*
+• Stake máximo recomendado: 5% do bankroll
+• Valor mínimo esperado: 2.0%
+• Gestão de risco é fundamental
+• Nunca aposte mais do que pode perder
+
+🤖 *Sistema MaraBet AI - Análise Profissional*

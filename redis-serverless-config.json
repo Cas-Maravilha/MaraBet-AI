@@ -1,0 +1,26 @@
+﻿{
+    "generated_at":  "2025-10-27T11:20:40Z",
+    "connection_strings":  {
+                               "nodejs":  "rediss://marabet-redis-zxaq7e.serverless.euw1.cache.amazonaws.com:6379",
+                               "redis":  "rediss://marabet-redis-zxaq7e.serverless.euw1.cache.amazonaws.com:6379",
+                               "python":  "rediss://marabet-redis-zxaq7e.serverless.euw1.cache.amazonaws.com:6379/0"
+                           },
+    "redis":  {
+                  "engine_version":  "7.2",
+                  "vpc_id":  "vpc-081a8c63b16a94a3a",
+                  "encryption":  {
+                                     "in_transit":  true,
+                                     "at_rest":  true,
+                                     "kms_key":  "AWS owned"
+                                 },
+                  "type":  "serverless",
+                  "security_group_id":  "sg-09f7d3d37a8407f43",
+                  "region":  "eu-west-1",
+                  "engine":  "valkey",
+                  "name":  "marabet-redis",
+                  "arn":  "arn:aws:elasticache:eu-west-1:206749730888:serverlesscache:marabet-redis",
+                  "port":  6379,
+                  "status":  "available",
+                  "endpoint":  "marabet-redis-zxaq7e.serverless.euw1.cache.amazonaws.com"
+              }
+}

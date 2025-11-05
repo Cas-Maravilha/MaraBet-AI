@@ -1,0 +1,223 @@
+name: 🧹 Cleanup & Maintenance
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to clean up'
+        required: true
+        type: choice
+        options:
+        - staging
+        - production
+        - both
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: marabet-ai
+
+jobs:
+  # Job 1: Cleanup Staging
+  cleanup-staging:
+    name: 🧹 Cleanup Staging
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'staging' || github.event.inputs.environment == 'both' || github.event_name == 'schedule'
+    environment: staging
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🔐 Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: 🧹 Cleanup Staging Environment
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.STAGING_HOST }}
+        username: ${{ secrets.STAGING_USERNAME }}
+        key: ${{ secrets.STAGING_SSH_KEY }}
+        port: ${{ secrets.STAGING_PORT }}
+        script: |
+          cd /opt/marabet-ai/staging
+          
+          # Clean up old Docker images (keep last 5 versions)
+          docker images --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | \
+          grep ${{ env.IMAGE_NAME }} | \
+          tail -n +6 | \
+          awk '{print $1}' | \
+          xargs -r docker rmi || true
+          
+          # Clean up unused containers
+          docker container prune -f
+          
+          # Clean up unused volumes
+          docker volume prune -f
+          
+          # Clean up unused networks
+          docker network prune -f
+          
+          # Clean up build cache
+          docker builder prune -f
+          
+          # Clean up old logs (keep last 7 days)
+          find /opt/marabet-ai/staging/logs -name "*.log" -mtime +7 -delete || true
+          
+          # Clean up old backups (keep last 30 days)
+          find /opt/marabet-ai/staging/backups -name "*.backup" -mtime +30 -delete || true
+          
+          echo "Staging cleanup completed successfully!"
+
+  # Job 2: Cleanup Production
+  cleanup-production:
+    name: 🧹 Cleanup Production
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'production' || github.event.inputs.environment == 'both' || github.event_name == 'schedule'
+    environment: production
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🔐 Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: 🧹 Cleanup Production Environment
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.PRODUCTION_HOST }}
+        username: ${{ secrets.PRODUCTION_USERNAME }}
+        key: ${{ secrets.PRODUCTION_SSH_KEY }}
+        port: ${{ secrets.PRODUCTION_PORT }}
+        script: |
+          cd /opt/marabet-ai/production
+          
+          # Clean up old Docker images (keep last 10 versions)
+          docker images --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | \
+          grep ${{ env.IMAGE_NAME }} | \
+          tail -n +11 | \
+          awk '{print $1}' | \
+          xargs -r docker rmi || true
+          
+          # Clean up unused containers
+          docker container prune -f
+          
+          # Clean up unused volumes
+          docker volume prune -f
+          
+          # Clean up unused networks
+          docker network prune -f
+          
+          # Clean up build cache
+          docker builder prune -f
+          
+          # Clean up old logs (keep last 30 days)
+          find /opt/marabet-ai/production/logs -name "*.log" -mtime +30 -delete || true
+          
+          # Clean up old backups (keep last 90 days)
+          find /opt/marabet-ai/production/backups -name "*.backup" -mtime +90 -delete || true
+          
+          # Clean up old Prometheus data (keep last 90 days)
+          find /opt/marabet-ai/production/prometheus -name "*.db" -mtime +90 -delete || true
+          
+          echo "Production cleanup completed successfully!"
+
+  # Job 3: Database Maintenance
+  database-maintenance:
+    name: 🗄️ Database Maintenance
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    environment: production
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🗄️ Database Maintenance
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.PRODUCTION_HOST }}
+        username: ${{ secrets.PRODUCTION_USERNAME }}
+        key: ${{ secrets.PRODUCTION_SSH_KEY }}
+        port: ${{ secrets.PRODUCTION_PORT }}
+        script: |
+          cd /opt/marabet-ai/production
+          
+          # Database backup
+          docker exec marabet-ai-production python -c "
+          from armazenamento.banco_de_dados import DatabaseManager
+          import datetime
+          
+          db = DatabaseManager()
+          timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+          backup_file = f'/app/data/backup_{timestamp}.db'
+          
+          # Create backup
+          db.backup_database(backup_file)
+          print(f'Database backup created: {backup_file}')
+          "
+          
+          # Database optimization
+          docker exec marabet-ai-production python -c "
+          from armazenamento.banco_de_dados import DatabaseManager
+          
+          db = DatabaseManager()
+          db.optimize_database()
+          print('Database optimized successfully')
+          "
+          
+          echo "Database maintenance completed successfully!"
+
+  # Job 4: Security Updates
+  security-updates:
+    name: 🔒 Security Updates
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🔒 Check for Security Updates
+      run: |
+        # Check for security updates in requirements.txt
+        pip install safety
+        safety check --json --output safety-updates.json || true
+        
+        # Check for outdated packages
+        pip install pip-audit
+        pip-audit --format=json --output=audit-updates.json || true
+        
+        echo "Security updates check completed!"
+
+  # Job 5: Notificação de Limpeza
+  notify-cleanup:
+    name: 📢 Notify Cleanup Status
+    runs-on: ubuntu-latest
+    needs: [cleanup-staging, cleanup-production, database-maintenance, security-updates]
+    if: always()
+    
+    steps:
+    - name: 📢 Notify Success
+      if: needs.cleanup-staging.result == 'success' || needs.cleanup-production.result == 'success'
+      run: |
+        echo "✅ Cleanup completed successfully!"
+        echo "🧹 Environment: ${{ github.event.inputs.environment || 'both' }}"
+        echo "🗄️ Database maintenance: ${{ needs.database-maintenance.result }}"
+        echo "🔒 Security updates: ${{ needs.security-updates.result }}"
+    
+    - name: 📢 Notify Failure
+      if: needs.cleanup-staging.result == 'failure' || needs.cleanup-production.result == 'failure'
+      run: |
+        echo "❌ Cleanup failed!"
+        echo "🔍 Please check the logs for details"
+        exit 1

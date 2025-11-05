@@ -1,0 +1,145 @@
+{
+  "name": "MaraBet AI - Previsões Inteligentes",
+  "short_name": "MaraBet",
+  "description": "Sistema profissional de análise e previsões de apostas desportivas com inteligência artificial",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0d1f3c",
+  "background_color": "#ffffff",
+  "lang": "pt-AO",
+  "dir": "ltr",
+  "scope": "/",
+  "categories": [
+    "sports",
+    "finance",
+    "analytics"
+  ],
+  "icons": [
+    {
+      "src": "/static/images/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/images/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/images/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/images/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/images/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/images/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/static/images/screenshot-mobile-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Dashboard principal"
+    },
+    {
+      "src": "/static/images/screenshot-mobile-2.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Previsões de jogos"
+    },
+    {
+      "src": "/static/images/screenshot-desktop-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Dashboard desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Previsões de Hoje",
+      "short_name": "Hoje",
+      "description": "Ver previsões para os jogos de hoje",
+      "url": "/predictions/today",
+      "icons": [
+        {
+          "src": "/static/images/shortcut-predictions.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Jogos Ao Vivo",
+      "short_name": "Ao Vivo",
+      "description": "Acompanhar jogos em tempo real",
+      "url": "/live",
+      "icons": [
+        {
+          "src": "/static/images/shortcut-live.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Bankroll",
+      "short_name": "Bankroll",
+      "description": "Gerenciar seu bankroll",
+      "url": "/bankroll",
+      "icons": [
+        {
+          "src": "/static/images/shortcut-bankroll.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

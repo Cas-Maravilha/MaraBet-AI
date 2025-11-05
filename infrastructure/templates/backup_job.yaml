@@ -1,0 +1,66 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: marabet-backup
+  namespace: marabet
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /scripts/backup.sh
+            - full
+            command:
+            - /bin/bash
+            env:
+            - name: DB_HOST
+              value: marabet-master.cluster-xyz.us-east-1.rds.amazonaws.com
+            - name: DB_PORT
+              value: '5432'
+            - name: DB_NAME
+              value: marabet_production
+            - name: DB_USER
+              value: marabet_user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: db-secret
+            - name: S3_BUCKET
+              value: marabet-backups
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: access-key
+                  name: aws-secret
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret-key
+                  name: aws-secret
+            image: postgres:13
+            name: backup
+            resources:
+              limits:
+                cpu: 500m
+                memory: 1Gi
+              requests:
+                cpu: 250m
+                memory: 512Mi
+            volumeMounts:
+            - mountPath: /scripts
+              name: backup-scripts
+            - mountPath: /backups
+              name: backup-storage
+          restartPolicy: OnFailure
+          volumes:
+          - configMap:
+              defaultMode: 493
+              name: backup-scripts
+            name: backup-scripts
+          - name: backup-storage
+            persistentVolumeClaim:
+              claimName: backup-pvc
+  schedule: 0 2 * * *

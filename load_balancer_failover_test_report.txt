@@ -1,0 +1,47 @@
+================================================================================
+RELATÓRIO DE TESTE DE FAILOVER DO LOAD BALANCER - MARABET AI
+================================================================================
+
+📊 RESUMO GERAL:
+  Data: 2025-10-21 17:27:35
+  Load Balancer: ❌ Com problemas
+  Failover: ❌ Falhou
+  Performance: 516.14 RPS
+
+🔍 RESULTADOS DE HEALTH CHECK:
+  Endpoint Primário:
+    Status: unhealthy
+    Response Time: 0.00s
+  Endpoint Secundário:
+    Status: unhealthy
+    Response Time: 0.00s
+
+🔄 RESULTADOS DE FAILOVER:
+  Falha Detectada: ✅
+  Failover Concluído: ❌
+  Tempo de Failover: 0.00s
+  Tempo de DNS Update: 0.00s
+  Tempo Total: 0.00s
+
+⚡ RESULTADOS DE PERFORMANCE:
+  Total de Requests: 100
+  Requests Bem-sucedidas: 0
+  Requests Falharam: 100
+  Taxa de Sucesso: 0.00%
+  Response Time Médio: 0.00s
+  Response Time Máximo: 0.00s
+  Response Time Mínimo: infs
+  Throughput: 516.14 RPS
+
+🎯 VALIDAÇÃO DE OBJETIVOS:
+  ❌ Load Balancer com problemas
+  ❌ Failover falhou
+  ✅ Throughput adequado (516.14 RPS)
+  ✅ Response time adequado (0.00s)
+
+💡 RECOMENDAÇÕES:
+  ⚠️ Verificar configuração do load balancer
+  ⚠️ Configurar failover automático
+  🔄 Executar testes de failover regularmente
+  📊 Monitorar métricas de performance
+================================================================================

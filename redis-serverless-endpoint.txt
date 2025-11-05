@@ -1,0 +1,24 @@
+﻿MaraBet AI - ElastiCache Redis Serverless
+==========================================
+
+Name:                 marabet-redis
+Status:               available
+Region:               eu-west-1
+
+Endpoint:             marabet-redis-zxaq7e.serverless.euw1.cache.amazonaws.com
+Port:                 6379
+
+Engine:               valkey
+Version:              7.2
+Type:                 Serverless
+
+Encryption At-Rest:   Yes (AWS owned KMS key)
+Encryption In-Transit: Yes (TLS)
+Multi-AZ:             Yes (3 AZs)
+
+VPC:                  vpc-081a8c63b16a94a3a
+Security Group:       sg-09f7d3d37a8407f43
+
+ARN:                  arn:aws:elasticache:eu-west-1:206749730888:serverlesscache:marabet-redis
+
+Generated:            10/27/2025 12:20:40

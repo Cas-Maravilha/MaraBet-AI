@@ -1,0 +1,174 @@
+groups:
+  - name: marabet-ai-alerts
+    rules:
+      # Alertas de disponibilidade
+      - alert: MaraBetAIDown
+        expr: up{job="marabet-ai"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI is down"
+          description: "MaraBet AI has been down for more than 1 minute"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/marabet-ai-down"
+      
+      - alert: MaraBetAIHighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI high error rate"
+          description: "MaraBet AI error rate is {{ $value | humanizePercentage }} for more than 2 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/high-error-rate"
+      
+      - alert: MaraBetAIHighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 3m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI high response time"
+          description: "MaraBet AI 95th percentile response time is {{ $value }}s for more than 3 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/high-response-time"
+      
+      # Alertas de recursos
+      - alert: MaraBetAIHighCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI high CPU usage"
+          description: "MaraBet AI CPU usage is {{ $value }}% for more than 5 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/high-cpu-usage"
+      
+      - alert: MaraBetAIHighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI high memory usage"
+          description: "MaraBet AI memory usage is {{ $value }}% for more than 5 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/high-memory-usage"
+      
+      - alert: MaraBetAIHighDiskUsage
+        expr: (1 - (node_filesystem_avail_bytes / node_filesystem_size_bytes)) * 100 > 90
+        for: 5m
+        labels:
+          severity: critical
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI high disk usage"
+          description: "MaraBet AI disk usage is {{ $value }}% for more than 5 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/high-disk-usage"
+      
+      # Alertas de banco de dados
+      - alert: MaraBetAIDatabaseConnectionHigh
+        expr: marabet_database_connections_active / marabet_database_connections_max > 0.8
+        for: 2m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI high database connection usage"
+          description: "MaraBet AI database connection usage is {{ $value | humanizePercentage }} for more than 2 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/high-db-connections"
+      
+      - alert: MaraBetAIDatabaseSlowQueries
+        expr: rate(marabet_database_query_duration_seconds{quantile="0.95"}[5m]) > 1
+        for: 3m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI slow database queries"
+          description: "MaraBet AI 95th percentile database query time is {{ $value }}s for more than 3 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/slow-db-queries"
+      
+      # Alertas de APIs externas
+      - alert: MaraBetAIAPIFootballDown
+        expr: up{job="marabet-ai",api="football"} == 0
+        for: 5m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI API Football is down"
+          description: "MaraBet AI API Football has been down for more than 5 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/api-football-down"
+      
+      - alert: MaraBetAIOddsAPIDown
+        expr: up{job="marabet-ai",api="odds"} == 0
+        for: 5m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI Odds API is down"
+          description: "MaraBet AI Odds API has been down for more than 5 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/odds-api-down"
+      
+      # Alertas de Telegram
+      - alert: MaraBetAITelegramDown
+        expr: up{job="marabet-ai",service="telegram"} == 0
+        for: 10m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "MaraBet AI Telegram service is down"
+          description: "MaraBet AI Telegram service has been down for more than 10 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/telegram-down"
+      
+      # Alertas de Nginx
+      - alert: NginxDown
+        expr: up{job="nginx"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "Nginx is down"
+          description: "Nginx has been down for more than 1 minute"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/nginx-down"
+      
+      - alert: NginxHighErrorRate
+        expr: rate(nginx_http_requests_total{status=~"5.."}[5m]) / rate(nginx_http_requests_total[5m]) > 0.01
+        for: 2m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "Nginx high error rate"
+          description: "Nginx error rate is {{ $value | humanizePercentage }} for more than 2 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/nginx-high-error-rate"
+      
+      # Alertas de Prometheus
+      - alert: PrometheusDown
+        expr: up{job="prometheus"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "Prometheus is down"
+          description: "Prometheus has been down for more than 1 minute"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/prometheus-down"
+      
+      - alert: PrometheusHighMemoryUsage
+        expr: (prometheus_tsdb_head_series / prometheus_tsdb_head_series_limit) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          environment: "{{ $labels.environment }}"
+        annotations:
+          summary: "Prometheus high memory usage"
+          description: "Prometheus memory usage is {{ $value | humanizePercentage }} for more than 5 minutes"
+          runbook_url: "https://github.com/marabet-ai/docs/runbooks/prometheus-high-memory"

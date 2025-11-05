@@ -1,0 +1,172 @@
+# Testes de Carga com Artillery - MaraBet AI
+# Configuração YAML para testes de performance
+
+config:
+  target: 'http://localhost:8000'
+  phases:
+    # Fase 1: Warm-up
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm-up"
+    
+    # Fase 2: Ramp-up
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 20
+      name: "Ramp-up"
+    
+    # Fase 3: Load
+    - duration: 300
+      arrivalRate: 20
+      name: "Sustained Load"
+    
+    # Fase 4: Stress
+    - duration: 120
+      arrivalRate: 50
+      name: "Stress Test"
+  
+  # Plugins
+  plugins:
+    expect: {}
+  
+  # Variáveis
+  variables:
+    username: "teste"
+    password: "marabet123"
+  
+  # HTTP settings
+  http:
+    timeout: 10
+  
+  # Métricas
+  ensure:
+    maxErrorRate: 5
+    p95: 500
+    p99: 1000
+
+scenarios:
+  # Cenário 1: Usuário normal
+  - name: "Normal User Flow"
+    weight: 70
+    flow:
+      # Login
+      - post:
+          url: "/api/auth/login"
+          json:
+            username: "{{ username }}"
+            password: "{{ password }}"
+          capture:
+            - json: "$.token"
+              as: "token"
+          expect:
+            - statusCode: 200
+      
+      # Ver previsões de hoje
+      - get:
+          url: "/api/predictions/today"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          expect:
+            - statusCode: 200
+            - contentType: json
+      
+      # Think time
+      - think: 3
+      
+      # Ver previsões ao vivo
+      - get:
+          url: "/api/predictions/live"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          expect:
+            - statusCode: 200
+      
+      # Think time
+      - think: 2
+      
+      # Ver estatísticas
+      - get:
+          url: "/api/statistics"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          expect:
+            - statusCode: 200
+      
+      # Ver bankroll
+      - get:
+          url: "/api/bankroll"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          expect:
+            - statusCode: 200
+  
+  # Cenário 2: Usuário que faz apostas
+  - name: "Betting User Flow"
+    weight: 20
+    flow:
+      # Login
+      - post:
+          url: "/api/auth/login"
+          json:
+            username: "{{ username }}"
+            password: "{{ password }}"
+          capture:
+            - json: "$.token"
+              as: "token"
+      
+      # Ver previsões
+      - get:
+          url: "/api/predictions/today"
+          headers:
+            Authorization: "Bearer {{ token }}"
+      
+      # Think time
+      - think: 5
+      
+      # Criar aposta
+      - post:
+          url: "/api/bets"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          json:
+            prediction_id: 1
+            stake: 100
+            bookmaker: "SportingBet"
+          expect:
+            - statusCode: [200, 201]
+  
+  # Cenário 3: Admin
+  - name: "Admin Flow"
+    weight: 10
+    flow:
+      # Login admin
+      - post:
+          url: "/api/auth/login"
+          json:
+            username: "admin"
+            password: "marabet123"
+          capture:
+            - json: "$.token"
+              as: "token"
+      
+      # Dashboard admin
+      - get:
+          url: "/api/admin/dashboard"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          expect:
+            - statusCode: 200
+      
+      # Ver usuários
+      - get:
+          url: "/api/admin/users"
+          headers:
+            Authorization: "Bearer {{ token }}"
+      
+      # Estatísticas do sistema
+      - get:
+          url: "/api/admin/stats"
+          headers:
+            Authorization: "Bearer {{ token }}"
+
+# Executar: artillery run load_tests/artillery/artillery.yml

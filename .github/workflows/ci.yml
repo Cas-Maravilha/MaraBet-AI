@@ -1,0 +1,266 @@
+name: 🧪 Continuous Integration
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '18'
+
+jobs:
+  # Job 1: Análise de Código e Qualidade
+  code-quality:
+    name: 🔍 Code Quality & Security
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 black isort bandit safety
+        pip install -r requirements.txt
+    
+    - name: 🎨 Code Formatting Check (Black)
+      run: black --check --diff .
+    
+    - name: 📋 Import Sorting Check (isort)
+      run: isort --check-only --diff .
+    
+    - name: 🔍 Linting (Flake8)
+      run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    
+    - name: 🔒 Security Scan (Bandit)
+      run: bandit -r . -f json -o bandit-report.json || true
+    
+    - name: 🛡️ Dependency Security Check (Safety)
+      run: safety check --json --output safety-report.json || true
+    
+    - name: 📊 Upload Security Reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          safety-report.json
+
+  # Job 2: Testes Unitários e Integração
+  test:
+    name: 🧪 Tests
+    runs-on: ubuntu-latest
+    needs: code-quality
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: marabet_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-xdist pytest-html pytest-json-report
+        pip install pytest-asyncio pytest-mock pytest-timeout
+        pip install coverage[toml]
+    
+    - name: 🗄️ Setup Test Database
+      run: |
+        python -c "
+        import os
+        os.environ['DATABASE_URL'] = 'postgresql://postgres:postgres@localhost:5432/marabet_test'
+        from armazenamento.banco_de_dados import DatabaseManager
+        db = DatabaseManager()
+        db.create_tables()
+        "
+    
+    - name: 🧪 Run Unit Tests
+      env:
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/marabet_test
+        API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+        REDIS_URL: redis://localhost:6379/1
+      run: |
+        # Executar testes unitários
+        pytest tests/test_units/ -m unit --cov=. --cov-report=xml:coverage-unit.xml --junitxml=test-results-unit.xml --html=test-report-unit.html --self-contained-html -v
+        # Executar testes de integração
+        pytest tests/test_integration/ -m integration --cov=. --cov-report=xml:coverage-integration.xml --junitxml=test-results-integration.xml --html=test-report-integration.html --self-contained-html -v
+        # Executar todos os testes
+        pytest tests/ --cov=. --cov-report=xml:coverage.xml --cov-report=html:htmlcov --junitxml=test-results.xml --html=test-report.html --self-contained-html -v
+    
+    - name: 📊 Upload Test Coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+    
+    - name: 📈 Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: |
+          test-results.xml
+          htmlcov/
+
+  # Job 3: Testes de Integração com APIs
+  integration-tests:
+    name: 🔗 Integration Tests
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: 🔗 Test API Integrations
+      env:
+        API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        python -m pytest tests/test_integration/ -v --timeout=300
+
+  # Job 4: Build e Teste de Imagens Docker
+  docker-build:
+    name: 🐳 Docker Build & Test
+    runs-on: ubuntu-latest
+    needs: [test, integration-tests]
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🐳 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: 🔐 Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: 🏗️ Build Docker Images
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
+        push: false
+        tags: |
+          marabet-ai:test-${{ github.sha }}
+          marabet-ai:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: 🧪 Test Docker Container
+      run: |
+        docker run --rm -d --name marabet-test \
+          -e DATABASE_URL=sqlite:///test.db \
+          -e API_FOOTBALL_KEY=test \
+          -e THE_ODDS_API_KEY=test \
+          marabet-ai:test-${{ github.sha }}
+        
+        # Wait for container to start
+        sleep 30
+        
+        # Test health endpoint
+        docker exec marabet-test curl -f http://localhost:8000/health || exit 1
+        
+        # Stop container
+        docker stop marabet-test
+
+  # Job 5: Análise de Vulnerabilidades
+  security-scan:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    needs: docker-build
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🔍 Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: 📊 Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  # Job 6: Notificação de Status
+  notify:
+    name: 📢 Notify Status
+    runs-on: ubuntu-latest
+    needs: [code-quality, test, integration-tests, docker-build, security-scan]
+    if: always()
+    
+    steps:
+    - name: 📢 Notify Success
+      if: needs.code-quality.result == 'success' && needs.test.result == 'success' && needs.docker-build.result == 'success'
+      run: |
+        echo "✅ All CI checks passed successfully!"
+        echo "🚀 Ready for deployment"
+    
+    - name: 📢 Notify Failure
+      if: needs.code-quality.result == 'failure' || needs.test.result == 'failure' || needs.docker-build.result == 'failure'
+      run: |
+        echo "❌ CI checks failed!"
+        echo "🔍 Please check the logs for details"
+        exit 1

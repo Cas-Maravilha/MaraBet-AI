@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/rate-limit: '50'
+    nginx.ingress.kubernetes.io/rate-limit-window: 1m
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+  name: marabet-ai-staging-ingress
+  namespace: marabet-staging
+spec:
+  rules:
+  - host: staging.marabet.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: marabet-ai-staging-service
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - staging.marabet.com
+    secretName: marabet-staging-tls

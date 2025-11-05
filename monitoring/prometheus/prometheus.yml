@@ -1,0 +1,84 @@
+# Configuração Prometheus - MaraBet AI
+# Coleta métricas de todos os serviços
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'marabet-production'
+    replica: 'prometheus-1'
+
+# Alertmanager
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+# Regras de alerta
+rule_files:
+  - 'alerts/*.yml'
+
+# Scrape configs
+scrape_configs:
+  # Prometheus próprio
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  
+  # MaraBet AI - Web Application
+  - job_name: 'marabet-web'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['web:8000']
+        labels:
+          service: 'web'
+          environment: 'production'
+  
+  # PostgreSQL
+  - job_name: 'postgresql'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+        labels:
+          service: 'database'
+          environment: 'production'
+  
+  # Redis
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+        labels:
+          service: 'cache'
+          environment: 'production'
+  
+  # Node Exporter (Sistema)
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'system'
+          environment: 'production'
+  
+  # cAdvisor (Containers Docker)
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          service: 'containers'
+          environment: 'production'
+  
+  # Nginx
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx-exporter:9113']
+        labels:
+          service: 'webserver'
+          environment: 'production'
+
+# Configuração de armazenamento
+storage:
+  tsdb:
+    path: /prometheus
+    retention:
+      time: 30d
+      size: 10GB

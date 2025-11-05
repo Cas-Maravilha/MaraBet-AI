@@ -1,0 +1,217 @@
+# Configuração de Testes para GitHub Actions
+# Este arquivo define as configurações e parâmetros para os testes automatizados
+
+# Configurações gerais de teste
+test_config:
+  python_version: "3.11"
+  node_version: "18"
+  timeout: 300  # 5 minutos
+  
+  # Configurações de cobertura
+  coverage:
+    threshold: 80  # 80% de cobertura mínima
+    exclude:
+      - "tests/*"
+      - "venv/*"
+      - "env/*"
+      - "*.pyc"
+      - "__pycache__/*"
+  
+  # Configurações de paralelização
+  parallel:
+    enabled: true
+    workers: 4
+    strategy: "loadfile"
+
+# Configurações de banco de dados para testes
+database:
+  test_db:
+    type: "postgresql"
+    version: "15"
+    host: "localhost"
+    port: 5432
+    name: "marabet_test"
+    user: "postgres"
+    password: "postgres"
+  
+  # Configurações de limpeza
+  cleanup:
+    after_tests: true
+    drop_tables: true
+    reset_sequences: true
+
+# Configurações de APIs para testes
+apis:
+  api_football:
+    base_url: "https://api-football-v1.p.rapidapi.com"
+    timeout: 30
+    retries: 3
+    mock_mode: true  # Usar dados mockados para testes
+  
+  odds_api:
+    base_url: "https://api.the-odds-api.com"
+    timeout: 30
+    retries: 3
+    mock_mode: true
+  
+  telegram:
+    base_url: "https://api.telegram.org"
+    timeout: 30
+    retries: 3
+    mock_mode: true
+
+# Configurações de containers para testes
+containers:
+  test_containers:
+    - name: "postgres"
+      image: "postgres:15"
+      ports: ["5432:5432"]
+      environment:
+        POSTGRES_PASSWORD: "postgres"
+        POSTGRES_DB: "marabet_test"
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+    
+    - name: "redis"
+      image: "redis:7-alpine"
+      ports: ["6379:6379"]
+      healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+
+# Configurações de testes específicos
+test_suites:
+  unit_tests:
+    pattern: "tests/unit/*"
+    timeout: 60
+    parallel: true
+    coverage: true
+  
+  integration_tests:
+    pattern: "tests/integration/*"
+    timeout: 300
+    parallel: false
+    coverage: true
+    requires_services: true
+  
+  api_tests:
+    pattern: "tests/api/*"
+    timeout: 180
+    parallel: true
+    coverage: false
+    requires_services: true
+  
+  e2e_tests:
+    pattern: "tests/e2e/*"
+    timeout: 600
+    parallel: false
+    coverage: false
+    requires_services: true
+
+# Configurações de relatórios
+reports:
+  junit:
+    enabled: true
+    output: "test-results.xml"
+    merge: true
+  
+  coverage:
+    enabled: true
+    format: "xml"
+    output: "coverage.xml"
+    upload: true
+  
+  html:
+    enabled: true
+    output: "htmlcov/"
+    upload: true
+
+# Configurações de notificações de teste
+notifications:
+  on_failure:
+    - slack: true
+    - email: true
+  
+  on_success:
+    - slack: false
+    - email: false
+  
+  thresholds:
+    coverage_warning: 70
+    coverage_failure: 60
+    test_failure_threshold: 0.1
+
+# Configurações de performance
+performance:
+  load_tests:
+    enabled: true
+    duration: 300  # 5 minutos
+    users: 100
+    ramp_up: 60  # 1 minuto
+  
+  stress_tests:
+    enabled: false
+    duration: 600  # 10 minutos
+    users: 500
+    ramp_up: 120  # 2 minutos
+
+# Configurações de segurança
+security:
+  dependency_scan:
+    enabled: true
+    tools: ["safety", "bandit", "pip-audit"]
+    fail_on_high: true
+    fail_on_medium: false
+  
+  container_scan:
+    enabled: true
+    tools: ["trivy"]
+    fail_on_high: true
+    fail_on_medium: false
+  
+  secret_scan:
+    enabled: true
+    tools: ["trufflehog"]
+    fail_on_find: true
+
+# Configurações de ambiente
+environments:
+  test:
+    variables:
+      - name: "TEST_MODE"
+        value: "true"
+      - name: "LOG_LEVEL"
+        value: "DEBUG"
+      - name: "DATABASE_URL"
+        value: "postgresql://postgres:postgres@localhost:5432/marabet_test"
+      - name: "CACHE_TTL"
+        value: "60"
+      - name: "API_TIMEOUT"
+        value: "30"
+  
+  staging:
+    variables:
+      - name: "TEST_MODE"
+        value: "false"
+      - name: "LOG_LEVEL"
+        value: "INFO"
+      - name: "CACHE_TTL"
+        value: "300"
+      - name: "API_TIMEOUT"
+        value: "60"
+  
+  production:
+    variables:
+      - name: "TEST_MODE"
+        value: "false"
+      - name: "LOG_LEVEL"
+        value: "WARNING"
+      - name: "CACHE_TTL"
+        value: "600"
+      - name: "API_TIMEOUT"
+        value: "120"

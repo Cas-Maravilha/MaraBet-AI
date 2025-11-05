@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: marabet-ai
+    version: v1.0.0
+  name: marabet-ai
+  namespace: marabet
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: marabet-ai
+  template:
+    metadata:
+      labels:
+        app: marabet-ai
+        version: v1.0.0
+    spec:
+      containers:
+      - env:
+        - name: FLASK_ENV
+          value: production
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: db-url
+              name: marabet-secrets
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              key: redis-url
+              name: marabet-secrets
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: jwt-secret
+              name: marabet-secrets
+        image: your-registry.com/marabet-ai:latest
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /api/health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        name: marabet-ai
+        ports:
+        - containerPort: 5000
+          name: http
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /api/health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        volumeMounts:
+        - mountPath: /app/logs
+          name: app-logs
+        - mountPath: /app/data
+          name: app-data
+      imagePullSecrets:
+      - name: docker-registry-secret
+      volumes:
+      - emptyDir: {}
+        name: app-logs
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: marabet-data-pvc

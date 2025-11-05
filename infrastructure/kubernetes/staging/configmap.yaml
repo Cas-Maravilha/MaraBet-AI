@@ -1,0 +1,81 @@
+apiVersion: v1
+data:
+  app.conf: '
+
+    [app]
+
+    debug = true
+
+    host = 0.0.0.0
+
+    port = 5000
+
+    environment = staging
+
+
+    [database]
+
+    pool_size = 10
+
+    max_overflow = 20
+
+    pool_timeout = 30
+
+    pool_recycle = 3600
+
+
+    [redis]
+
+    max_connections = 10
+
+    socket_timeout = 5
+
+    socket_connect_timeout = 5
+
+
+    [logging]
+
+    level = DEBUG
+
+    format = %(asctime)s - %(name)s - %(levelname)s - %(message)s
+
+
+    [monitoring]
+
+    enabled = true
+
+    metrics_port = 9090
+
+    health_check_interval = 30
+
+
+    [testing]
+
+    enabled = true
+
+    test_data_cleanup = true
+
+    mock_external_apis = true
+
+    '
+  nginx.conf: "\nupstream marabet_staging_backend {\n    least_conn;\n    server marabet-ai-staging-service:80\
+    \ weight=1 max_fails=3 fail_timeout=30s;\n    keepalive 32;\n}\n\nserver {\n \
+    \   listen 80;\n    server_name staging.marabet.com;\n    \n    # Rate limiting\n\
+    \    limit_req_zone $binary_remote_addr zone=staging:10m rate=10r/s;\n    limit_req\
+    \ zone=staging burst=20 nodelay;\n    \n    # Main application\n    location /\
+    \ {\n        proxy_pass http://marabet_staging_backend;\n        proxy_http_version\
+    \ 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header\
+    \ Connection 'upgrade';\n        proxy_set_header Host $host;\n        proxy_set_header\
+    \ X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n\
+    \        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_cache_bypass\
+    \ $http_upgrade;\n        \n        # Timeouts\n        proxy_connect_timeout\
+    \ 5s;\n        proxy_send_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\
+    \    \n    # Health check\n    location /health {\n        access_log off;\n \
+    \       proxy_pass http://marabet_staging_backend/api/health;\n        proxy_http_version\
+    \ 1.1;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP\
+    \ $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n\
+    \        proxy_set_header X-Forwarded-Proto $scheme;\n    }\n}\n"
+kind: ConfigMap
+metadata:
+  name: marabet-staging-config
+  namespace: marabet-staging

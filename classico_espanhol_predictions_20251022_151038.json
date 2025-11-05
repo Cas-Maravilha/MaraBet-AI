@@ -1,0 +1,38 @@
+{
+  "match_data": {
+    "home_team": "Real Madrid",
+    "away_team": "Barcelona",
+    "league": "La Liga",
+    "match_date": "2024-01-20 21:00",
+    "home_strength": 0.75,
+    "away_strength": 0.72,
+    "home_advantage": 0.08,
+    "home_goals_avg": 2.3,
+    "away_goals_avg": 2.1,
+    "home_corners_avg": 7.2,
+    "away_corners_avg": 6.8,
+    "home_cards_avg": 2.5,
+    "away_cards_avg": 2.3,
+    "home_yellow_avg": 2.2,
+    "away_yellow_avg": 2.0,
+    "home_red_avg": 0.12,
+    "away_red_avg": 0.1,
+    "form_factor": 1.05,
+    "injury_factor": 0.98,
+    "weather_factor": 1.0,
+    "importance_factor": 1.4,
+    "rivalry_factor": 1.5,
+    "referee_factor": 1.1,
+    "possession_factor": 1.02,
+    "style_factor": 1.15
+  },
+  "predictions": {
+    "goals": [
+      {
+        "market_type": "exact_goals",
+        "selection": "5+",
+        "predicted_probability": 0.7357892093387748,
+        "confidence": 0.8,
+        "expected_value": 0.0,
+        "kelly_fraction": 0.0,
+        "recommended": 

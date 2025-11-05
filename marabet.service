@@ -1,0 +1,71 @@
+# MaraBet AI - systemd Service File
+# Coloque este arquivo em: /etc/systemd/system/marabet.service
+# 
+# Instalação:
+#   sudo cp marabet.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable marabet
+#   sudo systemctl start marabet
+#
+# Comandos:
+#   sudo systemctl start marabet     # Iniciar
+#   sudo systemctl stop marabet      # Parar
+#   sudo systemctl restart marabet   # Reiniciar
+#   sudo systemctl status marabet    # Status
+#   sudo journalctl -u marabet -f    # Logs
+
+[Unit]
+Description=MaraBet AI - Sistema de Previsões Desportivas com IA
+Documentation=https://marabet.ao/docs
+After=network-online.target postgresql.service redis.service docker.service
+Wants=network-online.target
+Requires=postgresql.service redis.service
+
+[Service]
+Type=notify
+User=marabet
+Group=marabet
+WorkingDirectory=/opt/marabet
+
+# Ambiente
+Environment="PATH=/opt/marabet/venv/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONUNBUFFERED=1"
+Environment="PYTHONDONTWRITEBYTECODE=1"
+EnvironmentFile=/opt/marabet/.env
+
+# Comandos
+ExecStartPre=/usr/bin/docker compose -f /opt/marabet/docker-compose.local.yml pull
+ExecStart=/usr/bin/docker compose -f /opt/marabet/docker-compose.local.yml up
+ExecStop=/usr/bin/docker compose -f /opt/marabet/docker-compose.local.yml down
+ExecReload=/bin/kill -s HUP $MAINPID
+
+# Restart
+Restart=on-failure
+RestartSec=10s
+TimeoutStartSec=300
+TimeoutStopSec=120
+
+# Limites de recursos
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# Segurança
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/marabet/logs /opt/marabet/uploads /opt/marabet/backups
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictNamespaces=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=marabet
+
+[Install]
+WantedBy=multi-user.target
+

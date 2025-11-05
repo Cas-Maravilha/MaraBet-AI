@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO -->
+    <title>{% block title %}MaraBet AI - Previsões Inteligentes de Apostas{% endblock %}</title>
+    <meta name="description" content="{% block description %}Sistema profissional de análise e previsões de apostas desportivas com IA{% endblock %}">
+    <meta name="keywords" content="apostas, futebol, previsões, odds, MaraBet, Angola">
+    <meta name="author" content="MaraBet AI">
+    
+    <!-- PWA -->
+    <meta name="theme-color" content="#1a73e8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MaraBet AI">
+    <link rel="manifest" href="/static/manifest.json">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/apple-touch-icon.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marabet.ao/">
+    <meta property="og:title" content="{% block og_title %}MaraBet AI{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Previsões inteligentes de apostas desportivas{% endblock %}">
+    <meta property="og:image" content="/static/images/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://marabet.ao/">
+    <meta property="twitter:title" content="{% block twitter_title %}MaraBet AI{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}Previsões inteligentes{% endblock %}">
+    <meta property="twitter:image" content="/static/images/twitter-image.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <link rel="stylesheet" href="/static/css/logo-styles.css">
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/static/css/responsive.css" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://api-football.com">
+    
+    <!-- Analytics (opcional) -->
+    {% block analytics %}{% endblock %}
+</head>
+<body>
+    <!-- Skip to main content (acessibilidade) -->
+    <a href="#main-content" class="skip-to-content" style="position: absolute; left: -9999px;">
+        Pular para o conteúdo principal
+    </a>
+    
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Navegação principal">
+        <div class="container">
+            <a href="/" class="navbar-brand" aria-label="MaraBet AI - Página inicial">
+                <img src="/static/images/logo-marabet.svg" alt="MaraBet AI Logo" width="120" height="32" class="navbar-logo">
+                <span class="hide-mobile navbar-brand-text">AI</span>
+            </a>
+            
+            <!-- Menu Toggle (Mobile) -->
+            <button class="navbar-toggle" 
+                    id="navbarToggle" 
+                    aria-label="Menu de navegação"
+                    aria-expanded="false"
+                    aria-controls="navbarMenu">
+                <span class="navbar-toggle-icon"></span>
+            </button>
+            
+            <!-- Menu -->
+            <ul class="navbar-menu" id="navbarMenu" role="menu">
+                <li role="none">
+                    <a href="/" role="menuitem">
+                        <span>🏠</span> Início
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="/predictions" role="menuitem">
+                        <span>⚽</span> Previsões
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="/live" role="menuitem">
+                        <span>🔴</span> Ao Vivo
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="/statistics" role="menuitem">
+                        <span>📊</span> Estatísticas
+                    </a>
+                </li>
+                <li role="none" class="hide-mobile">
+                    <a href="/bankroll" role="menuitem">
+                        <span>💰</span> Bankroll
+                    </a>
+                </li>
+                <li role="none" class="hide-mobile">
+                    <a href="/profile" role="menuitem">
+                        <span>👤</span> Perfil
+                    </a>
+                </li>
+                <li role="none" class="show-mobile">
+                    <a href="/settings" role="menuitem">
+                        <span>⚙️</span> Configurações
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav show-mobile" role="navigation" aria-label="Navegação inferior">
+        <a href="/" class="bottom-nav-item" aria-label="Início">
+            <span class="bottom-nav-icon">🏠</span>
+            <span class="bottom-nav-label">Início</span>
+        </a>
+        <a href="/predictions" class="bottom-nav-item" aria-label="Previsões">
+            <span class="bottom-nav-icon">⚽</span>
+            <span class="bottom-nav-label">Previsões</span>
+        </a>
+        <a href="/live" class="bottom-nav-item" aria-label="Ao Vivo">
+            <span class="bottom-nav-icon">🔴</span>
+            <span class="bottom-nav-label">Ao Vivo</span>
+        </a>
+        <a href="/bankroll" class="bottom-nav-item" aria-label="Bankroll">
+            <span class="bottom-nav-icon">💰</span>
+            <span class="bottom-nav-label">Bankroll</span>
+        </a>
+        <a href="/profile" class="bottom-nav-item" aria-label="Perfil">
+            <span class="bottom-nav-icon">👤</span>
+            <span class="bottom-nav-label">Perfil</span>
+        </a>
+    </nav>
+    
+    <!-- Footer -->
+    <footer class="footer hide-mobile" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-4">
+                    <img src="/static/images/logo-marabet.svg" alt="MaraBet" class="footer-logo">
+                    <p>Sistema profissional de análise e previsões de apostas desportivas com IA.</p>
+                </div>
+                <div class="col col-md-4">
+                    <h4>Links Úteis</h4>
+                    <ul class="footer-links">
+                        <li><a href="/about">Sobre</a></li>
+                        <li><a href="/how-it-works">Como Funciona</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/terms">Termos de Uso</a></li>
+                    </ul>
+                </div>
+                <div class="col col-md-4">
+                    <h4>Contacto</h4>
+                    <ul class="footer-contact">
+                        <li>📧 comercial@marabet.ao</li>
+                        <li>📧 suporte@marabet.ao</li>
+                        <li>📞 +224 932027393</li>
+                        <li>🇦🇴 Angola</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MaraBet AI. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>A carregar...</p>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="/static/js/responsive.js"></script>
+    {% block extra_js %}{% endblock %}
+    
+    <!-- PWA Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/static/sw.js')
+                    .then(reg => console.log('Service Worker registrado'))
+                    .catch(err => console.log('Erro ao registrar Service Worker:', err));
+            });
+        }
+    </script>
+    
+    <!-- Online/Offline detection -->
+    <script>
+        window.addEventListener('online', () => {
+            showToast('✅ Conexão restaurada', 'success');
+        });
+        
+        window.addEventListener('offline', () => {
+            showToast('⚠️ Sem conexão à internet', 'warning');
+        });
+    </script>
+</body>
+</html>
+
+<style>
+/* Bottom Navigation (Mobile) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: var(--background);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: var(--z-fixed);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.bottom-nav-item:active {
+    background: var(--surface);
+}
+
+.bottom-nav-item.active {
+    color: var(--primary-color);
+}
+
+.bottom-nav-icon {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.bottom-nav-label {
+    font-size: 11px;
+}
+
+/* Footer */
+.footer {
+    background: var(--surface);
+    padding: var(--spacing-xxl) 0 var(--spacing-lg);
+    margin-top: var(--spacing-xxl);
+    border-top: 1px solid var(--border);
+}
+
+.footer h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.footer h4 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.footer-links,
+.footer-contact {
+    list-style: none;
+}
+
+.footer-links li,
+.footer-contact li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 72px;
+    right: var(--spacing-md);
+    z-index: var(--z-tooltip);
+    max-width: 320px;
+}
+
+.toast {
+    background: var(--background);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border-left: 4px solid var(--primary-color);
+    animation: slideIn var(--transition-normal);
+}
+
+.toast.success {
+    border-left-color: var(--success-color);
+}
+
+.toast.error {
+    border-left-color: var(--danger-color);
+}
+
+.toast.warning {
+    border-left-color: var(--warning-color);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal);
+    color: white;
+}
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Skip to content */
+.skip-to-content:focus {
+    position: static;
+    left: auto;
+}
+
+/* Mobile: Ajustes de espaçamento */
+@media (max-width: 767px) {
+    main {
+        padding-bottom: 80px; /* Espaço para bottom nav */
+    }
+    
+    .toast-container {
+        left: var(--spacing-md);
+        right: var(--spacing-md);
+        max-width: 100%;
+    }
+}
+</style>
+

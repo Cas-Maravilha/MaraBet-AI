@@ -1,0 +1,115 @@
+{
+  "project": "MaraBet AI",
+  "version": "1.0.0",
+  "created_at": "2025-10-24T12:00:00Z",
+  "server": {
+    "provider": "VPS (DigitalOcean, Linode, Vultr, OVH, Contabo, etc.)",
+    "location": "Configurar conforme provedor escolhido",
+    "type": "VPS/Servidor Dedicado",
+    "os": "Ubuntu 22.04 LTS",
+    "specs": {
+      "cpu_cores": 4,
+      "ram_gb": 8,
+      "disk_gb": 80,
+      "disk_type": "SSD"
+    }
+  },
+  "database": {
+    "type": "PostgreSQL",
+    "version": "15",
+    "host": "localhost",
+    "port": 5432,
+    "name": "marabet",
+    "user": "marabetuser",
+    "location": "Local no VPS (mesmo servidor)"
+  },
+  "cache": {
+    "type": "Redis",
+    "version": "7",
+    "host": "localhost",
+    "port": 6379,
+    "location": "Local no VPS (mesmo servidor)"
+  },
+  "domain": {
+    "primary": "marabet.ao",
+    "aliases": [
+      "www.marabet.ao",
+      "api.marabet.ao"
+    ],
+    "ssl": "Let's Encrypt (gratuito)",
+    "provider": "Registrador autorizado em Angola"
+  },
+  "email": {
+    "provider": "A configurar",
+    "smtp_host": "A configurar conforme provedor escolhido",
+    "smtp_port": 587,
+    "accounts": [
+      "comercial@marabet.ao",
+      "suporte@marabet.ao",
+      "info@marabet.ao"
+    ]
+  },
+  "backup": {
+    "location": "local",
+    "directory": "/opt/marabet/backups",
+    "frequency": "daily",
+    "time": "02:00",
+    "retention_days": 30,
+    "includes": [
+      "PostgreSQL database",
+      "Redis RDB",
+      "Application files",
+      "Static files",
+      "Media files",
+      "Configurations",
+      "Logs"
+    ]
+  },
+  "monitoring": {
+    "grafana": {
+      "enabled": true,
+      "port": 3000,
+      "url": "http://server:3000"
+    },
+    "prometheus": {
+      "enabled": true,
+      "port": 9090,
+      "url": "http://server:9090"
+    },
+    "alertmanager": {
+      "enabled": true,
+      "port": 9093
+    }
+  },
+  "costs": {
+    "currency": "USD",
+    "monthly": {
+      "vps": 60,
+      "email": 5,
+      "backup": 10,
+      "total": 75
+    },
+    "annual": {
+      "domain": 25,
+      "ssl": 0,
+      "total": 925
+    }
+  },
+  "contacts": {
+    "marabet": {
+      "phone": "+224932027393",
+      "email": "suporte@marabet.ao",
+      "telegram": "@marabet_support"
+    }
+  },
+  "notes": [
+    "Sistema 100% livre de AWS",
+    "Compatível com qualquer provedor VPS (Ubuntu/Debian)",
+    "PostgreSQL e Redis locais no mesmo servidor",
+    "SSL gratuito via Let's Encrypt",
+    "Backup automatizado diário",
+    "Monitoramento completo com Grafana",
+    "Provedores recomendados: DigitalOcean, Linode, Vultr, OVH, Contabo"
+  ]
+}
+

@@ -1,0 +1,152 @@
+# Configuração de Ambientes para GitHub Actions
+# Este arquivo define as regras de proteção e configurações para cada ambiente
+
+# Staging Environment
+staging:
+  # Regras de proteção
+  protection_rules:
+    - required_reviewers: 1
+    - dismiss_stale_reviews: true
+    - require_code_owner_reviews: false
+    - required_status_checks:
+        - ci
+        - docker-build
+      strict: true
+    - enforce_admins: false
+    - allow_force_pushes: false
+    - allow_deletions: false
+  
+  # Configurações específicas
+  environment_variables:
+    - name: ENVIRONMENT
+      value: staging
+    - name: LOG_LEVEL
+      value: INFO
+    - name: DATABASE_POOL_SIZE
+      value: "5"
+    - name: CACHE_TTL
+      value: "300"
+  
+  # Secrets necessários
+  required_secrets:
+    - STAGING_HOST
+    - STAGING_USERNAME
+    - STAGING_SSH_KEY
+    - STAGING_PORT
+    - STAGING_DATABASE_URL
+    - DOCKER_USERNAME
+    - DOCKER_PASSWORD
+    - API_FOOTBALL_KEY
+    - THE_ODDS_API_KEY
+    - TELEGRAM_BOT_TOKEN
+    - TELEGRAM_CHAT_ID
+
+# Production Environment
+production:
+  # Regras de proteção mais rigorosas
+  protection_rules:
+    - required_reviewers: 2
+    - dismiss_stale_reviews: true
+    - require_code_owner_reviews: true
+    - required_status_checks:
+        - ci
+        - docker-build
+        - security-scan
+      strict: true
+    - enforce_admins: true
+    - allow_force_pushes: false
+    - allow_deletions: false
+    - required_conversation_resolution: true
+  
+  # Configurações específicas
+  environment_variables:
+    - name: ENVIRONMENT
+      value: production
+    - name: LOG_LEVEL
+      value: WARNING
+    - name: DATABASE_POOL_SIZE
+      value: "10"
+    - name: CACHE_TTL
+      value: "600"
+    - name: RATE_LIMIT_ENABLED
+      value: "true"
+  
+  # Secrets necessários
+  required_secrets:
+    - PRODUCTION_HOST
+    - PRODUCTION_USERNAME
+    - PRODUCTION_SSH_KEY
+    - PRODUCTION_PORT
+    - PRODUCTION_DATABASE_URL
+    - DOCKER_USERNAME
+    - DOCKER_PASSWORD
+    - API_FOOTBALL_KEY
+    - THE_ODDS_API_KEY
+    - TELEGRAM_BOT_TOKEN
+    - TELEGRAM_CHAT_ID
+    - GRAFANA_ADMIN_PASSWORD
+    - SLACK_WEBHOOK_URL
+
+# Configurações de notificação
+notifications:
+  slack:
+    webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+    channels:
+      - staging: "#deployments-staging"
+      - production: "#deployments-production"
+  
+  email:
+    recipients:
+      - staging: ["dev-team@marabet-ai.com"]
+      - production: ["dev-team@marabet-ai.com", "ops-team@marabet-ai.com"]
+
+# Configurações de monitoramento
+monitoring:
+  health_checks:
+    - endpoint: "/health"
+      timeout: 30
+      retries: 3
+    - endpoint: "/api/health"
+      timeout: 30
+      retries: 3
+    - endpoint: "/dashboard"
+      timeout: 30
+      retries: 3
+  
+  metrics:
+    - name: "response_time"
+      threshold: 2000  # 2 segundos
+    - name: "error_rate"
+      threshold: 0.01  # 1%
+    - name: "cpu_usage"
+      threshold: 80    # 80%
+    - name: "memory_usage"
+      threshold: 85    # 85%
+
+# Configurações de rollback
+rollback:
+  automatic_rollback:
+    enabled: true
+    conditions:
+      - health_check_failure: 3
+      - error_rate_threshold: 0.05
+      - response_time_threshold: 5000
+  
+  manual_rollback:
+    enabled: true
+    max_versions_to_keep: 10
+    rollback_timeout: 300  # 5 minutos
+
+# Configurações de limpeza
+cleanup:
+  schedule: "0 2 * * *"  # Diário às 2:00 AM UTC
+  retention_policy:
+    images:
+      staging: 5    # Manter 5 versões
+      production: 10 # Manter 10 versões
+    logs:
+      staging: 7    # 7 dias
+      production: 30 # 30 dias
+    backups:
+      staging: 30   # 30 dias
+      production: 90 # 90 dias
